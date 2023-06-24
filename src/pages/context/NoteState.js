@@ -2,18 +2,22 @@ import {useState, useEffect} from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-const [currentUser, setCurrentUser] = useState(null);
+
+
+const [loginData, setLoginData] = useState(null);
+
     useEffect(() => { 
-    setCurrentUser(JSON.parse(localStorage.getItem('loginAuth')));
-    //console.log(StoreDataUser);
+        setLoginData(JSON.parse(localStorage.getItem('loginAuth')));
+    //console.log(localStorage.getItem('loginAuth'));
      },[]);
+     
+
+
     return (
-        <NoteContext.Provider  value={currentUser}>
+        <NoteContext.Provider  value={loginData}>
          {props.children}
         </NoteContext.Provider>
-
     )
-
 }
 
 export default NoteState;

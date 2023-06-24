@@ -4,7 +4,9 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 export class Owlslider extends Component {
     render()
     {
+      
   return (
+    <>
     <section class="py-4 border-bottom" style={{marginBottom: "50px"}}>
   <div class="container">
     <div class="row align-items-center">
@@ -27,6 +29,7 @@ export class Owlslider extends Component {
     </div>
   </div>
 </section>
+</>
   )
 }
 }

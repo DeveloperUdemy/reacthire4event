@@ -43,7 +43,7 @@ export const Userregister = () => {
       },
     });
   return (
-    <div>
+    <>
         <form onSubmit={handleSubmit} class="form-row mt-4 mb-5 align-items-center">
               {<div>{success}</div>}    
               <div class="form-group col-sm-12">
@@ -75,6 +75,6 @@ export const Userregister = () => {
               </div>
               <div class="col-sm-3"></div>
             </form>
-    </div>
+    </>
   )
 }

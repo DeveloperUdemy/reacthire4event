@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Emailsubscriber from './components/Emailsubscriber';
 export default function Footer() {
-    
+
 return (
-    <div>
+    <>
 <div style={{position: "fixed",
     bottom: "11px",
     right: "15px",
@@ -11,25 +12,50 @@ return (
     <footer class="footer border-top space-ptb" style={{paddingBottom: "20px"}}>
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0 pr-5 pt-5 pb-3" style={{borderRight: "solid 1px #ececec", paddingBottom: "62px !important"}}>
-                    <h5 class="text-primary mb-2 mb-sm-4">Hire4Event - Your Personal Wedding Planner</h5>
-                    <p class="text-left"><strong>Plan your Event with Us</strong><br />
-                        Hire4event is Delhi NCR based India's first online equipment and party supply service managed by Global magic consulting Pvt.Ltd. We provide Sound system on rent, PA System hire, Event and tour sound, stage, Lights, production, Online artist booking, Venue on hire, etc. Hire4event have an experienced team for Event management, fabrication and Venue Branding, special effect and fireworks, Venue decoration and theme creation. </p>
-                </div>
+                
+        <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0 pr-5 pt-5 pb-3" style={{borderRight: "solid 1px #ececec;", paddingBottom: "62px !important;"}}>
+        <h5 class="text-primary mb-2 mb-sm-4">Hire4Event - Your Personal Corporate Event Organizer</h5>
+        <div class="scrollHireAbout">
+         <p>Are you in search of top-notch event organizers, experienced event planners, or a reliable event management company in Delhi, Noida, or Gurgaon? Look no further! Our team of professionals specializes in crafting unforgettable events tailored to your unique requirements. With a proven track record of successful events and a passion for creating exceptional experiences, we are your trusted partners in turning your vision into reality.
+</p>
+<h4>Event Organizers in Delhi, Noida, and Gurgaon:</h4>
+<p>When it comes to event organizing, our company stands out as a leader in Delhi, Noida, and Gurgaon. We understand that every event is different, whether it's a corporate gathering, a wedding celebration, or a grand product launch. Our dedicated team takes the time to comprehend your objectives and ensures that every detail is meticulously planned and executed to perfection.
+</p>
+<h4>Experienced Event Planners:</h4>
+<p>Our experienced event planners possess the creativity, expertise, and industry knowledge to transform your event into an extraordinary affair. We collaborate closely with you, incorporating your ideas and preferences while offering valuable suggestions to enhance your event's overall impact. From conceptualization and theme development to vendor coordination and logistics management, our event planners have you covered at every step of the journey.
+</p>
+<h4>Event Management Company in Delhi, Noida, and Gurgaon:</h4>
+<p>As a leading event management company in Delhi, Noida, and Gurgaon, we take pride in delivering seamless event experiences. Our dedicated team ensures smooth operations, allowing you to enjoy the event stress-free. We meticulously handle venue selection, stage setup, audiovisual requirements, lighting arrangements, catering services, entertainment, and much more. With our attention to detail and commitment to excellence, we strive to exceed your expectations.
+</p>
+<h4>Why Choose Us:</h4>
+
+<p><strong>Expertise and Experience:</strong> With years of experience in the industry, we have a deep understanding of event management and the ability to handle diverse event types and scales.
+</p>
+<p><strong>Personalized Approach:</strong> We believe in personalized event experiences. Our team takes the time to understand your vision and objectives, ensuring that your event reflects your unique style and requirements.
+</p>
+<p><strong>Attention to Detail:</strong> We leave no stone unturned when it comes to event planning and execution. Every aspect, big or small, is meticulously managed to create a seamless and unforgettable experience.
+</p>
+<p><strong>Professional Network:</strong> Over the years, we have developed a strong network of trusted vendors, suppliers, and industry professionals. This allows us to provide you with the best services, ensuring the success of your event.
+</p>
+<p><strong>Cost-Effective Solutions:</strong> We understand the importance of working within your budget. Our team offers cost-effective solutions without compromising on quality, helping you maximize your investment.
+</p>
+<h4>Conclusion:</h4>
+<p>When it comes to organizing exceptional events in Delhi, Noida, and Gurgaon, our event organizers, planners, and management company are your ideal choice. From meticulous planning to flawless execution, we strive to create memorable experiences that leave a lasting impression. Contact us today to discuss your upcoming event and let us bring your vision to life.
+  </p> 
+      
+    </div>   
+      </div>
+
+
+
+
                 <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0 pt-5 pl-5">
+
+                    
                     <div class="footer-contact-info lett">
-                        <h4 style={{fontSize: "17px", fontWeight: "500"}}>Subscribe to Newsletter</h4>
-                        <form id="Hire4event-Subscribe" method="post">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <input type="email" name="email" class="form-control" placeholder="Email Address...." />
-                                </div>
-                                <div class="col-md-4">
-                                    <button class="btn btn-primary" id="Hire4event_Subscribe" name="Hire4event_Subscribe">Subscribe</button>
-                                </div>
-                            </div>
-                            <div id="error_subscribe"></div>
-                        </form>
+                        
+                        <Emailsubscriber />
+
                         <div class="contact-address mt-2 footer-link">
                             <h4 style={{fontSize: "17px", fontWeight: "500"}}>Connect us to Get best Deals</h4>
                             <ul class="list-unstyled mb-4">
@@ -45,9 +71,11 @@ return (
                             <li><a href="https://www.instagram.com/hire4event/?hl=en" target="_blank" style={{color: "#9118ab"}}><i class="fa fa-instagram"></i></a></li>
                             <li><a href="https://www.youtube.com/channel/UCO30G7y5-QlJnQv0cVEv7_Q" target="_blank" style={{color: "#f62424"}}><i class="fa fa-youtube"></i></a></li>
                         </ul>
-                        <a href="vendor-registration" class="btn btn-danger" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Register as a Vendor</a> 
-                        <a href="contact/" class="btn btn-primary" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Submit Requirement</a> 
-                        <a href="contact/" class="btn btn-success" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Contact us</a> </div>
+                        <Link to="vendor-registration" class="btn btn-danger" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Register as a Vendor</Link> 
+                        <Link to="contact/" class="btn btn-primary" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Submit Requirement</Link> 
+                        <Link to="contact/" class="btn btn-success" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Contact us</Link> 
+                        </div>
+
                 </div>
             </div>
         </div>
@@ -123,10 +151,9 @@ return (
                         <h5 class="text-primary mb-2 mb-sm-4">QUICK LINKS</h5>
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="javascript:void(login);" data-toggle="modal" data-target="#loginModal">Login</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="javascript:void(login);" data-toggle="modal" data-target="#loginModal">Register</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#" data-toggle="modal" data-target="#loginModal">My Dashboard</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="contact/"> Contact Us</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="blogs/" target="_blank">Blogs</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="https://hire4event.com/blogs/" target="_blank">Blogs</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="disclaimer/">Disclaimer</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="term-condition/">Terms & Condition</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="privacy-policy/">Privacy Policy</Link></li>
@@ -225,6 +252,10 @@ return (
                     </div>
                 </div>
             </footer>
-            </div>
+            </>
             );
 }
+
+
+
+

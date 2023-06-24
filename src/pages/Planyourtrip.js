@@ -1,9 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaRegUser } from "react-icons/fa";
+import React, { useEffect, Fragment } from 'react';
 function Panyourtrip ()  {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-  <div>
+  <Fragment>
 <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
   <div class="container">
     <div class="row justify-content-center">
@@ -197,7 +198,7 @@ function Panyourtrip ()  {
 </section>
 
 
-</div>
+</Fragment>
 )
 }
 export default Panyourtrip;

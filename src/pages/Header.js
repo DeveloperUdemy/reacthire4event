@@ -19,10 +19,12 @@ export default function Header() {
   const loginShow = () => setPopoverModal(!popoverModal);
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
+  
   useEffect(() => { 
    let StoreDataUser = JSON.parse(localStorage.getItem('loginAuth'));
    setCurrentUser(StoreDataUser);
     },[]);
+
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("loginAuth");
@@ -32,7 +34,7 @@ export default function Header() {
 
 
   return (
-    <div>
+    <>
       <MDBModal tabIndex='-1' show={popoverModal} setShow={setPopoverModal} >
         <MDBModalDialog>
           <MDBModalContent>
@@ -139,6 +141,6 @@ export default function Header() {
     </div>
   </nav>
 </header>
-</div>
+</>
   )
 }

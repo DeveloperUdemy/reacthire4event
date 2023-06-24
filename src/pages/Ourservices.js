@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
 const Ourservices = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [servicesDetails, setServicesDetails] = useState([]);
   function getServices() {
@@ -11,7 +16,7 @@ const Ourservices = () => {
     };
     const url = Mainurl+'api/services/list';
     axios.get(url, { headers })
-    .then((res) => 
+    .then(res => 
     setServicesDetails(res.data.servicesList) 
         //console.log(res.data.servicesList)
     )
@@ -25,8 +30,9 @@ const Ourservices = () => {
       getServices();
     },[]);
 
-  return (   
-<section class="space-pb popup-gallery overflowx-h">
+  return ( 
+    <Fragment>  
+<section class="space-pb popup-gallery overflowx-h" style={{marginTop: "20px"}}>
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -59,6 +65,7 @@ const Ourservices = () => {
     </div>
   </div>
   </section>
+  </Fragment>
   )
 }
 

@@ -5,27 +5,27 @@ import axios from "axios";
 
 const Artistscomponent = () => {
     const Mainurl = 'https://hire4event.com/apppanel/';
-    const [artistDetail, setArtistDetails] = useState([]);
-    
+    const [artistDetails, setArtistDetails] = useState([]);
     function getArtist() {
       const headers = {
         "Content-Type": "application/json"
       };
-      const url = Mainurl+'api/artist/list';
-      axios.get(url, { headers })
-      .then((res) => 
-          setArtistDetails(res.data.artistList) 
-          //console.log(res.data.data)
-      )
+      const url = Mainurl+'api/artist/listartist';
+      axios.get(url,{headers})
+      .then(resp => {
+        setArtistDetails(resp.data.artistList);
+        //console.log(resp.data);
+      })
       .catch(function(error) {
-        console.log(error);
+        console.log(error.resp);
       });
     }
       useEffect(()=>{
         getArtist();
       },[]);
     
-  return (   
+  return (  
+    <> 
 <section class="space-pb popup-gallery">
   <div class="container">
     <div class="row">
@@ -38,10 +38,11 @@ const Artistscomponent = () => {
     </div>
     <div class="row">
     {
-    artistDetail.slice(0,9).map((post) => {
-      const {first_name, url, city, category, image} = post;
+    artistDetails.slice(0,9).map((getData) => {
+      const {first_name, url, city, category, image, register_id} = getData;
       return (
-      <div class="col-lg-4 col-sm-6 mb-4"> <Link to={'artist/'+url+''}>
+        <>
+      <div class="col-lg-4 col-sm-6 mb-4" key={register_id}> <Link to={'artist/'+url+''}>
         <div class="listing-item">
           <div class="listing-image bg-overlay-half-bottom"> <img class="img-fluid" src={image} alt={first_name} style={{height:"394px", width:"100%"}} />
             <div class="listing-quick-box"> 
@@ -59,6 +60,7 @@ const Artistscomponent = () => {
         </div>
         </Link> 
       </div>
+      </>
       )
       })
       }
@@ -70,6 +72,7 @@ const Artistscomponent = () => {
     </div>
   </div>
 </section>
+</>
   )
 }
 

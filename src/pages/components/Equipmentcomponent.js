@@ -11,10 +11,10 @@ function getEquipment() {
   };
   const url = Mainurl+'api/equipment/list';
   axios.get(url, { headers })
-  .then((res) => 
-      setEquipmentDetails(res.data.equipmentList) 
-      //console.log(res.data.equipmentList)
-  )
+  .then(resp => {
+    setEquipmentDetails(resp.data.equipmentList);
+    //console.log(resp.data.equipmentList);
+  })
   .catch(function(error) {
     console.log(error);
   });
@@ -24,7 +24,8 @@ function getEquipment() {
   },[]);
 
     
-  return (   
+  return ( 
+    <>  
 <section class="space-pb popup-gallery" style={{paddingBottom: "40px"}}>
   <div class="container">
     <div class="row">
@@ -38,9 +39,10 @@ function getEquipment() {
     <div class="row even">
     {
     equipmentDetails.slice(0,12).map((getEquipmentData) => {
-      const {heading,url,image,appimage} = getEquipmentData;
+      const {heading,url,image,id} = getEquipmentData;
       return (
-      <div class="col-lg-3 col-sm-3 mb-4"> <Link to={url}>
+        <>
+      <div class="col-lg-3 col-sm-3 mb-4" key={id} > <Link to={url}>
         <div class="listing-item">
           <div class="listing-image bg-overlay-half-bottom"> 
           <img class="img-fluid" src={Mainurl+'assets/equipments/'+image+''} alt={heading} style={{height: "265px",
@@ -55,6 +57,7 @@ function getEquipment() {
         </div>
         </Link> 
         </div>
+        </>
       )
     })
     }
@@ -66,6 +69,7 @@ function getEquipment() {
     </div>
   </div>
 </section>
+</>
   )
 }
 

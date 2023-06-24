@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -22,14 +22,17 @@ import Artistmanagement from "./pages/Artistmanagement";
 import Planyourtrip from "./pages/Planyourtrip";
 import Protected from "./pages/Protected";
 import Profile from "./pages/dashboard/Profile";
-import NoteState from "./pages/context/NoteState";
 import Artistprofile from "./pages/dashboard/Artistprofile";
 import Changepassword from "./pages/dashboard/Changepassword";
 import Editemail from "./pages/dashboard/Editemail";
+import Editartist from "./pages/dashboard/Editartist";
+import Singleartist from "./pages/Singleartist";
+import Singleservicedetail from "./pages/Singleservicedetail";
 function App() {
   return (
-    <NoteState>
+      <React.StrictMode>
       <BrowserRouter>
+    
         <Routes>
            <Route path="/" element={<MainHeaderFooter/>} >
            <Route index element={<Home/>} />
@@ -51,17 +54,23 @@ function App() {
            <Route path="artists-management/" element={<Artistmanagement/>} />
            <Route path="plan-your-trip/" element={<Planyourtrip/>} /> 
            
+           {/* Detail Page Start Here  */}
+           <Route path="artist/:slug_url" element={<Singleartist/>} />
+           <Route path="service/:slug_url" element={<Singleservicedetail/>} />
+
+           {/*  After Login User  */}
            <Route path="dashboard" element={<Protected Component={Profile}/>} />
            <Route path="create-artist-profile" element={<Protected Component={Artistprofile}/>} />
            <Route path="change-password" element={<Protected Component={Changepassword}/>} />
            <Route path="edit-email" element={<Protected Component={Editemail}/>} />
-           
-           <Route path="*" element={<Error/>} />
+           <Route path="artist-profile" element={<Protected Component={Editartist}/>} />
+
+           <Route path="*" element={<Error/>} /> 
            </Route>
         </Routes>
         
       </BrowserRouter> 
-      </NoteState>
+      </React.StrictMode>
   );
 }
 export default App;

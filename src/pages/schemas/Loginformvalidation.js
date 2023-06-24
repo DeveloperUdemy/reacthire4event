@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import * as Yup from 'yup';
 
 export const SignInUser = Yup.object({

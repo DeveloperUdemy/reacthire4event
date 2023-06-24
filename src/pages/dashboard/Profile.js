@@ -1,32 +1,54 @@
 
-import React, { useState, useContext } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { Formik, useFormik } from 'formik';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useFormik } from 'formik';
 import { Editprofilevalidation } from '../schemas/EditprofileValidation';
 import axios from 'axios';
 import Userheader from './Userheader';
-import noteContext from '../context/noteContext';
 import { FaRegUserCircle } from "react-icons/fa";
 
-function Profiler() {
-  const userDetail = useContext(noteContext);
-  //console.log(userDetail);
+function Profile() {
+const [userDetail,setUserDetail] = useState([]);
+useEffect ( () => {
+  let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+  const Mainurl = 'https://hire4event.com/apppanel/'; 
+  const headers = {
+   'Content-Type': 'application/json',
+   'Content-Type': 'multipart/form-data'
+ };
+ const values = {
+   'userid': userID.userProfile.id,
+ };
+ const url = Mainurl + 'api/user/profile';
+    axios.post(url, values, { headers })
+   .then(resp => {
+     setUserDetail(resp.data.userProfile);
+   })
+   .catch(function (error) {
+     if (error.response) {
+       
+     }
+     //console.log(error.response.data.message);
+   });
+  },[]);
+
+
+
 
   const initialValues = {
-    name: userDetail.userProfile.name,
-    mobile: userDetail.userProfile.contact,
-    city: userDetail.userProfile.city,
-    pincode: userDetail.userProfile.pincode,
-    address: userDetail.userProfile.address,
-    userid: userDetail.userProfile.id,
+    name: userDetail.name,
+    mobile: userDetail.contact,
+    city: userDetail.city,
+    pincode: userDetail.pincode,
+    address: userDetail.address,
+    userid: userDetail.id,
   }
-
 
   const [success, setSuccess] = useState();
   const [error, setError] = useState([]);
   const Mainurl = 'https://hire4event.com/apppanel/';
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
     initialValues: initialValues,
+    enableReinitialize: true,
     validationSchema: Editprofilevalidation,
     onSubmit: async (values, action) => {
       setError("");
@@ -35,9 +57,8 @@ function Profiler() {
         'Content-Type': 'multipart/form-data'
       };
       const url = Mainurl + 'api/user/update';
-      const response = await axios.post(url, values, { headers })
+       axios.post(url, values, { headers })
         .then(resp => {
-          {/*console.log(resp);*/ }
           setSuccess(resp.data.message);
         })
         .catch(function (error) {
@@ -50,30 +71,33 @@ function Profiler() {
     },
   });
 
-
-
   return (
-    <div>
+    <Fragment>
       <Userheader />
       <section class="space-ptb bg-light">
         <div class="container">
           <div class="row">
             <div class="col-lg-2 col-md-2">
-
+            
             </div>
             <div class="col-lg-8 col-md-8">
+
+                 
+
               <div class="sidebar mb-0">
                 <div class="widget">
                   <div class="widget-title bg-primary">
                     <h6 class="text-white mb-0"> <FaRegUserCircle style={{ fontSize: "22px" }} /> My Account Information </h6>
                   </div>
                   <div class="widget-content">
+                  {<div>{success}</div>}
                     <form onSubmit={handleSubmit}>
-                      {<div>{success}</div>}
+                      
+                      {<div>{error}</div>}
                       <div class="form-row">
                         <div class="form-group col-md-4">
                           <label>Full name*</label>
-                          <input type="hidden" name="userid" value={userDetail.userProfile.id} />
+                          <input type="hidden" name="userid" value={values.userid} />
                           <input type="text" class="form-control" name="name" onChange={handleChange} onBlur={handleBlur} value={values.name} />
                           {errors.name && touched.name ? (<div class="error">{errors.name}</div>) : null}
                         </div>
@@ -114,7 +138,7 @@ function Profiler() {
           </div>
         </div>
       </section>
-    </div>
+    </Fragment>
   )
 }
-export default Profiler;
+export default Profile;

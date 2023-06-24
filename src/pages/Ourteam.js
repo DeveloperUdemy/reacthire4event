@@ -40,7 +40,7 @@ function Ourteam ()  {
               
               <div class="col-md-12">
               <div class="row">
-             <div class="col-md-2"><img src="https://hire4event.com/images/verma.png" style={{width: "100%", float: "right"}} />     </div>     
+             <div class="col-md-2"><img src="https://hire4event.com/images/verma.png" alt="Team member" style={{width: "100%", float: "right"}} />     </div>     
              <div class="col-md-9">
                  <h3>Mr. G.C. Verma</h3>
              <p>Mr. Verma is an Advisor (Vice President) with us under whose able guidance we have been able to flourish miles in our effort to be the preferred choice in this segment of the industry. He comes with 40+ years of immense experience served & retired as the Deputy Director in the Reasearch Designs & Standards Organisation of Indian Railways, Government of India.</p>
@@ -51,7 +51,7 @@ function Ourteam ()  {
               <div class="col-md-12"><hr/> </div>
               <div class="col-md-12">
                <div class="row">
-             <div class="col-md-2"><img src="https://hire4event.com/images/Abhishek.png" style={{width: "100%", float: "right"}} />     </div>     
+             <div class="col-md-2"><img src="https://hire4event.com/images/Abhishek.png" alt="Team member" style={{width: "100%", float: "right"}} />     </div>     
              <div class="col-md-10">
                  <h3>Mr. Abhishek Verma</h3>
              <p>Mr. Abhishek serves as an Advisor (Vice President) to us whose pragmatic & flamboyant personality has helped the company on all spheres to grow exponentially. He comes with around 11+ years of industry experience having served with top notch firms like IBM & Wipro.</p>

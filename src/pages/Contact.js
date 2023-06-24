@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {Fragment, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 function Contact ()  {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <div>
+    <Fragment>
   
 <section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
   <div class="container">
@@ -134,7 +137,7 @@ function Contact ()  {
   </div>
 </section>
 
-</div>
+</Fragment>
 )
 }
 export default Contact;

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
-
-
-const Inhouseservices = () => {
+function Inhouseservices () {
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [inhouseservicesDetails, setInhouseservicesDetails] = useState([]);
   function getinhouseServices() {
@@ -13,7 +11,7 @@ const Inhouseservices = () => {
     };
     const url = Mainurl+'api/services/inhouselist';
     axios.get(url, { headers })
-    .then((res) => 
+    .then(res => 
     setInhouseservicesDetails(res.data.inhouseservicesList) 
         //console.log(res.data.inhouseservicesList)
     )
@@ -28,6 +26,7 @@ const Inhouseservices = () => {
     },[]);
 
   return (
+    <>
     <section class="space-pb popup-gallery">
   <div class="container">
     <div class="row">
@@ -62,6 +61,7 @@ const Inhouseservices = () => {
     </div>
   </div>
 </section>
+</>
   )
 }
 

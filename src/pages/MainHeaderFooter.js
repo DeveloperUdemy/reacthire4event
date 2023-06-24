@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
   function  Mainheader() {
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, []);
+   
+
+
   return ( 
-    
-    <div>
+    <Fragment>
       <Header />
       <Outlet />
       <Footer />
-    </div>
+    </Fragment>
   );
 };
 export default Mainheader;

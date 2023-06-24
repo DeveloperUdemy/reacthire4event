@@ -5521,3 +5521,20 @@ label {
 .swm {
 	display:none
 }
+
+.scrollHireAbout{
+	height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.sponsors-logo img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    box-shadow: 0px 0px 5px;
+    padding: 7px 18px;
+    border-radius: 2px;
+}
+.ts-intro-sponsors .sponsors-logo .col-md-2 {
+    padding: 8px;
+}

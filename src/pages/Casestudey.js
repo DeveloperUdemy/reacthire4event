@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Artistscomponent from './components/Artistscomponent';
 import Equipmentcomponent from './components/Equipmentcomponent';
 import { FaRegUser } from "react-icons/fa";
 function Casestudey ()  {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-  <div>
+  <Fragment>
   <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
   <div class="container">
     <div class="row align-content-center">
@@ -52,7 +57,7 @@ function Casestudey ()  {
 </section>
 <Equipmentcomponent />
 <Artistscomponent/>
-</div>
+</Fragment>
 )
 }
 export default Casestudey;

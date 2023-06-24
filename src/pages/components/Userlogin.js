@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Formik, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import {SignInUser} from '../schemas/Loginformvalidation';
 import axios from 'axios';
 const initialValues = {
@@ -10,7 +10,7 @@ export const Userlogin = () => {
   const [popoverModal, setPopoverModal] = useState(true);
   const loginShow = () => setPopoverModal(!popoverModal);
   const [success, setSuccess] = useState();
-  const [error, setError] = useState([]);
+  const [error, setError] = useState();
   const Mainurl = 'https://hire4event.com/apppanel/';
   const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
 
@@ -23,7 +23,7 @@ export const Userlogin = () => {
         'Content-Type': 'multipart/form-data'
       };
       const url = Mainurl+'api/user/login';
-      const  response = await axios.post(url, values, { headers })
+      const  responses = await axios.post(url, values, { headers })
       .then(resp => {
         //console.log(resp);
         setSuccess(resp.data.message);
@@ -45,7 +45,7 @@ export const Userlogin = () => {
 
 
   return (
-    <div>
+    <>
         <form onSubmit={handleSubmit} class="form-row mt-4 align-items-center">
               <div class="col-sm-12">
                 <div>{error}</div>
@@ -63,10 +63,10 @@ export const Userlogin = () => {
               </div>
               <div class="col-sm-6">
                 <ul class="list-unstyled d-flex mb-1 mt-sm-0 mt-3" style={{float: "right"}}>
-                  <li class="mr-1"><a class="text-dark" href="javascript:void(0);">Lost your password?</a></li>
+                  <li class="mr-1"><a class="text-dark" href="#">Lost your password?</a></li>
                 </ul>
               </div>
             </form>
-    </div>
+    </>
   )
 }

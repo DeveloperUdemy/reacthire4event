@@ -1,66 +1,64 @@
 
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { ArtistFormValidation } from '../schemas/CreateArtistProfile';
+import { useFormik } from 'formik';
+import { EditArtistFormValidation } from '../schemas/EditArtistProfile';
 import axios from 'axios';
 import Userheader from './Userheader';
 import Usersidebar from './Usersidebar';
 import { FaRegUserCircle, FaUpload } from "react-icons/fa";
 import Previewimage from './Previewimage';
-import { Navigate } from 'react-router-dom';
 
 
-function Artistprofile() {
-
-const navigate = useNavigate();
-function getArtistProfile() {
-  let userID = (JSON.parse(localStorage.getItem('loginAuth')));
-  const Mainurl = 'https://hire4event.com/apppanel/'; 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Content-Type': 'multipart/form-data'
-  };
- const values = {
-   'register_id': userID.userProfile.id,
- };
- const url = Mainurl + 'api/artist/singleartist';
-    axios.post(url, values, { headers })
-   .then(resp => {
-     if(resp.data.status===true)
-     {
-      navigate('/artist-profile');
-     }
-   })
-   .catch(function (error) {
-     if (error.response) {
-      console.log(error.response.data.message); 
-     }
-   });
-  }
-
-  useEffect( () => {
-    getArtistProfile();
-  })
+function Editartist() {
 
 
 
-  let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+  
+    const [artistDetail, setArtistDetail] = useState([]);
+    const navigate = useNavigate();
+
+    function getArtistProfile() {
+      let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+      const Mainurl = 'https://hire4event.com/apppanel/'; 
+      const headers = {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      };
+     const values = {
+       'register_id': userID.userProfile.id,
+     };
+     const url = Mainurl + 'api/artist/singleartist';
+        axios.post(url, values, { headers })
+       .then(resp => {
+           setArtistDetail(resp.data.artistSingle);
+           //console.log(resp.data.artistSingle);
+       })
+       .catch(function (error) {
+        navigate('/create-artist-profile');
+       });
+      }
+      useEffect( () => {
+        getArtistProfile();
+      },[])
+
+
+  let userID = (JSON.parse(localStorage.getItem('loginAuth'))); 
   const postParamValues = {
-    user_image: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    mobile: '',
-    category: '',
-    city: '',
-    performance_duration: '',
-    open_to_travel: '',
-    music_genre: '',
-    team_members: '',
-    location: '',
-    artist_keyword: '',
-    description: '',
+    user_image: "",
+    first_name: artistDetail.first_name,
+    last_name: artistDetail.last_name,
+    email: artistDetail.email,
+    mobile: artistDetail.mobile,
+    category: artistDetail.category,
+    city: artistDetail.city,
+    performance_duration: artistDetail.performance_duration,
+    open_to_travel: artistDetail.open_to_travel,
+    music_genre: artistDetail.music_genre,
+    team_members: artistDetail.team_members,
+    location: artistDetail.location,
+    artist_keyword: artistDetail.keyword,
+    description: artistDetail.description,
     register_id: userID.userProfile.id,
   }
   const [success, setSuccess] = useState();
@@ -69,7 +67,7 @@ function getArtistProfile() {
   const { values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue } = useFormik({
     initialValues: postParamValues,
     enableReinitialize: true,
-    validationSchema: ArtistFormValidation,
+    validationSchema: EditArtistFormValidation,
     onSubmit: async (values, action) => {
        //console.log(values);
        setError("");
@@ -110,24 +108,22 @@ function getArtistProfile() {
         <div class="sidebar mb-0">
           <div class="widget">
             <div class="widget-title bg-primary">
-              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Create Artist Profile </h6>
+              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Edit Artist Profile </h6>
             </div>
             <div class="widget-content">
-              
+            
               <form  onSubmit={handleSubmit} enctype="multipart/form-data">
-                  <div id="error_artistprofile"></div>
               <div class="form-row">
+                
                 <div class="col-md-3">
                 <div class="text-center"> 
-                {values.user_image ? <Previewimage file={values.user_image} /> : <img src="https://www.hire4event.com/apppanel/assets/primaryimage/icons-user-profile-man-icon.png" class="avatar img-circle" id="ArtistPic" alt="Artist Profile" style={{width:"100%",height: "200px", marginBottom: "15px"}} /> }
+                {values.user_image ? <Previewimage file={values.user_image} /> : <img src={artistDetail.image} class="avatar img-circle" id="ArtistPic" alt="Artist Profile" style={{width:"100%",height: "200px", marginBottom: "15px"}} /> }
                 <input type="file" name="user_image" ref={fileRef} hidden onChange={(event) => {
                   setFieldValue("user_image", event.target.files[0]);
                 }} onBlur={handleBlur} class="form-control" />
                  <div onClick={() => {
                   fileRef.current.click();
                  }} class="form-control btn btn-secondary"><FaUpload style={{ fontSize: "20px" }}/> Upload Photo</div>
-
-
                 {errors.user_image && touched.user_image ? (<div class="error">{errors.user_image}</div>) : null}
                 </div>
                 </div>  
@@ -157,7 +153,7 @@ function getArtistProfile() {
                 
                 <div class="form-group col-md-6">
                   <label>Category*</label>
-                 <select class="form-control" onChange={handleChange} name="category">
+                 <select class="form-control" value={values.category} onChange={handleChange} name="category">
                     <option value="">Select Categories</option>
                     <option>Painter</option>
                     <option>Sketch Artist</option>
@@ -242,7 +238,7 @@ function getArtistProfile() {
                   {/* <CKEditor onChange={handleChange} onBlur={handleBlur} value={values.description}/> */}
 
 
-                  <textarea class="form-control" name="description" onChange={handleChange} onBlur={handleBlur}>{values.description}</textarea>
+                  <textarea class="form-control" name="description" style={{height: "140px"}} onChange={handleChange} onBlur={handleBlur} value={values.description} />
 
                   {errors.description && touched.description ? (<div class="error">{errors.description}</div>) : null}
                 
@@ -250,9 +246,11 @@ function getArtistProfile() {
                 
                 <div class="form-group col-md-4"></div>
                 <div class="form-group col-md-4">
-                  <button type="submit" class="form-control btn btn-secondary">Continue</button>
+                  <button type="submit" class="form-control btn btn-secondary">Update</button>
                 </div>
                 <div class="form-group col-md-4"></div>
+                <div class="form-group col-md-12">{success}</div>
+                
                 </div>
                 </div>
               </div>
@@ -263,10 +261,11 @@ function getArtistProfile() {
           </div>
         </div>
       </div>
+   
     </div>
   </div>
 </section>
     </Fragment>
   )
 }
-export default Artistprofile;
+export default Editartist;

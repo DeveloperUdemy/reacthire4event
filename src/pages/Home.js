@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, {Fragment,useEffect } from 'react';
 import Owlslider from './Owlslider';
 import Artistscomponent from './components/Artistscomponent';
 import Equipmentcomponent from './components/Equipmentcomponent';
 import Ourservices from './Ourservices';
 import Inhouseservices from './Inhouseservices';
-
+import Ourblogs from './components/Ourblogs';
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return ( 
-    
-    <div>
+    <Fragment>
   <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/image.jpg)"}}>
   <div class="container">
     <div class="row justify-content-center">
@@ -134,8 +134,10 @@ const Home = () => {
     </div>
   </div>
 </section>
+
 <Owlslider />
-<Artistscomponent/>
+
+<Artistscomponent />
 <Equipmentcomponent />
 <Ourservices />
 <Inhouseservices />
@@ -205,62 +207,48 @@ const Home = () => {
   </div>
 </section>
 
+ <Ourblogs />
 
-<section class="ts-intro-sponsors space-ptb" style={{backgroundImage: "url(images/sponsors/sponsor_img.jpg)"}}>
-  <div class="container">
-    <div class="row">
+<section class="ts-intro-sponsors space-ptb">
+    <div class="container">
+      <div class="row">
       <div class="col-12">
         <div class="section-title">
-          <h2 class="text-white">Our Clients</h2>
+          <h2 class="text-black" style={{color: "#000"}}>Companies that trust our work.</h2>
           <div class="sub-title text-right"> <span> Reflect and experiment until you find the right combination.</span></div>
         </div>
       </div>
     </div>
-    <div class="col-lg-12">
-      <div class="sponsors-logo text-center">
-        <div class="row">
-          <div class="col-md-2"> <img src="images/logo1.png" /></div>
-          <div class="col-md-2"> <img src="images/logo2.png" /></div>
-          <div class="col-md-2"> <img src="images/logo3.png" /></div>
-          <div class="col-md-2"> <img src="images/logo4.png" /></div>
-          <div class="col-md-2"> <img src="images/logo5.png" /></div>
-          <div class="col-md-2"> <img src="images/logo6.png" /></div>
-          <div class="col-md-2"> <img src="images/logo7.png" /></div>
-          <div class="col-md-2"> <img src="images/logo8.png" /></div>
-          <div class="col-md-2"> <img src="images/logo9.png" /></div>
-          <div class="col-md-2"> <img src="images/logo10.png" /></div>
-          <div class="col-md-2"> <img src="images/logo11.png" /></div>
-          <div class="col-md-2"> <img src="images/logo12.png" /></div>
-          <div class="col-md-2"> <img src="images/logo13.png" /></div>
-          <div class="col-md-2"> <img src="images/logo14.png" /></div>
-          <div class="col-md-2"> <img src="images/logo15.png" /></div>
-          <div class="col-md-2"> <img src="images/logo16.png" /></div>
-          <div class="col-md-2"> <img src="images/logo17.png" /></div>
-          <div class="col-md-2"> <img src="images/logo18.png" /></div>
-          <div class="col-md-2"> <img src="images/logo19.png" /></div>
-          <div class="col-md-2"> <img src="images/logo20.png" /></div>
-          <div class="col-md-2"> <img src="images/logo21.png" /></div>
-          <div class="col-md-2"> <img src="images/logo22.png" /></div>
-          <div class="col-md-2"> <img src="images/logo23.png" /></div>
-          <div class="col-md-2"> <img src="images/logo24.png" /></div>
-          <div class="col-md-2"> <img src="images/25.jpg" /></div>
-          <div class="col-md-2"> <img src="images/26.jpg" /></div>
-          <div class="col-md-2"> <img src="images/27.jpg" /></div>
-          <div class="col-md-2"> <img src="images/28.jpg" /></div>
-          <div class="col-md-2"> <img src="images/29.jpg" /></div>
-          <div class="col-md-2"> <img src="images/30.jpg" /></div>
-          <div class="col-md-2"> <img src="images/31.jpg" /></div>
-          <div class="col-md-2"> <img src="images/32.jpg" /></div>
-          <div class="col-md-2"> <img src="images/33.jpg" /></div>
-          <div class="col-md-2"> <img src="images/34.jpg" /></div>
-          <div class="col-md-2"> <img src="images/35.jpg" /></div>
-          <div class="col-md-2"> <img src="images/36.jpg" /></div>
+        <div class="col-lg-12">
+          <div class="sponsors-logo text-center"> 
+          <div class="row">
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/25.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/26.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/27.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/28.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/31.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/36.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/37.jpg" /></div>
+              
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/38.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/39.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/40.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/41.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/42.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/43.jpg" /></div>
+              
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/44.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/45.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/46.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/47.jpg" /></div>
+              <div class="col-md-2"> <img src="https://hire4event.com/images/client/48.jpg" /></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-</div>
+  </section>
+
+</Fragment>
   );
 };
 export default Home;

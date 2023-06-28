@@ -59,6 +59,7 @@ const Artistscomponent = () => {
                 height: "394px",
                 width: "100%"
               }}
+              visibleByDefault={'.../public/default-artist.webp'}
               />
             <div class="listing-quick-box"> 
             <Link class="category" to={'/artist/'+url+''}> <FcApproval /> {category} | {city}</Link> 

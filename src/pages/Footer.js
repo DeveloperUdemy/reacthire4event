@@ -33,7 +33,7 @@ return (
 <div style={{position: "fixed",
     bottom: "11px",
     right: "15px",
-    zIndex: "9999"}}> <a class="hidden-xs hidden-sm" target="_blank" href="https://wa.me/919718941111?text=Hi, I am interested in your services."> <img src="images/GAC_Whatsapp-chat-icon-EN.png" alt="whatsapp" style={{height: "105px"}} /> </a> </div>
+    zIndex: "9999"}}> <a class="hidden-xs hidden-sm" target="_blank" href="https://wa.me/919718941111?text=Hi, I am interested in your services."> <img src="/images/GAC_Whatsapp-chat-icon-EN.png" alt="whatsapp" style={{height: "105px"}} /> </a> </div>
     <footer class="footer border-top space-ptb" style={{paddingBottom: "20px"}}>
         <div class="container">
             <div class="row">

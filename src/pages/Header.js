@@ -117,7 +117,7 @@ export default function Header() {
   <nav class="navbar navbar-static-top navbar-expand-lg">
     <div class="container-fluid">
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-align-left"></i></button>
-      <Link class="navbar-brand" to="/"> <img class="img-fluid" src="images/logo.png" alt="logo" /> </Link>
+      <Link class="navbar-brand" to="/"> <img class="img-fluid" src="/images/logo.png" alt="logo" /> </Link>
       <div class="navbar-collapse collapse justify-content-start">
       <ul class="nav navbar-nav ml-auto">
         {currentUser === null && (

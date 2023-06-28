@@ -28,11 +28,11 @@ import Editemail from "./pages/dashboard/Editemail";
 import Editartist from "./pages/dashboard/Editartist";
 import Singleartist from "./pages/Singleartist";
 import Singleservicedetail from "./pages/Singleservicedetail";
+import Singleequipment from "./pages/Singleequipment";
 function App() {
   return (
       <React.StrictMode>
-      <BrowserRouter>
-    
+      <BrowserRouter basename="/">
         <Routes>
            <Route path="/" element={<MainHeaderFooter/>} >
            <Route index element={<Home/>} />
@@ -55,8 +55,10 @@ function App() {
            <Route path="plan-your-trip/" element={<Planyourtrip/>} /> 
            
            {/* Detail Page Start Here  */}
-           <Route path="artist/:slug_url" element={<Singleartist/>} />
-           <Route path="service/:slug_url" element={<Singleservicedetail/>} />
+           <Route path="/artist/:slug_url" element={<Singleartist/>} />
+           <Route path="/service/:slug_url" element={<Singleservicedetail/>} />
+           <Route path="/:slug_url" element={<Singleequipment/>} />
+           
 
            {/*  After Login User  */}
            <Route path="dashboard" element={<Protected Component={Profile}/>} />

@@ -2,13 +2,17 @@ import {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from "react-icons/fa";
 import axios from 'axios';
+import { Parser } from 'html-to-react';
+import Artistphoto from './Artistphoto';
+import Artistvideo from './Artistvideo';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 function Singleartist() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  
     let { slug_url } = useParams();
 
     const [artistDetail, setArtistDetail] = useState([]);
@@ -23,7 +27,7 @@ function Singleartist() {
         axios.get(url, { headers })
        .then(resp => {
            setArtistDetail(resp.data.artistSingle);
-           console.log(resp.data.artistSingle);
+           //console.log(resp.data.artistSingle);
        })
        .catch(function (error) {
         navigate('/');
@@ -37,13 +41,16 @@ function Singleartist() {
    
     return (
         <>
-
             <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/images/banner2.jpg")', backgroundSize: "cover", backgroundPosition: "0px -146px" }}>
                 <div class="container">
                     <div class="row align-content-center">
                         <div class="col-lg-9">
                             <div class="d-sm-flex d-block align-items-center"> 
-                            <img class="img-fluid rounded-circle avatar avatar-xll" src={artistDetail.image} alt="" />
+                            <LazyLoadImage
+              alt={artistDetail.first_name}
+              effect="blur"
+              class={"img-fluid rounded-circle avatar avatar-xll"}
+              src={artistDetail.image} />
                                 <div class="ml-sm-4 ml-0 mt-3 mt-sm-0">
                                     <h3 class="text-white mb-2"> {artistDetail.first_name} {artistDetail.last_name}</h3>
                                     <div class="d-md-flex d-block">
@@ -74,7 +81,8 @@ function Singleartist() {
               </div>
 
               <div class="col-12">
-              {artistDetail.description}
+              
+              {Parser().parse(artistDetail.description)}
               </div>
 
             </div>
@@ -88,73 +96,42 @@ function Singleartist() {
               <div class="row">
                 <div class="col-lg-4">
                   <ul class="artis list-unstyled mb-lg-0 mb-3">
-                    <li class="mb-3"> <img src="https://hire4event.com/images/duration.png" /> Performance Duration<br/>
+                    <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/duration.png" /> Performance Duration<br/>
                       <strong>{artistDetail.performance_duration} </strong></li>
-                    <li class="mb-3"> <img src="https://hire4event.com/images/team-icon.png" /> Team Members<br/>
+                    <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage//team-icon.png" /> Team Members<br/>
                       <strong>{artistDetail.team_members}</strong></li>
                   </ul>
                 </div>
                 <div class="col-lg-4">
                   <ul class="artis list-unstyled mb-lg-0 mb-3">
-                    <li class="mb-3"> <img src="https://hire4event.com/images/travel.png" /> Open to Travel<br/>
+                    <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/travel.png" /> Open to Travel<br/>
                       <strong>{artistDetail.open_to_travel}</strong></li>
-                    <li class="mb-3"> <img src="https://hire4event.com/images/language.png" /> Language<br/>
+                    <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/language.png" /> Language<br/>
                       <strong>English/Hindi</strong></li>
                   </ul>
                 </div>
                 <div class="col-lg-4">
                   <ul class="artis list-unstyled mb-0">
-                    <li class="mb-3"> <img src="https://hire4event.com/images/music.png" /> Music/Genre<br/>
+                    <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/music.png" /> Music/Genre<br/>
                       <strong>{artistDetail.music_genre}</strong></li>
-                      <li class="mb-3"> <img src="https://hire4event.com/images/art-type.png" /> Artist Type / City<br/>
+                      <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/art-type.png" /> Artist Type / City<br/>
                       <strong>{artistDetail.category} | {artistDetail.city}</strong></li>
                   </ul>
                 </div>
                 <div class="col-lg-12">
                   <ul class="artis list-unstyled mb-lg-0 mb-3">                   
-                     <li class="mb-3"> <img src="https://hire4event.com/images/location1.png" /> Preferred Location<br/>
+                     <li class="mb-3"> <img src="https://hire4event.com/apppanel/assets/primaryimage/location1.png" /> Preferred Location<br/>
                       <strong>{artistDetail.location}</strong></li>  
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <div class="tab-pane mt-5">
-            <div class="row">
-              <div class="col-12">
-                <div class="section-title">
-                  <h2>Photo Gallery</h2>
-                  <div class="sub-title text-right"> <span> Make a list of your achievements toward your long-term goal</span></div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="masonry">
-                    
-                  {/* <div class="item"><a class="fancybox" href="https://www.hire4event.com/artistimage/artistphoto/16873601360bhklhl.jpg" data-fancybox-group="gallery"><img src="https://www.hire4event.com/artistimage/artistphoto/16873601360bhklhl.jpg" /></a></div>
-                 */}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane mt-5">
-            <div class="row">
-              <div class="col-12">
-                <div class="section-title">
-                  <h2>Video Gallery</h2>
-                  
-                  <div class="sub-title text-right"> <span> Make a list of your achievements toward your long-term goal</span></div>
-                
-                </div>
-               </div>
-              
-                          {/* <div class="col-md-3 mb-3">
-                <iframe width="100%" height="150" src="https://www.youtube.com/embed/c04IYEv2sDA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div> */}
-                          
-                    
-            
-            </div>
-          </div>
+
+          <Artistphoto  register_id={slug_url} />
+
+          <Artistvideo register_id={slug_url} /> 
+
           <div class="tab-pane mt-5 artistpage">
             <div class="row">
               <div class="col-lg-12">
@@ -165,7 +142,7 @@ function Singleartist() {
               </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon1.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon1.png" /> </div>
                     <div class="counter-content"> <span>Campus</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -173,7 +150,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon2.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon2.png" /> </div>
                     <div class="counter-content align-self-center"> <span>Charity</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -181,7 +158,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon3.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon3.png" /> </div>
                     <div class="counter-content"> <span>Festival</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -189,7 +166,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon4.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon4.png" /> </div>
                     <div class="counter-content"> <span>Corporate</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -197,7 +174,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon5.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon5.png" /> </div>
                     <div class="counter-content"> <span>Exhibition</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -205,7 +182,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon6.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon6.png" /> </div>
                     <div class="counter-content align-self-center"> <span>Fashion show</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -213,7 +190,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon7.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon7.png" /> </div>
                     <div class="counter-content"> <span>Inogration</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -221,7 +198,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon8.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon8.png" /> </div>
                     <div class="counter-content"> <span>Kids Party</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -229,7 +206,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon9.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon9.png" /> </div>
                     <div class="counter-content"> <span>Photo Shoot</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -237,7 +214,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon10.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon10.png" /> </div>
                     <div class="counter-content align-self-center"> <span>Private party</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -245,7 +222,7 @@ function Singleartist() {
                 </div>
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon11.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon11.png" /> </div>
                     <div class="counter-content"> <span>Wedding</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -254,7 +231,7 @@ function Singleartist() {
                 
                 <div class="col-sm-6 col-lg-2">
                   <div class="counter">
-                    <div class="counter-icon"> <img src="https://hire4event.com/images/icon12.png" /> </div>
+                    <div class="counter-icon"> <img src="https://hire4event.com/apppanel/assets/primaryimage/icon12.png" /> </div>
                     <div class="counter-content"> <span>Restaurent</span>
                       <label class="text-dark">Events</label>
                     </div>
@@ -266,7 +243,7 @@ function Singleartist() {
             <div class="row">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>Review DJ Yogii</h2>
+                  <h2>Review {artistDetail.first_name} {artistDetail.last_name}</h2>
                   <div class="sub-title text-right"> <span> Make a list of your achievements toward your long-term goal</span></div>
                 </div>
               </div>

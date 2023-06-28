@@ -1,7 +1,11 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { Parser } from 'html-to-react';
+import Artistscomponent from './components/Artistscomponent';
+import Inhouseservices from './Inhouseservices';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
  function Singleservicedetail() {
 
     useEffect(() => {
@@ -62,12 +66,16 @@ import axios from 'axios';
                 </div>
               </div>
               
+              <div class="col-md-4">
+              <LazyLoadImage
+              alt={serviceDetail.title}
+              effect="blur"
+              width={'100%'}
+              src={'https://www.hire4event.com/apppanel/assets/service/'+serviceDetail.image+''} />
+                </div>
               
-              <div class="col-md-4"><img src={'https://www.hire4event.com/apppanel/assets/service/'+serviceDetail.image+''} style={{width: "100%"}} /></div>
               <div class="col-md-8">
-               
-              {serviceDetail.content}
-               
+              {Parser().parse(serviceDetail.content)}
               </div>
             </div>
           </div>
@@ -75,10 +83,13 @@ import axios from 'axios';
       </div>
     </div>
   </div>
-</section>
+  </section>
 
+<Artistscomponent />
 
-    </Fragment>
+<Inhouseservices />
+
+  </Fragment>
   )
 }
 export default Singleservicedetail;

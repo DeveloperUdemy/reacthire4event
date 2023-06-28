@@ -52,12 +52,8 @@ function About ()  {
     </div>
   </div>
 </section>
-
-
 <Artistscomponent/>
 <Equipmentcomponent />
-
-
 </Fragment>
 )
 }

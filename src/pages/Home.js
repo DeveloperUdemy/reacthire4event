@@ -1,10 +1,15 @@
-import React, {Fragment,useEffect } from 'react';
+import React, {Fragment,useEffect, Suspense } from 'react';
 import Owlslider from './Owlslider';
-import Artistscomponent from './components/Artistscomponent';
-import Equipmentcomponent from './components/Equipmentcomponent';
 import Ourservices from './Ourservices';
 import Inhouseservices from './Inhouseservices';
 import Ourblogs from './components/Ourblogs';
+import { FcCheckmark } from "react-icons/fc";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
+const Artistscomponent = React.lazy(() => import('./components/Artistscomponent'));
+const Equipmentcomponent = React.lazy(() => import('./components/Equipmentcomponent'));
 
 const Home = () => {
   useEffect(() => {
@@ -134,32 +139,77 @@ const Home = () => {
     </div>
   </div>
 </section>
-
+ 
 <Owlslider />
 
+<Suspense fallback={<div> Loading… </div>}>
 <Artistscomponent />
+</Suspense>
+
+<Suspense fallback={<div> Loading… </div>}>
 <Equipmentcomponent />
+</Suspense>
+
 <Ourservices />
+
 <Inhouseservices />
+
 <section class="space-pb">
   <div class="container">
     <div class="row">
-      <div class="col-lg-7">
+      
+
+    <div class="col-lg-7">
         <div class="section-title">
-          <h2>EVENT MANAGEMENT COMPANY </h2>
+          <h2>EVENT MANAGEMENT COMPANY</h2>
           <div class="sub-title text-right bg-transparent"> <span> in delhi NCR</span></div>
         </div>
-        <p class="">We are a one-stop event solutions provider in Delhi & NCR. Our services include Fabrication, Sound, Light and Video. We help experiential marketing agencies in creating unique experiences for their audiences.</p>
-        <p class="">Being in the business for 8 years, we have been fortunate to partner with some top of the line agencies in India while working with their clients which include some iconic Global & Indian brands.Exhibition, Sports, Conference, Product Launch, Brand promotion, Annual day organizer, Dealer meets,MICE, Hospitality services, Marathon events, Concert, and ticketed shows.</p>
-        <ul class="list-unstyled mt-4 mb-4 mb-lg-0">
-          <li class="d-flex text-dark align-items-center font-md mt-3"><i class="far fa-check-circle mr-3 font-xxl text-primary"></i> <span> Event production and decor services for events and weddings </span></li>
-          <li class="d-flex text-dark align-items-center font-md mt-3"><i class="far fa-check-circle mr-3 font-xxl text-primary"></i> <span> Artist booking, Venue booking and entertainment  services </span></li>
-          <li class="d-flex text-dark align-items-center font-md mt-3"><i class="far fa-check-circle mr-3 font-xxl text-primary"></i> <span> Conferences, College fest and exhibition management </span></li>
-        </ul>
-        <br />
-        <a href="event-management-company-in-delhi-ncr.php" class="btn btn-primary">Know More</a> </div>
+        <div class="event-anagement">
+        <p>"Hire4event one of the best event management companies in Delhi, NCR, Noida, or Gurgaon. Our experienced team specializes in planning and executing flawless events. Contact us today for all your event management and Planning needs in the region."</p>
+<p>We provide a comprehensive range of event management services in the event industry. Here's a summary of the services we mentioned:</p>
+ <ul class="list-unstyled mt-4 mb-4 mb-lg-0">
+     <li class="d-flex text-dark align-items-center font-md mt-3"><FcCheckmark class="mr-3 font-xxl text-primary"/><span> <strong>1. Event Management:</strong> Looking for event management services? Hire4Event.com is your ultimate destination for seamless
+event planning, production, and execution. Our experienced team specializes in delivering top-notch
+solutions for corporate events, weddings, concerts, and more. Contact us today for a hassle-free and
+unforgettable event experience!" Hire4event is one of the Top &amp; Best Corporate Event Planner,
+Conference Organizer, biggest Event Management Company in Delhi, Noida, Gurgaon.</span></li>
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>2. Stage Fabrication:</strong> Hire4event is event management company in Delhi, Noida, Gurgaon offer fabrication services, which likely involve creating customized structures, stages, sets, and props for events.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>3. Sound:</strong> Our sound services cover audio equipment, systems, and solutions to ensure optimal sound quality during events. This includes sound engineering, equipment rental, and setup.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>4. Light:</strong> We provide lighting solutions, including designing and setting up lighting arrangements that enhance the visual appeal and atmosphere of events.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>5. Video:</strong> Our video services involve capturing and displaying high-quality video content during events. This includes video production, live streaming, video mapping, and projection.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>6. Experiential Marketing Support:</strong> Hire4event assist experiential marketing agencies in creating unique and engaging experiences for their target audiences. This could involve integrating your various services to enhance the overall event experience.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>7. Event Production and Decor:</strong> Hire4event offer event production and decor services, which likely include designing and executing event themes, decorations, stage setups, and overall event production management.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>8. Artist Booking, Venue Booking, and Entertainment Services:</strong> We help clients book artists, performers, and entertainers for their events. Additionally, we assist in venue selection and offer related entertainment services to enhance event experiences.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>9. Conference, College Fest, and Exhibition Management:</strong> We are specialized in managing conferences, college fests, and exhibitions. This includes planning, coordination, logistics, and execution of these events.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>9. Hospitality Services:</strong> Our hospitality services cater to the specific needs of events, ensuring a smooth and comfortable experience for attendees. This may involve managing accommodation, catering, transportation, and other hospitality-related aspects.</span></li>
+
+          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>10. Marathon Events, Concerts, and Ticketed Shows:</strong> We organize and provide event services for marathon events, concerts, and ticketed shows. This could involve event planning, production, ticketing, logistics, and overall event management.</span></li>
+</ul>
+<p style={{marginTop: "20px"}}>We have a wide range of expertise and experience in the event industry, catering to various types of events and clients.</p>
+
+</div>
+        
+          <a href="/event-management-company-in-delhi-ncr.php" class="btn btn-primary">Know More</a>
+      </div>
+
+      
       <div class="col-lg-5">
-        <div class="position-relative"> <img class="img-fluid border-radius w-100" src="images/05.jpg" alt="" /> </div>
+        <div class="position-relative"> 
+        <LazyLoadImage
+              class={"img-fluid border-radius w-100"}
+              alt={'Event Management Company'}
+              effect="blur"
+              width={'100%'}
+              src={'images/05.jpg'} />
+        </div>
       </div>
     </div>
   </div>

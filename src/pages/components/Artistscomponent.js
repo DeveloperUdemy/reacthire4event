@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
 import axios from "axios";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const Artistscomponent = () => {
+
+  
     const Mainurl = 'https://hire4event.com/apppanel/';
     const [artistDetails, setArtistDetails] = useState([]);
     function getArtist() {
@@ -36,17 +39,29 @@ const Artistscomponent = () => {
         </div>
       </div>
     </div>
+
+
     <div class="row">
     {
     artistDetails.slice(0,9).map((getData) => {
       const {first_name, url, city, category, image, register_id} = getData;
       return (
         <>
-      <div class="col-lg-4 col-sm-6 mb-4" key={register_id}> <Link to={'artist/'+url+''}>
+      <div class="col-lg-4 col-sm-6 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
         <div class="listing-item">
-          <div class="listing-image bg-overlay-half-bottom"> <img class="img-fluid" src={image} alt={first_name} style={{height:"394px", width:"100%"}} />
+          <div class="listing-image bg-overlay-half-bottom"> 
+          <LazyLoadImage
+              class={"img-fluid"}
+              effect="blur"
+              src={image}
+              alt={first_name}
+              style={{
+                height: "394px",
+                width: "100%"
+              }}
+              />
             <div class="listing-quick-box"> 
-            <Link class="category" to={'artist/'+url+''}> <FcApproval />{/*<i class="fa fa-check" aria-hidden="true"></i>*/} {category} | {city}</Link> 
+            <Link class="category" to={'/artist/'+url+''}> <FcApproval /> {category} | {city}</Link> 
             <Link class="popup popup-single" data-toggle="tooltip" data-placement="top" title="Zoom"> <FcSearch /> {/*<i class="fas fa-search-plus"></i>*/} </Link> </div>
           </div>
           <div class="listing-details">
@@ -54,7 +69,7 @@ const Artistscomponent = () => {
               <div class="listing-title">
                 <h6>{first_name}</h6>
               </div>
-              <div class="listing-rating-call"> <Link class="listing-rating" to={'artist/'+url+''}><span>0.0</span> Rating</Link> <Link class="listing-call" to={'artist/'+url+''}> <FcPhone />{/*<i class="fas fa-phone-volume"></i>*/} +91 xxx xxx xxxx</Link> </div>
+              <div class="listing-rating-call"> <Link class="listing-rating" to={'/artist/'+url+''}><span>0.0</span> Rating</Link> <Link class="listing-call" to={'artist/'+url+''}> <FcPhone />{/*<i class="fas fa-phone-volume"></i>*/} +91 xxx xxx xxxx</Link> </div>
             </div>
           </div>
         </div>
@@ -65,6 +80,8 @@ const Artistscomponent = () => {
       })
       }
     </div>
+
+
     <div class="row">
       <div class="col-md-4"></div>
       <div class="col-md-4" style={{textAlign: "center"}}><a href="book-an-artist" class="btn btn-primary">View More Artist</a></div>

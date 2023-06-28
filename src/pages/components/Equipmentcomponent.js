@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Equipmentcomponent = () => {
 const Mainurl = 'https://hire4event.com/apppanel/';
@@ -42,11 +44,16 @@ function getEquipment() {
       const {heading,url,image,id} = getEquipmentData;
       return (
         <>
-      <div class="col-lg-3 col-sm-3 mb-4" key={id} > <Link to={url}>
+      <div class="col-lg-3 col-sm-3 mb-4" key={id} > <Link to={'/'+url}>
         <div class="listing-item">
           <div class="listing-image bg-overlay-half-bottom"> 
-          <img class="img-fluid" src={Mainurl+'assets/equipments/'+image+''} alt={heading} style={{height: "265px",
-    width: "100%"}} /> </div>
+          <LazyLoadImage
+              alt={heading}
+              effect="blur"
+              height={"265"}
+              width={"100%"}
+              src={Mainurl+'assets/equipments/'+image+''} />
+    </div>
           <div class="listing-details">
             <div class="listing-details-inner">
               <div class="listing-title">

@@ -5538,3 +5538,9 @@ label {
 .ts-intro-sponsors .sponsors-logo .col-md-2 {
     padding: 8px;
 }
+
+.event-anagement {
+	height: 436px;
+    overflow-y: scroll;
+    margin-bottom: 26px;
+}

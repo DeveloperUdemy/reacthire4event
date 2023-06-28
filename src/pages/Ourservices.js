@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 const Ourservices = () => {
 
   useEffect(() => {
@@ -47,13 +48,20 @@ const Ourservices = () => {
     servicesDetails.slice(0,6).map((post) => {
       const {url, name, title, image, color} = post;
       return (
-      <div class="col-6 mb-4"> <Link to={'service/'+url+''}>
+      <div class="col-6 mb-4"> <Link to={'/service/'+url+''}>
         <div style={{backgroundColor: color, float: "left", width: "100%"}}>
           <div class="cont" style={{paddingBottom: "15px"}}>
             <h6>{name}</h6>
             <p class="mb-0">{title.slice(0,400)}</p>
           </div>
-          <div class="ims"><img class="img-fluid" src={Mainurl+'assets/service/'+image+''} alt={name} /></div>
+          <div class="ims">
+            <LazyLoadImage
+              class={"img-fluid"}
+              effect="blur"
+              src={Mainurl+'assets/service/'+image+''}
+              alt={name}
+              />
+            </div>
         </div>
         </Link> 
         </div>

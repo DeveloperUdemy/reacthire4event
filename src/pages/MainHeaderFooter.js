@@ -7,9 +7,6 @@ import Footer from './Footer';
     useEffect(() => {
       window.scrollTo(0, 0)
     }, []);
-   
-
-
   return ( 
     <Fragment>
       <Header />

@@ -1,7 +1,32 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Emailsubscriber from './components/Emailsubscriber';
 export default function Footer() {
+
+
+    const Mainurl = 'https://hire4event.com/apppanel/';
+    const [footerServices, setFooterServices] = useState([]);
+    function getServices() {
+      const headers = {
+        "Content-Type": "application/json"
+      };
+      const url = Mainurl+'api/services/listfooter';
+      axios.get(url, { headers })
+      .then(res => 
+        setFooterServices(res.data.servicesList) 
+          //console.log(res.data.servicesList)
+      )
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
+      useEffect(()=>{
+        getServices();
+      },[]);
+  
+
+
 
 return (
     <>
@@ -87,18 +112,18 @@ return (
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/"> Home</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="about/"> About Us</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="why-us/"> Why Us</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="how_it_works/"> How it Works</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="services/"> Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="javascript:void(0);"> Gallery</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="case-study/"> Case study</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="our-service"> Our Service</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="marketing_services/"> Marketing Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="project-management/"> Project Management</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="consulting/"> Consulting Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="other/"> Other Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="artists-management/">Artist Management</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/about/"> About Us</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/why-us/"> Why Us</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/how_it_works/"> How it Works</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/services/"> Services</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#"> Gallery</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/case-study/"> Case study</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/our-service"> Our Service</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/marketing_services/"> Marketing Services</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/project-management/"> Project Management</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/consulting/"> Consulting Services</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/other/"> Other Services</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/artists-management/">Artist Management</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -152,18 +177,21 @@ return (
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#" data-toggle="modal" data-target="#loginModal">My Dashboard</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="contact/"> Contact Us</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/contact/"> Contact Us</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="https://hire4event.com/blogs/" target="_blank">Blogs</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="disclaimer/">Disclaimer</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="term-condition/">Terms & Condition</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="privacy-policy/">Privacy Policy</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/singer/">singer </Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/entertainment/">Entertainment</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/exhibition/">Exhibition</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/corporate-events/">Corporate Events</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/sports/">Sports</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/corporate-annual-family-day-dealer-meet-sales-meet/">Corporate Annual Family day, Dealer meet, Sales Meet</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="service/brand-promotion-and-product-launch-event/">Brand Promotion and Product Launch Event</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/disclaimer/">Disclaimer</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/term-condition/">Terms & Condition</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/privacy-policy/">Privacy Policy</Link></li>
+                                {
+                                footerServices.map((post) => {
+                                const {url, name} = post;
+                                return (
+                                <>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to={'/service/'+url+''}> {name} </Link></li>
+                                </>
+                                )
+                                })
+                                }
                             </ul>
                         </div>
                     </div>

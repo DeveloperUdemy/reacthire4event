@@ -1,11 +1,58 @@
-import React, { useEffect, Fragment } from 'react';
-function Panyourtrip ()  {
+import React, { useEffect, useState, Fragment, } from 'react';
+import { useFormik } from 'formik';
+import { PlanTripValidation } from './schemas/Plantripvalidation';
+import axios from 'axios';
+
+
+const initialValues = {
+  numberperson: "",
+  triptype: "",
+  location: "",
+  duration: "",
+  username: "",
+  email: "",
+  mobile: "",
+  message: "",
+}
+function Planyourtrip ()  {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [success, setSuccess] = useState();
+  const [error, setError] = useState([]);
+  const Mainurl = 'https://hire4event.com/apppanel/';
+  const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
+  initialValues : initialValues,
+  validationSchema: PlanTripValidation,
+  onSubmit : async (values, action) => {
+    setError("");
+  const headers = {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      };
+      const url = Mainurl+'api/enquiry/plan_your_trip';
+      const  response = await axios.post(url, values, { headers })
+      .then(resp => {
+        setSuccess(resp.data.message);
+        action.resetForm();
+      })
+      .catch(function(error) {
+        if(error.response)
+        {
+          setError(error.response.data.message);
+        }
+        //console.log(error.response.data.message);
+      });
+  },
+});
+
+
+
+
   return (
   <Fragment>
-<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundColor: "#dc123d"}}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">
@@ -16,88 +63,39 @@ function Panyourtrip ()  {
   </div>
 </section>
 
-<section class="space-ptb">
- 
-  <div class="container stepwizard1">
-      <div class="col-md-10 offset-md-1">
-          
-             
-        <div class="stepwizard">
-          <div class="stepwizard-row setup-panel">
-            <div class="stepwizard-step col-md-2"> <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
-              <p><small>NUMBER <br/>
-                OF PERSONS</small></p>
-            </div>
-            <div class="stepwizard-step col-md-2"> <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-              <p><small>TRIP<br/>
-                TYPE</small></p>
-            </div>
-            <div class="stepwizard-step col-md-2"> <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-              <p><small>SELECT <br/>
-                LOCATION</small></p>
-            </div>
-            <div class="stepwizard-step col-md-2"> <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-              <p><small>SELECT<br/>
-                DURATION</small></p>
-            </div>
-            <div class="stepwizard-step col-md-2"> <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-              <p><small>Additional<br/>
-                Activities</small></p>
-            </div>
-            <div class="stepwizard-step col-md-2"> <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
-              <p><small>PERSONAL<br/>
-                DETIALS</small></p>
-            </div>
-          </div>
-        </div>
-        <form role="form" action="https://hire4event.com/PlanTripProcess.php" method="post">
-          <div class="panel panel-primary setup-content" id="step-1">
-            <div class="panel-heading">
-              <h3 class="panel-title">Number of Persons</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                <label class="control-label">Number of person</label>
-                <select class="form-control" name="numberperson" required>
+<section class="space-pb mt-n5 position-relative z-index-1">
+  <div class="container">
+      <div class="">
+            
+      <div class="col-md-10 offset-md-1 bg-white">
+        <div class="contact-form p-md-5 p-4">
+          <h4 class="mb-4 text-primary" style={{textAlign: "center"}}>Let’s Apply Here!</h4>
+          <form  onSubmit={handleSubmit} class="pt-3" >
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Number of person</label>
+                <select class="form-control" name="numberperson">
                   <option value="">Select Number of person</option>
                   <option value="10 to 25">10 to 25</option>
                   <option value="25 to 50">25 to 50</option>
                   <option value="50 to 100">50 to 100</option>
                   <option value="More than 100">More than 100</option>
                 </select>
+                { errors.numberperson && touched.numberperson ? ( <div class="error">{errors.numberperson}</div> ) : null }
               </div>
-              <div class="form-group">
-                <button class="btn btn-primary nextBtn" type="button">Next</button>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-primary setup-content" id="step-2">
-            <div class="panel-heading">
-              <h3 class="panel-title">Trip Type</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                <label class="control-label">Trip Type</label>
+              <div class="form-group col-md-6">
+                <label>Trip Type</label>
                 <select class="form-control" name="triptype">
                   <option value="">Select Trip Type</option>
                   <option value="Corporate">Corporate</option>
-                  <option value="Friends & Family">Friends & Family</option>
+                  <option value="Friends &amp; Family">Friends &amp; Family</option>
                   <option value="Institutional">Institutional</option>
                   <option value="Destination Wedding">Destination Wedding</option>
                 </select>
+                { errors.triptype && touched.triptype ? ( <div class="error">{errors.triptype}</div> ) : null }
               </div>
-              <div class="form-group">
-                <button class="btn btn-primary nextBtn" type="button">Next</button>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-primary setup-content" id="step-3">
-            <div class="panel-heading">
-              <h3 class="panel-title">Select Location</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                <label class="control-label">Select Location</label>
+              <div class="form-group col-md-6">
+                <label>Select Location</label>
                 <select class="form-control" name="location">
                   <option value="">Select Location</option>
                   <option value="AGRA"> AGRA</option>
@@ -113,19 +111,10 @@ function Panyourtrip ()  {
                   <option value="RANIKHET"> RANIKHET</option>
                   <option value="OTHERS"> OTHERS</option>
                 </select>
+                { errors.location && touched.location ? ( <div class="error">{errors.location}</div> ) : null }
               </div>
-              <div class="form-group">
-                <button class="btn btn-primary nextBtn" type="button">Next</button>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-primary setup-content" id="step-4">
-            <div class="panel-heading">
-              <h3 class="panel-title">Duration</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                <label class="control-label">Select Duration</label>
+             <div class="form-group col-md-6">
+                <label>Duration</label>
                 <select class="form-control" name="duration">
                   <option value="">Select Duration</option>
                   <option value="1 Day">1 Day</option>
@@ -133,72 +122,77 @@ function Panyourtrip ()  {
                   <option value="2N-3D">2N-3D</option>
                   <option value="3N-4D"> 3N-4D</option>
                 </select>
+                { errors.duration && touched.duration ? ( <div class="error">{errors.duration}</div> ) : null }
               </div>
-              <div class="form-group">
-                <button class="btn btn-primary nextBtn" type="button">Next</button>
+
+              <div class="form-group col-md-12">
+                <label><strong>Additional Activities</strong></label>
+                { errors.Activities && touched.Activities ? ( <div class="error">{errors.Activities}</div> ) : null }
               </div>
-            </div>
-          </div>
-          <div class="panel panel-primary setup-content" id="step-5">
-            <div class="panel-heading">
-              <h3 class="panel-title">Additional Activities</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group">
-                
-    <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Team Building" /> <span>Team Building</span></p>
-    <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Adventure" /> <span>Adventure</span></p>
-   <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Entertainment Shows" /> <span>Entertainment Shows</span></p>
-   <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Wedding decor" /> <span>Wedding decor</span></p>
-   <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Artist" /> <span>Artist</span></p>
-      <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="None" /> <span>None</span></p>
-    <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Others" /> <span>Others</span></p>
-    
-                
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Team Building"/> <span>Team Building</span></p>
               </div>
-              <div class="form-group">
-                <button class="btn btn-primary nextBtn" type="button">Next</button>
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Adventure"/> <span>Adventure</span></p>
               </div>
-            </div>
-          </div>
-          <div class="panel panel-primary setup-content" id="step-6">
-            <div class="panel-heading">
-              <h3 class="panel-title">Personal Details</h3>
-            </div>
-            <div class="panel-body">
-              <div class="form-group has-error">
-                    <label class="control-label">Name</label>
-                    <input maxlength="200" type="text" name="username" required="required" class="form-control" placeholder="Enter Name" />
-                </div>
-                <div class="form-group has-error">
-                    <label class="control-label">Email Id</label>
-                    <input maxlength="200" type="text" name="email" required="required" class="form-control" placeholder="Enter Email Id" />
-                </div>
-                <div class="form-group has-error">
-                    <label class="control-label">Mobile</label>
-                    <input maxlength="200" type="text" name="mobile" required="required" class="form-control" placeholder="Enter Mobile Number" />
-                </div>
-                <div class="form-group has-error">
-                    <label class="control-label">Message</label>
-                    <textarea name="message" cols="" rows="" class="form-control" placeholder="Enter Message"></textarea>
-                </div>
-                
-              <div class="form-group">
-                <button class="btn btn-success" type="submit" name="plan-your-trip">Finish!</button>
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Entertainment Shows"/> <span>Entertainment Shows</span></p>
               </div>
-              
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Wedding decor"/> <span>Wedding Decoration</span></p>
+              </div>
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Artist"/> <span>Artist</span></p>
+              </div>
+
+              <div class="form-group col-md-6">
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Others"/> <span>Others</span></p>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Name*</label>
+                <input type="text" class="form-control" name="username" value={values.username} onChange={handleChange} onBlur={handleBlur} />
+                { errors.username && touched.username ? ( <div class="error">{errors.username}</div> ) : null }
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Mobile*</label>
+                <input type="number" class="form-control" name="mobile"  value={values.mobile} onChange={handleChange} onBlur={handleBlur}/>
+                { errors.mobile && touched.mobile ? ( <div class="error">{errors.mobile}</div> ) : null }
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Email*</label>
+                <input type="email" class="form-control" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} />
+                { errors.email && touched.email ? ( <div class="error">{errors.email}</div> ) : null }
+              </div>
+
+              <div class="form-group col-md-12">
+                <label>Message</label>
+                <textarea class="form-control" rows="4" name="message" value={values.message} onChange={handleChange} onBlur={handleBlur} placeholder="Type your message" />
+                { errors.message && touched.message ? ( <div class="error">{errors.message}</div> ) : null }
+              </div>
+
+              <div class="col-md-4 offset-md-4">
+                <button class="btn btn-primary" type="submit" style={{width: "100%"}}> Send Message</button>
+              </div>
+
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    
-    
- 
+
+      </div>
   </div>
 </section>
-
-
 </Fragment>
 )
 }
-export default Panyourtrip;
+export default Planyourtrip;
+
+

@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios';
+import { Parser } from 'html-to-react';
 export default function Blogchild(props) {
      const [blogImage, setBlogImage] = useState();
      useEffect(()=>{
@@ -22,7 +23,7 @@ export default function Blogchild(props) {
         <div class="blog-post bg-overlay-half-bottom bg-holder mb-4" style={{backgroundImage: 'url('+blogImage+')'}}>
         <div class="blog-post-info">
         <div class="blog-post-category" style={{color: "white"}}>{props.date}</div>
-        <h5 class="blog-post-title" style={{color: "white"}}>{props.title}</h5>
+        <h5 class="blog-post-title" style={{color: "white"}}>  {Parser().parse(props.title)}</h5>
         </div>
         </div>
     </>

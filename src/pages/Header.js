@@ -99,12 +99,13 @@ export default function Header() {
             {currentUser === null && (
             <>
             <Link onClick={loginShow}> <FcManager style={{fontSize: "20px"}}/>My Dashboard</Link> 
-            <Link to="vendor-registration"> <FcBusinessman style={{fontSize: "20px"}}/> Register as a vendor</Link> 
+            <Link to="/vendor-registration"> <FcBusinessman style={{fontSize: "20px"}}/> Register as a vendor</Link>
+            <Link to="/volunteer-registration-for-event-and-sports"> <FcBusinessman style={{fontSize: "20px"}}/> Volunteer Registration</Link> 
             </>
             )}
             {currentUser !== null && (
             <>
-            <Link to="dashboard"> <img src="https://www.hire4event.com/apppanel/assets/primaryimage/icons-user-profile-man-icon.png" style={{height:"25px", width:"25px",borderRadius: "50%"}}/> {currentUser.userProfile.name}</Link>
+            <Link to="/dashboard"> <img src="https://www.hire4event.com/apppanel/assets/primaryimage/icons-user-profile-man-icon.png" style={{height:"25px", width:"25px",borderRadius: "50%"}}/> {currentUser.userProfile.name}</Link>
             <Link onClick={handleLogout} > <i class="fa fa-sign-out pl-2" aria-hidden="true"></i> Logout</Link> 
             </>
             )}
@@ -133,8 +134,8 @@ export default function Header() {
         </>
         )}
 
-          <li class="nav-item"> <Link class="nav-link" to="plan-your-trip/"><i class="fa fa-map-marker" aria-hidden="true"></i>plan a destination  wedding/event</Link></li>
-          <li class="nav-item"> <Link class="nav-link" to="team/"><i class="fa fa-users" aria-hidden="true"></i>team</Link></li>
+          <li class="nav-item"> <Link class="nav-link" to="/plan-your-trip/"><i class="fa fa-map-marker" aria-hidden="true"></i>plan a destination  wedding/event</Link></li>
+          <li class="nav-item"> <Link class="nav-link" to="/team/"><i class="fa fa-users" aria-hidden="true"></i>team</Link></li>
           <li class="nav-item"> <a class="nav-link" href="https://hire4event.com/blogs/" target="_blank"><i class="fa fa-file" aria-hidden="true"></i>Blog</a></li>
         </ul>
       </div>

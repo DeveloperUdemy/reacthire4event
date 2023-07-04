@@ -1,20 +1,22 @@
-import {useEffect, useState} from 'react'
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from "react-icons/fa";
 import axios from 'axios';
+import { useFormik } from 'formik';
 import { Parser } from 'html-to-react';
 import Artistphoto from './Artistphoto';
 import Artistvideo from './Artistvideo';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-function Singleartist() {
+import {MDBModal,MDBModalDialog,MDBModalContent,MDBModalHeader,MDBModalTitle,MDBModalBody} from 'mdb-react-ui-kit';
+import { ArtistEnquiryValidation } from './schemas/ArtistEnquiryValidation';
+import { Helmet } from 'react-helmet';
 
+function Singleartist() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
     let { slug_url } = useParams();
-
     const [artistDetail, setArtistDetail] = useState([]);
     const navigate = useNavigate();
     function getArtistProfile() {
@@ -33,14 +35,116 @@ function Singleartist() {
         navigate('/');
        });
       }
-
       useEffect( () => {
         getArtistProfile();
       },[]);
 
-   
+
+
+      const [enquiryModal, setEnquiryModal] = useState(false);
+      const popupShow = () => setEnquiryModal(!enquiryModal);
+      const initialValues = {
+        user_url: slug_url,
+        user_name: "",
+        user_mobile: "",
+        user_email: "",
+        user_description: "",
+    }
+      const [success, setSuccess] = useState();
+      const [error, setError] = useState([]);
+      const Mainurl = 'https://hire4event.com/apppanel/';
+      const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
+      initialValues : initialValues,
+      validationSchema: ArtistEnquiryValidation,
+      onSubmit : async (values, action) => {
+
+      const headers = {
+            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data'
+          };
+          const url = Mainurl+'api/artist/enquiry';
+          const  response = await axios.post(url, values, { headers })
+          .then(resp => {
+            setSuccess(resp.data.message);
+            action.resetForm();
+          })
+          .catch(function(error) {
+            if(error.response)
+            {
+              setError(error.response.data.message);
+            }
+          });
+      },
+    });
+
+
+      
     return (
         <>
+      <MDBModal tabIndex='-1' show={enquiryModal} setShow={setEnquiryModal} >
+        <MDBModalDialog>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>{artistDetail.first_name} {artistDetail.last_name}</MDBModalTitle>
+              <button type="button" class="close" onClick={popupShow}> <span aria-hidden="true">&times;</span> </button>
+            </MDBModalHeader>
+            <MDBModalBody>
+            <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+            <form onSubmit={handleSubmit} class="form-row align-items-center" novalidate="novalidate">
+                
+            <div class="form-group col-sm-12"> 
+            {success}   
+            <input type="hidden" name="user_url" class="form-control" onChange={handleChange} value={values.user_url} />
+            { errors.user_url && touched.user_url ? ( <div class="error">{errors.user_url}</div> ) : null }
+            </div>
+            
+            <div class="form-group col-sm-12">
+            <input type="text" class="form-control" name="user_name" value={values.user_name} onChange={handleChange} onBlur={handleBlur} placeholder="Your name*" autocomplete="off" />
+            { errors.user_name && touched.user_name ? ( <div class="error">{errors.user_name}</div> ) : null }
+            </div>
+            
+            <div class="form-group col-sm-12">
+            <input type="number" class="form-control" name="user_mobile" value={values.user_mobile} onChange={handleChange} onBlur={handleBlur} placeholder="Phone Number*" autocomplete="off" />
+            { errors.user_mobile && touched.user_mobile ? ( <div class="error">{errors.user_mobile}</div> ) : null }
+            </div>
+            
+            <div class="form-group col-sm-12">
+            <input type="email" class="form-control" name="user_email" value={values.user_email} onChange={handleChange} onBlur={handleBlur} placeholder="Email Address*" autocomplete="off" />
+            { errors.user_email && touched.user_email ? ( <div class="error">{errors.user_email}</div> ) : null }
+            </div>
+            
+            <div class="form-group col-sm-12">
+            <input type="text" class="form-control" name="user_description" value={values.user_description} onChange={handleChange} onBlur={handleBlur} placeholder="Description" autocomplete="off" />
+            { errors.user_description && touched.user_description ? ( <div class="error">{errors.user_description}</div> ) : null }
+            </div>
+            
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+            <div class="col-sm-3"></div>
+            </form>
+            </div>
+            </div>   
+
+
+          </MDBModalBody>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+
+            <Helmet>
+              <title>{'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'}</title>
+              <meta name="description" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'} />
+              <meta name="keywords" content={artistDetail.keyword} />
+              <meta property="og:url" content={window.location.href} />
+              <meta property="og:title" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'} />
+              <meta property="og:description" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'}/> 
+              <meta property="og:image" content={artistDetail.image} />
+              <link rel="canonical" href={window.location.href}/>
+            </Helmet>
+
             <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/images/banner2.jpg")', backgroundSize: "cover", backgroundPosition: "0px -146px" }}>
                 <div class="container">
                     <div class="row align-content-center">
@@ -60,7 +164,7 @@ function Singleartist() {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 text-lg-center mt-3"> <a class="btn btn-secondary" href="javascript:void(0);"> <FaArrowRight style={{ fontSize: "13px;"}}/> Enquire Now</a> </div>
+                        <div class="col-lg-3 text-lg-center mt-3"> <Link class="btn btn-secondary" to="#" onClick={popupShow}> <FaArrowRight style={{ fontSize: "13px;"}}/> Enquire Now</Link> </div>
                     </div>
                 </div>
             </section>
@@ -86,9 +190,7 @@ function Singleartist() {
               </div>
 
             </div>
-            <a class="share btn btn-default" style={{backgroundColor: "#4267b2", color: "white"}} href="http://www.facebook.com/sharer.php?u=https://hire4event.com/artist/djyogii" target="_blank" ><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
-            
-            
+            <a class="share btn btn-default" style={{backgroundColor: "#4267b2", color: "white"}} href={'http://www.facebook.com/sharer.php?u='+window.location.href+''} target="_blank" ><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
             <div class="listing-detail-box mb-3">
               <div class="detail-title">
                 <h5>More details about {artistDetail.first_name} {artistDetail.last_name}</h5>

@@ -39,8 +39,6 @@ const Artistscomponent = () => {
         </div>
       </div>
     </div>
-
-
     <div class="row">
     {
     artistDetails.slice(0,9).map((getData) => {
@@ -85,7 +83,7 @@ const Artistscomponent = () => {
 
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4" style={{textAlign: "center"}}><a href="book-an-artist" class="btn btn-primary">View More Artist</a></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><Link to="/book-an-artist" class="btn btn-primary">View More Artist</Link></div>
       <div class="col-md-4"></div>
     </div>
   </div>

@@ -29,6 +29,11 @@ import Editartist from "./pages/dashboard/Editartist";
 import Singleartist from "./pages/Singleartist";
 import Singleservicedetail from "./pages/Singleservicedetail";
 import Singleequipment from "./pages/Singleequipment";
+import RegisterVendor from "./pages/RegisterVendor";
+import RegisterVolunteer from "./pages/RegisterVolunteer";
+import InhouseSingleservice from "./pages/InhouseSingleservice";
+import AllArtistList from "./pages/AllArtistList";
+import AllEquipmentList from "./pages/AllEquipmentList";
 function App() {
   return (
       <React.StrictMode>
@@ -37,7 +42,6 @@ function App() {
            <Route path="/" element={<MainHeaderFooter/>} >
            <Route index element={<Home/>} />
            <Route path="about/" element={<About/>} />
-           <Route path="contact/" element={<Contact/>} />
            <Route path="team/" element={<Ourteam/>} />
            <Route path="disclaimer/" element={<Disclaimerpage/>} />
            <Route path="term-condition/" element={<Termconditions/>} />
@@ -58,7 +62,10 @@ function App() {
            <Route path="/artist/:slug_url" element={<Singleartist/>} />
            <Route path="/service/:slug_url" element={<Singleservicedetail/>} />
            <Route path="/:slug_url" element={<Singleequipment/>} />
-           
+           <Route path="/inhouse-service/:slug_url" element={<InhouseSingleservice/>} />
+          
+          <Route path="/book-an-artist" element={<AllArtistList />}  />
+          <Route path="/equipment" element={<AllEquipmentList />}  />
 
            {/*  After Login User  */}
            <Route path="dashboard" element={<Protected Component={Profile}/>} />
@@ -66,6 +73,13 @@ function App() {
            <Route path="change-password" element={<Protected Component={Changepassword}/>} />
            <Route path="edit-email" element={<Protected Component={Editemail}/>} />
            <Route path="artist-profile" element={<Protected Component={Editartist}/>} />
+
+
+           {/*  Enquiry All Form */}
+           <Route path="contact/" element={<Contact/>} />
+           <Route path="vendor-registration/" element={<RegisterVendor/>} />
+           <Route path="volunteer-registration-for-event-and-sports" element={<RegisterVolunteer/>} />
+
 
            <Route path="*" element={<Error/>} /> 
            </Route>

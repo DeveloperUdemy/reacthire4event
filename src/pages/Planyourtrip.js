@@ -1,7 +1,9 @@
 import React, { useEffect, useState, Fragment, } from 'react';
 import { useFormik } from 'formik';
+import { Helmet } from 'react-helmet';
 import { PlanTripValidation } from './schemas/Plantripvalidation';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 
 const initialValues = {
@@ -9,16 +11,13 @@ const initialValues = {
   triptype: "",
   location: "",
   duration: "",
+  Activities: [],
   username: "",
   email: "",
   mobile: "",
   message: "",
 }
 function Planyourtrip ()  {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const [success, setSuccess] = useState();
   const [error, setError] = useState([]);
   const Mainurl = 'https://hire4event.com/apppanel/';
@@ -31,16 +30,26 @@ function Planyourtrip ()  {
         'Content-Type': 'application/json',
         'Content-Type': 'multipart/form-data'
       };
-      const url = Mainurl+'api/enquiry/plan_your_trip';
-      const  response = await axios.post(url, values, { headers })
+      const posturl = Mainurl+'api/enquiry/plan_your_trip';
+      const  response = await axios.post(posturl, values, { headers })
       .then(resp => {
-        setSuccess(resp.data.message);
+        swal({
+          title: "Success!",
+          text: resp.data.message,
+          icon: "success",
+          button: "Close",
+        });
         action.resetForm();
       })
       .catch(function(error) {
         if(error.response)
         {
-          setError(error.response.data.message);
+          swal({
+            title: "Failed!",
+            text: error.response.data.message,
+            icon: "warning",
+            button: "Close",
+          });
         }
         //console.log(error.response.data.message);
       });
@@ -48,10 +57,42 @@ function Planyourtrip ()  {
 });
 
 
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/20';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getMetaSingle();
+  }, []);
 
 
   return (
   <Fragment>
+
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
+
 <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundColor: "#dc123d"}}>
   <div class="container">
     <div class="row justify-content-center">
@@ -74,7 +115,7 @@ function Planyourtrip ()  {
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Number of person</label>
-                <select class="form-control" name="numberperson">
+                <select class="form-control" name="numberperson" onChange={handleChange}>
                   <option value="">Select Number of person</option>
                   <option value="10 to 25">10 to 25</option>
                   <option value="25 to 50">25 to 50</option>
@@ -85,7 +126,7 @@ function Planyourtrip ()  {
               </div>
               <div class="form-group col-md-6">
                 <label>Trip Type</label>
-                <select class="form-control" name="triptype">
+                <select class="form-control" name="triptype" onChange={handleChange}>
                   <option value="">Select Trip Type</option>
                   <option value="Corporate">Corporate</option>
                   <option value="Friends &amp; Family">Friends &amp; Family</option>
@@ -96,7 +137,7 @@ function Planyourtrip ()  {
               </div>
               <div class="form-group col-md-6">
                 <label>Select Location</label>
-                <select class="form-control" name="location">
+                <select class="form-control" name="location" onChange={handleChange}>
                   <option value="">Select Location</option>
                   <option value="AGRA"> AGRA</option>
                   <option value="GOA"> GOA</option>
@@ -115,7 +156,7 @@ function Planyourtrip ()  {
               </div>
              <div class="form-group col-md-6">
                 <label>Duration</label>
-                <select class="form-control" name="duration">
+                <select class="form-control" name="duration" onChange={handleChange}>
                   <option value="">Select Duration</option>
                   <option value="1 Day">1 Day</option>
                   <option value="1N-2D">1N-2D</option>
@@ -131,27 +172,27 @@ function Planyourtrip ()  {
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Team Building"/> <span>Team Building</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check"  onChange={handleChange} onBlur={handleBlur} name="Activities" value="Team Building"/> <span>Team Building</span></p>
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Adventure"/> <span>Adventure</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" onChange={handleChange} onBlur={handleBlur} name="Activities" value="Adventure"/> <span>Adventure</span></p>
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Entertainment Shows"/> <span>Entertainment Shows</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" onChange={handleChange} onBlur={handleBlur} name="Activities" value="Entertainment Shows"/> <span>Entertainment Shows</span></p>
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Wedding decor"/> <span>Wedding Decoration</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" onChange={handleChange} onBlur={handleBlur} name="Activities" value="Wedding decor"/> <span>Wedding Decoration</span></p>
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Artist"/> <span>Artist</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" onChange={handleChange} onBlur={handleBlur} name="Activities" value="Artist"/> <span>Artist</span></p>
               </div>
 
               <div class="form-group col-md-6">
-              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" name="Activities[]" value="Others"/> <span>Others</span></p>
+              <p style={{marginBottom: "5px"}}><input type="checkbox" class="check" onChange={handleChange} onBlur={handleBlur} name="Activities" value="Others"/> <span>Others</span></p>
               </div>
 
               <div class="form-group col-md-4">

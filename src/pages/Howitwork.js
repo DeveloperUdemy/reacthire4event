@@ -20,7 +20,7 @@ function Howitwork ()  {
           </div>
         </div>
       </div>
-      <div class="col-lg-3 text-lg-center mt-3"> <Link class="btn btn-secondary" to="/contact"> <i class="far fa-user pr-2"></i>Contact Us</Link> </div>
+      <div class="col-lg-3 text-lg-center mt-3"> <Link class="btn btn-secondary" to="/contact"> <i class="fa fa-user pr-2"></i>Contact Us</Link> </div>
     </div>
   </div>
 </section>

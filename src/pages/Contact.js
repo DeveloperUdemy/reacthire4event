@@ -1,13 +1,83 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
+import { Helmet } from 'react-helmet';
+import { useFormik } from 'formik';
+import { ContactValidation } from './schemas/Contactvalidation';
+import swal from 'sweetalert';
+const initialValues = {
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  message: "",
+}
 function Contact ()  {
+  const Mainurl = 'https://hire4event.com/apppanel/';
+  const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
+  initialValues : initialValues,
+  validationSchema: ContactValidation,
+  onSubmit : async (values, action) => {
+  const headers = {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      };
+      const posturl = Mainurl+'api/enquiry/contact';
+      const  response = await axios.post(posturl, values, { headers })
+      .then(resp => {
+        swal({
+          title: "Success!",
+          text: resp.data.message,
+          icon: "success",
+          button: "Close",
+        });
+        //console.log(resp.data.message);
+        action.resetForm();
+      })
+      .catch(function(error) {
+          swal({
+            title: "Failed!",
+            text: error.response.data.message,
+            icon: "warning",
+            button: "Close",
+          });
+          //console.log(error.response.data.message);
+      });
+  },
+});
+
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/14';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
   useEffect(() => {
     window.scrollTo(0, 0);
+    getMetaSingle();
   }, []);
   return (
     <Fragment>
-  
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
+
 <section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
   <div class="container">
     <div class="row justify-content-center">
@@ -31,40 +101,49 @@ function Contact ()  {
       <div class="col-lg-7 bg-white">
         <div class="contact-form p-md-5 p-4">
           <h4 class="mb-4 text-primary">Let’s Get In Touch!</h4>
-          <form class="pt-3" id="Hire4event-Contact">
+          
+          
+          <form class="pt-3" onSubmit={handleSubmit}>
               <div id="error_Contact"></div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Your name*</label>
-                <input type="text" class="form-control" name="name" placeholder="Your name" />
+                <input type="text" class="form-control" name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} placeholder="Your name" />
+                { errors.name && touched.name ? ( <div class="error">{errors.name}</div> ) : null }
               </div>
               <div class="form-group col-md-6">
                 <label>Your phone*</label>
-                <input type="text" class="form-control" name="phone" placeholder="Your phone" />
+                <input type="number" class="form-control" name="phone" value={values.phone} onChange={handleChange} onBlur={handleBlur} placeholder="Your phone" />
+                { errors.phone && touched.phone ? ( <div class="error">{errors.phone}</div> ) : null }
               </div>
               <div class="form-group col-md-12">
                 <label>Your email*</label>
-                <input type="email" class="form-control" name="email" placeholder="Your email" />
+                <input type="email" class="form-control" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} placeholder="Your email" />
+                { errors.email && touched.email ? ( <div class="error">{errors.email}</div> ) : null }
               </div>
              <div class="form-group col-md-12">
                 <label>Address</label>
-                <input type="text" class="form-control" name="address" placeholder="Address" />
+                <input type="text" class="form-control" name="address" value={values.address} onChange={handleChange} onBlur={handleBlur} placeholder="Address" />
+                { errors.address && touched.address ? ( <div class="error">{errors.address}</div> ) : null }
               </div>
               <div class="form-group col-md-12">
                 <label>Your message</label>
-                <textarea class="form-control" rows="4" name="message" placeholder="Your message"></textarea>
+                <textarea class="form-control" rows="4" name="message" value={values.message} onChange={handleChange} onBlur={handleBlur} placeholder="Your message" />
+                { errors.message && touched.message ? ( <div class="error">{errors.message}</div> ) : null }
               </div>
               <div class="form-group col-md-12">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1" />
-                  <label class="custom-control-label pr-5" for="customCheck1">I consent to having this website store my submitted information so they can respond to my inquiry.</label>
+                  <label class="custom-control-label pr-5" for="customCheck1">I consent to having this website store my submitted information so they can respond to my Enquiry.</label>
                 </div>
               </div>
               <div class="col-md-12">
-                <button class="btn btn-primary" type="submit" id="Hire4event_Contact" name="Hire4event_Contact" style={{width: "100%"}}> Send Message</button>
+                <button class="btn btn-primary" type="submit" style={{width: "100%"}}> Send Message</button>
               </div>
             </div>
           </form>
+
+
         </div>
       </div>
       <div class="col-lg-5 bg-primary p-md-5 p-4">
@@ -109,13 +188,17 @@ function Contact ()  {
           <div class="social-icon-02 mt-4 mt-md-5">
             <div class="d-flex align-items-center">
               <h6 class="mr-3 mb-0 text-white">Social :</h6>
+              
+              
               <ul class="list-unstyled mb-0 d-flex">
-                <li><a href="https://www.facebook.com/hire4eventofficial" target="_blank" class="text-white mr-3"> <i class="fab fa-facebook-f"></i> </a></li>
-                <li><a href="https://twitter.com/hire4eventcom" target="_blank" class="text-white mr-3"> <i class="fab fa-twitter"></i> </a></li>
-                <li><a href="https://www.linkedin.com/company/hire4event-com/" target="_blank" class="text-white mr-3"> <i class="fab fa-linkedin"></i> </a></li>
-                <li><a href="https://in.pinterest.com/" target="_blank" class="text-white mr-3"> <i class="fab fa-pinterest"></i> </a></li>
-                <li><a href="https://www.instagram.com/?hl=en" target="_blank" class="text-white mr-3"> <i class="fab fa-instagram"></i> </a></li>
+                <li><a href="https://www.facebook.com/hire4eventofficial" target="_blank" class="text-white mr-3"> <i class="fa fa-facebook-f"></i> </a></li>
+                <li><a href="https://twitter.com/hire4eventcom" target="_blank" class="text-white mr-3"> <i class="fa fa-twitter"></i> </a></li>
+                <li><a href="https://www.linkedin.com/company/hire4event-com/" target="_blank" class="text-white mr-3"> <i class="fa fa-linkedin"></i> </a></li>
+                <li><a href="https://in.pinterest.com/" target="_blank" class="text-white mr-3"> <i class="fa fa-pinterest"></i> </a></li>
+                <li><a href="https://www.instagram.com/?hl=en" target="_blank" class="text-white mr-3"> <i class="fa fa-instagram"></i> </a></li>
               </ul>
+
+
             </div>
           </div>
         </div>

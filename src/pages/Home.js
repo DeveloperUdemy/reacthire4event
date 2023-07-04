@@ -1,4 +1,4 @@
-import React, {Fragment,useEffect, Suspense } from 'react';
+import React, {Fragment,useEffect, Suspense, useState } from 'react';
 import Owlslider from './Owlslider';
 import Ourservices from './Ourservices';
 import Inhouseservices from './Inhouseservices';
@@ -6,18 +6,47 @@ import Ourblogs from './components/Ourblogs';
 import { FcCheckmark } from "react-icons/fc";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-
-
+import { Helmet } from 'react-helmet';
+import  axios  from 'axios';
 const Artistscomponent = React.lazy(() => import('./components/Artistscomponent'));
 const Equipmentcomponent = React.lazy(() => import('./components/Equipmentcomponent'));
 
 const Home = () => {
+  const Mainurl = 'https://hire4event.com/apppanel/';
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/1';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
   useEffect(() => {
     window.scrollTo(0, 0);
+    getMetaSingle();
   }, []);
   return ( 
     <Fragment>
-  <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/image.jpg)"}}>
+
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
+  <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/home-banner-hiree4event.png)"}}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">

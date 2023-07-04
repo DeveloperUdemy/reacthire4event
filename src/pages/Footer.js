@@ -95,6 +95,7 @@ return (
                             <li><a href="https://in.pinterest.com/hire4event/" target="_blank" style={{color: "#db473e"}}><i class="fa fa-pinterest"></i></a></li>
                             <li><a href="https://www.instagram.com/hire4event/?hl=en" target="_blank" style={{color: "#9118ab"}}><i class="fa fa-instagram"></i></a></li>
                             <li><a href="https://www.youtube.com/channel/UCO30G7y5-QlJnQv0cVEv7_Q" target="_blank" style={{color: "#f62424"}}><i class="fa fa-youtube"></i></a></li>
+                        
                         </ul>
                         <Link to="vendor-registration" class="btn btn-danger" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Register as a Vendor</Link> 
                         <Link to="contact/" class="btn btn-primary" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Submit Requirement</Link> 

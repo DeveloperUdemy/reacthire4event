@@ -7,7 +7,7 @@ import Inhouseservices from './Inhouseservices';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Helmet } from 'react-helmet';
- function Singleservicedetail() {
+function InhouseSingleservice() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -23,7 +23,7 @@ import { Helmet } from 'react-helmet';
      'Content-Type': 'application/json',
      'Content-Type': 'multipart/form-data'
    };
-  const url = Mainurl + 'api/services/single/'+slug_url;
+  const url = Mainurl + 'api/services/inhousesingle/'+slug_url;
      axios.get(url, { headers })
     .then(resp => {
         setServiceDetail(resp.data.serviceSingle);
@@ -39,6 +39,7 @@ import { Helmet } from 'react-helmet';
   return (
     <Fragment>
 
+
       <Helmet>
         <title>{serviceDetail.title}</title>
         <meta name="description" content={serviceDetail.meta} />
@@ -49,7 +50,6 @@ import { Helmet } from 'react-helmet';
         <meta property="og:image" content={Mainurl+'assets/service/'+serviceDetail.image+''} />
         <link rel="canonical" href={window.location.href}/>
       </Helmet>
-
 
 
     <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
@@ -86,7 +86,7 @@ import { Helmet } from 'react-helmet';
               alt={serviceDetail.title}
               effect="blur"
               width={'100%'}
-              src={Mainurl+'assets/service/'+serviceDetail.image+''} />
+              src={'https://www.hire4event.com/apppanel/assets/service/'+serviceDetail.image+''} />
                 </div>
               
               <div class="col-md-8">
@@ -107,4 +107,4 @@ import { Helmet } from 'react-helmet';
   </Fragment>
   )
 }
-export default Singleservicedetail;
+export default InhouseSingleservice;

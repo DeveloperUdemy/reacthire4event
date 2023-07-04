@@ -1,13 +1,46 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
 import Equipmentcomponent from './components/Equipmentcomponent';
 function Ourservice ()  {
+
+  const Mainurl = 'https://hire4event.com/apppanel/';
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/8';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
   useEffect(() => {
     window.scrollTo(0, 0);
+    getMetaSingle();
   }, []);
+
   return (
   <Fragment>
+
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
   <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
   <div class="container">
     <div class="row align-content-center">
@@ -20,7 +53,7 @@ function Ourservice ()  {
           </div>
         </div>
       </div>
-      <div class="col-lg-3 text-lg-center mt-3"> <Link class="btn btn-secondary" to="/contact"> <i class="far fa-user pr-2"></i>Contact Us</Link> </div>
+      <div class="col-lg-3 text-lg-center mt-3"> <Link class="btn btn-secondary" to="/contact"> <i class="fa fa-user pr-2"></i>Contact Us</Link> </div>
     </div>
   </div>
 </section>

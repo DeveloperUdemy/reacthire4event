@@ -34,6 +34,8 @@ import RegisterVolunteer from "./pages/RegisterVolunteer";
 import InhouseSingleservice from "./pages/InhouseSingleservice";
 import AllArtistList from "./pages/AllArtistList";
 import AllEquipmentList from "./pages/AllEquipmentList";
+import AllVenueList from "./pages/AllVenueList";
+import SingleVenueDetail from "./pages/SingleVenueDetail";
 function App() {
   return (
       <React.StrictMode>
@@ -63,9 +65,11 @@ function App() {
            <Route path="/service/:slug_url" element={<Singleservicedetail/>} />
            <Route path="/:slug_url" element={<Singleequipment/>} />
            <Route path="/inhouse-service/:slug_url" element={<InhouseSingleservice/>} />
+           <Route path="/venue-view/:slug_url" element={<SingleVenueDetail/>} />
           
           <Route path="/book-an-artist" element={<AllArtistList />}  />
           <Route path="/equipment" element={<AllEquipmentList />}  />
+          <Route path="/venue-listing" element={<AllVenueList />}  />
 
            {/*  After Login User  */}
            <Route path="dashboard" element={<Protected Component={Profile}/>} />

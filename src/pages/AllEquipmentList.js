@@ -1,6 +1,34 @@
-import React,{Fragment} from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import axios from "axios";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function AllEquipmentList() {
+  const Mainurl = 'https://hire4event.com/apppanel/';
+  const [equipmentDetails, setEquipmentDetails] = useState([]);
+  const [visible, setVisible] = useState(24);
+  const showMore = () => {
+    setVisible((prevValue) => prevValue+40);
+  }
+  function getEquipment() {
+    const headers = {
+      "Content-Type": "application/json"
+    };
+    const url = Mainurl+'api/equipment/alllist';
+    axios.get(url, { headers })
+    .then(resp => {
+      setEquipmentDetails(resp.data.equipmentList);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
+    useEffect(()=>{
+      getEquipment();
+    },[]);
+
+
   return (
     <Fragment>
 
@@ -36,6 +64,57 @@ function AllEquipmentList() {
     </div>
   </div>
 </section>
+
+
+<section class="space-pb popup-gallery" style={{paddingBottom: "40px"}}>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title" style={{marginTop: "20px"}}>
+          <h2>Event Equipment</h2>
+          <div class="sub-title text-right"> <span> We can provide every equipment or services related to event</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="row even">
+    {
+    equipmentDetails.slice(0, visible).map((getEquipmentData) => {
+      const {heading,url,image,id} = getEquipmentData;
+      return (
+        <>
+      <div class="col-lg-3 col-sm-3 mb-4" key={id} > <Link to={'/'+url}>
+        <div class="listing-item">
+          <div class="listing-image bg-overlay-half-bottom"> 
+          <LazyLoadImage
+              alt={heading}
+              effect="blur"
+              height={"265"}
+              width={"100%"}
+              src={Mainurl+'assets/equipments/'+image+''} />
+    </div>
+          <div class="listing-details">
+            <div class="listing-details-inner">
+              <div class="listing-title">
+                <h6>{heading}</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        </Link> 
+        </div>
+        </>
+      )
+    })
+    }
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">Load More {'>>'} </button></div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</section>
+
 
     </Fragment>
   )

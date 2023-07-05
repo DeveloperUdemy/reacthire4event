@@ -7,15 +7,18 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 function AllArtistList() {
-
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [artistDetails, setArtistDetails] = useState([]);
+  const [visible, setVisible] = useState(32);
+  const showMore = () => {
+    setVisible((prevValue) => prevValue+32);
+  }
   function getArtist() {
     const headers = {
       "Content-Type": "application/json"
     };
-    const url = Mainurl+'api/artist/listartist';
-    axios.get(url,{headers})
+    const url = Mainurl+'api/artist/allartist';
+   const Getresponse = axios.get(url,{headers})
     .then(resp => {
       setArtistDetails(resp.data.artistList);
       //console.log(resp.data);
@@ -103,7 +106,7 @@ function AllArtistList() {
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="section-title">
+        <div class="section-title" style={{marginTop: "20px"}}>
           <h2>Artist</h2>
           <div class="sub-title text-right"> <span> Make a list of your artist toward your long-term goal</span></div>
         </div>
@@ -111,7 +114,7 @@ function AllArtistList() {
     </div>
     <div class="row">
     {
-    artistDetails.slice(0,34).map((getData) => {
+    artistDetails.slice(0, visible).map((getData) => {
       const {first_name, url, city, category, image, register_id} = getData;
       return (
         <>
@@ -153,7 +156,7 @@ function AllArtistList() {
 
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4" style={{textAlign: "center"}}><Link to="#" class="btn btn-primary">Load More</Link></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">Load More {'>>'}</button></div>
       <div class="col-md-4"></div>
     </div>
 

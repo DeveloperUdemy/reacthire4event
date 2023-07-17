@@ -36,6 +36,7 @@ import AllArtistList from "./pages/AllArtistList";
 import AllEquipmentList from "./pages/AllEquipmentList";
 import AllVenueList from "./pages/AllVenueList";
 import SingleVenueDetail from "./pages/SingleVenueDetail";
+import ArtistPhotoVideo from "./pages/dashboard/ArtistPhotoVideo";
 function App() {
   return (
       <React.StrictMode>
@@ -72,17 +73,20 @@ function App() {
           <Route path="/venue-listing" element={<AllVenueList />}  />
 
            {/*  After Login User  */}
-           <Route path="dashboard" element={<Protected Component={Profile}/>} />
-           <Route path="create-artist-profile" element={<Protected Component={Artistprofile}/>} />
-           <Route path="change-password" element={<Protected Component={Changepassword}/>} />
-           <Route path="edit-email" element={<Protected Component={Editemail}/>} />
-           <Route path="artist-profile" element={<Protected Component={Editartist}/>} />
+           <Route path="/dashboard" element={<Protected Component={Profile}/>} />
+           <Route path="/create-artist-profile" element={<Protected Component={Artistprofile}/>} />
+           <Route path="/change-password" element={<Protected Component={Changepassword}/>} />
+           <Route path="/edit-email" element={<Protected Component={Editemail}/>} />
+           <Route path="/artist-profile" element={<Protected Component={Editartist}/>} />
+           <Route path="/artist-upload-photo-video" element={<Protected Component={ArtistPhotoVideo}/>} />
+
+           
 
 
            {/*  Enquiry All Form */}
-           <Route path="contact/" element={<Contact/>} />
-           <Route path="vendor-registration/" element={<RegisterVendor/>} />
-           <Route path="volunteer-registration-for-event-and-sports" element={<RegisterVolunteer/>} />
+           <Route path="/contact/" element={<Contact/>} />
+           <Route path="/vendor-registration/" element={<RegisterVendor/>} />
+           <Route path="/volunteer-registration-for-event-and-sports" element={<RegisterVolunteer/>} />
 
 
            <Route path="*" element={<Error/>} /> 

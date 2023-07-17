@@ -1,10 +1,18 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import axios from "axios";
+import { Helmet } from 'react-helmet';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function AllEquipmentList() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
+  const [productName, setProductName] = useState(params.product_name);
+  const [locationCity, setLocationCity] = useState(params.location_city);
+  // const product_name = searchParams.get('product_name');
+  // const location_city = searchParams.get('location_city');
+
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [equipmentDetails, setEquipmentDetails] = useState([]);
   const [visible, setVisible] = useState(24);
@@ -13,10 +21,15 @@ function AllEquipmentList() {
   }
   function getEquipment() {
     const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      'Content-Type': 'multipart/form-data'
     };
-    const url = Mainurl+'api/equipment/alllist';
-    axios.get(url, { headers })
+    const parameterPost = {
+      'product_name' : productName,
+      'location_city' : locationCity
+    };
+    const urlpost = Mainurl+'api/equipment/alllist';
+    axios.post(urlpost, parameterPost, { headers })
     .then(resp => {
       setEquipmentDetails(resp.data.equipmentList);
     })
@@ -24,13 +37,46 @@ function AllEquipmentList() {
       console.log(error);
     });
   }
+
+
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/22';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
+
+
     useEffect(()=>{
       getEquipment();
+      getMetaSingle();
     },[]);
 
 
   return (
     <Fragment>
+
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
+
 
 <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/image.jpg)", padding: "150px 0 21px"}}>
   <div class="container">
@@ -42,16 +88,26 @@ function AllEquipmentList() {
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <form class="home-search" method="get" id="equipment_search" action="">
+        <form class="home-search" method="get">
           <div class="row mt-1 mt-lg-2">
             <div class="col-sm-4 col-lg-4 col-xl-5">
             <div class="form-group form-location"> <span>What?</span>
-            <input type="text" class="form-control" name="product_name" placeholder="Search Equipment" value="" />
+            <input type="text" class="form-control" 
+            name="product_name" 
+            value={productName} 
+            onChange={(e) => setProductName(e.target.value)}  
+            autoComplete='off'
+            placeholder="Search Equipment" />
             </div>
             </div>
             <div class="col-sm-5 col-lg-5 col-xl-4">
               <div class="form-group form-location"> <span>Where?</span>
-                <input type="text" name="location_city" value="" class="form-control" placeholder="Enter city or location" />
+                <input type="text" 
+                name="location_city" 
+                value={locationCity} 
+                onChange={(e) => setLocationCity(e.target.value)}
+                autoComplete='off'  
+                class="form-control" placeholder="Enter city or location" />
               </div>
             </div>
             <div class="col-sm-3 col-lg-3 col-xl-3">
@@ -106,6 +162,7 @@ function AllEquipmentList() {
       )
     })
     }
+  
     </div>
     <div class="row">
       <div class="col-md-4"></div>

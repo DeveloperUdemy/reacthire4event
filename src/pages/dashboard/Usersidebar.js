@@ -44,15 +44,13 @@ const url = Mainurl + 'api/artist/singleartist';
               {artistCount===true ?  
               <>   
               <li><Link to='/artist-profile'><i class="fa fa-pencil" aria-hidden="true"></i> Edit Artist Profile</Link></li> 
-              <li><Link to='/artist-photo'><i class="fa fa-picture-o" aria-hidden="true"></i> Upload Photos</Link></li>
-              <li><Link to='/artist-video'><i class="fa fa-youtube" aria-hidden="true"></i> Upload Youtube Video</Link></li>
+              <li><Link to='/artist-upload-photo-video'><i class="fa fa-picture-o" aria-hidden="true"></i> Upload Photos/Videos</Link></li>
               <li><Link to={'/artist/'+artistDetail.url+''}><i class="fa fa-eye" aria-hidden="true"></i> Public Artist Profile</Link></li>
               </>
               : 
               <>
               <li><Link to='/create-artist-profile'><i class="fa fa-pencil" aria-hidden="true"></i> Create Artist Profile</Link></li> 
-              <li><Link to='#'><i class="fa fa-picture-o" aria-hidden="true"></i> Upload Photos</Link></li>
-              <li><Link to='#'><i class="fa fa-youtube" aria-hidden="true"></i> Upload Youtube Video</Link></li>
+              <li><Link to='#'><i class="fa fa-picture-o" aria-hidden="true"></i> Upload Photos/Videos</Link></li>
               <li><Link to='#'><i class="fa fa-eye" aria-hidden="true"></i> Public Artist Profile</Link></li>
               </>
               }    

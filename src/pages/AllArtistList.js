@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
 import axios from "axios";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -7,6 +8,15 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 function AllArtistList() {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = Object.fromEntries([...searchParams]);
+  const [categoryName, setCategoryName] = useState(params.category);
+  const [locationCity, setLocationCity] = useState(params.location_city);
+
+
+
+
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [artistDetails, setArtistDetails] = useState([]);
   const [visible, setVisible] = useState(32);
@@ -15,10 +25,15 @@ function AllArtistList() {
   }
   function getArtist() {
     const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      'Content-Type': 'multipart/form-data'
     };
-    const url = Mainurl+'api/artist/allartist';
-   const Getresponse = axios.get(url,{headers})
+    const parameterPost = {
+      'category_name' : categoryName,
+      'location_city' : locationCity
+    };
+    const urlPost = Mainurl+'api/artist/allartist';
+   const Getresponse = axios.post(urlPost, parameterPost, {headers})
     .then(resp => {
       setArtistDetails(resp.data.artistList);
       //console.log(resp.data);
@@ -27,14 +42,45 @@ function AllArtistList() {
       console.log(error.resp);
     });
   }
+
+  const [metaDetail, setMetaDetail] = useState([]);
+  function getMetaSingle() {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    };
+   const url = Mainurl + 'api/enquiry/pagemeta/23';
+      axios.get(url, { headers })
+     .then(resp => {
+      setMetaDetail(resp.data.pageMeta);
+     })
+     .catch(function (error) {
+      
+     });
+    }
+
+
     useEffect(()=>{
       window.scrollTo(0, 0);
       getArtist();
+      getMetaSingle();
     },[]);
 
 
   return (
     <Fragment>
+
+        <Helmet>
+        <title>{metaDetail.meta_title}</title>
+        <meta name="description" content={metaDetail.meta_description} />
+        <meta name="keywords" content={metaDetail.meta_keyword} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:title" content={metaDetail.meta_title} />
+        <meta property="og:description" content={metaDetail.meta_description}/> 
+        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+        <link rel="canonical" href={window.location.href}/>
+        </Helmet>
+
   <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/image.jpg)", padding: "150px 0 21px"}}>
   <div class="container">
     <div class="row justify-content-center">
@@ -49,7 +95,7 @@ function AllArtistList() {
           <div class="row mt-1 mt-lg-2">
             <div class="col-sm-6 col-lg-5 col-xl-5">
               <div class="form-group"> <span>What?</span>
-              <select class="form-control" name="category">
+              <select class="form-control" name="category" value={categoryName} onChange={(e) => setCategoryName(e.target.value)}>
               <option value="">Choose</option>
               <option >Sketch Artist </option>
               <option >Painter</option>
@@ -87,7 +133,12 @@ function AllArtistList() {
             </div>
             <div class="col-sm-6 col-lg-4 col-xl-5">
               <div class="form-group form-location"> <span>Where?</span>
-                <input type="text" name="location_city" value="" class="form-control" placeholder="Enter city or location" />
+                <input type="text"
+                name="location_city" 
+                value={locationCity} 
+                onChange={(e) => setLocationCity(e.target.value)}
+                autoComplete='off' 
+                class="form-control" placeholder="Enter city or location" />
               </div>
             </div>
             <div class="col-lg-3 col-xl-2">

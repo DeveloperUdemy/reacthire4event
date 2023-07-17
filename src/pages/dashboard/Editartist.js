@@ -1,20 +1,19 @@
 
 import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { CKEditor } from 'ckeditor4-react';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
+import { Formik, FieldArray, useFormik, Field } from 'formik';
+
 import { EditArtistFormValidation } from '../schemas/EditArtistProfile';
 import axios from 'axios';
 import Userheader from './Userheader';
 import Usersidebar from './Usersidebar';
-import { FaRegUserCircle, FaUpload } from "react-icons/fa";
+import { FaRegUserCircle, FaUpload, FaRegTrashAlt } from "react-icons/fa";
 import Previewimage from './Previewimage';
 
 
 function Editartist() {
 
-
-
-  
     const [artistDetail, setArtistDetail] = useState([]);
     const navigate = useNavigate();
 
@@ -32,6 +31,7 @@ function Editartist() {
         axios.post(url, values, { headers })
        .then(resp => {
            setArtistDetail(resp.data.artistSingle);
+           
            //console.log(resp.data.artistSingle);
        })
        .catch(function (error) {
@@ -39,6 +39,7 @@ function Editartist() {
        });
       }
       useEffect( () => {
+        window.scrollTo(0, 0);
         getArtistProfile();
       },[])
 
@@ -59,7 +60,7 @@ function Editartist() {
     location: artistDetail.location,
     artist_keyword: artistDetail.keyword,
     description: artistDetail.description,
-    register_id: userID.userProfile.id,
+    register_id: userID.userProfile.id
   }
   const [success, setSuccess] = useState();
   const [error, setError] = useState([]);
@@ -81,6 +82,7 @@ function Editartist() {
        axios.post(url, values, { headers })
         .then(resp => {
           setSuccess(resp.data.message);
+          navigate('/artist-upload-photo-video');
         })
         .catch(function (error) {
           if (error.response) {
@@ -111,6 +113,11 @@ function Editartist() {
               <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Edit Artist Profile </h6>
             </div>
             <div class="widget-content">
+
+
+             
+
+
             
               <form  onSubmit={handleSubmit} enctype="multipart/form-data">
               <div class="form-row">
@@ -235,27 +242,24 @@ function Editartist() {
                 <div class="form-group col-md-12">
                   <label>Description*</label>
 
-                  {/* <CKEditor onChange={handleChange} onBlur={handleBlur} value={values.description}/> */}
-
-
                   <textarea class="form-control" name="description" style={{height: "140px"}} onChange={handleChange} onBlur={handleBlur} value={values.description} />
 
                   {errors.description && touched.description ? (<div class="error">{errors.description}</div>) : null}
                 
-                </div>
-                
+                </div>                
                 <div class="form-group col-md-4"></div>
                 <div class="form-group col-md-4">
-                  <button type="submit" class="form-control btn btn-secondary">Update</button>
+                  <button type="submit" class="form-control btn btn-secondary">Save & Continue</button>
                 </div>
                 <div class="form-group col-md-4"></div>
+
                 <div class="form-group col-md-12">{success}</div>
                 
                 </div>
                 </div>
               </div>
               </form>
-           
+            
 
             </div>
           </div>

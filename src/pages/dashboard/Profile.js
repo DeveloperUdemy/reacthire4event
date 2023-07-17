@@ -124,7 +124,7 @@ useEffect ( () => {
                           {errors.address && touched.address ? (<div class="error">{errors.address}</div>) : null}
                         </div>
                         <div class="form-group col-md-2">
-                          <button type="submit" class="form-control btn btn-secondary">Update</button>
+                          <button type="submit" class="form-control btn btn-secondary">Save Profile</button>
                         </div>
                       </div>
                     </form>

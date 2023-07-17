@@ -8,7 +8,6 @@ import Userheader from './Userheader';
 import Usersidebar from './Usersidebar';
 import { FaRegUserCircle, FaUpload } from "react-icons/fa";
 import Previewimage from './Previewimage';
-import { Navigate } from 'react-router-dom';
 
 
 function Artistprofile() {
@@ -83,12 +82,13 @@ function getArtistProfile() {
        axios.post(url, values, { headers })
         .then(resp => {
           setSuccess(resp.data.message);
+          navigate('/artist-upload-photo-video');
         })
         .catch(function (error) {
           if (error.response) {
             setError(error.response.data.message);
           }
-          console.log(error.response.data.message);
+          //console.log(error.response.data.message);
         });
         //  Stop Form Value To API 
     },
@@ -250,7 +250,7 @@ function getArtistProfile() {
                 
                 <div class="form-group col-md-4"></div>
                 <div class="form-group col-md-4">
-                  <button type="submit" class="form-control btn btn-secondary">Continue</button>
+                  <button type="submit" class="form-control btn btn-secondary">Save & Continue</button>
                 </div>
                 <div class="form-group col-md-4"></div>
                 </div>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState, Fragment} from 'react';
 import { Link } from 'react-router-dom';
+import { Parser } from 'html-to-react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
@@ -69,10 +70,9 @@ function Artistmanagement ()  {
               <div class="col-12">
                   
                 <div class="section-title">
-                  <h2>Artist Management</h2>
+                  <h1>{metaDetail.heading}</h1>
                   <div class="sub-title text-right"> <span> Meet the amazing team behind hire4event & find out more about how we work.</span></div>
                 </div>
-                
               </div>
               
     <div class="row align-items-center">
@@ -116,6 +116,17 @@ function Artistmanagement ()  {
         </a>
       </div>
     </div>
+
+
+    <div class="col-12">
+
+    {Parser().parse(metaDetail.content)}
+
+    </div>
+
+
+
+
     
             </div>
           </div>

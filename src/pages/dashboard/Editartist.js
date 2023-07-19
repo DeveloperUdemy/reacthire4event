@@ -12,8 +12,7 @@ import { FaRegUserCircle, FaUpload, FaRegTrashAlt } from "react-icons/fa";
 import Previewimage from './Previewimage';
 
 
-function Editartist() {
-
+function Editartist() { 
     const [artistDetail, setArtistDetail] = useState([]);
     const navigate = useNavigate();
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 import axios from "axios";
 import { Helmet } from 'react-helmet';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -10,6 +11,7 @@ function AllEquipmentList() {
   const params = Object.fromEntries([...searchParams]);
   const [productName, setProductName] = useState(params.product_name);
   const [locationCity, setLocationCity] = useState(params.location_city);
+  const [isLoader, setIsLoader] = useState(true);
   // const product_name = searchParams.get('product_name');
   // const location_city = searchParams.get('location_city');
 
@@ -32,8 +34,10 @@ function AllEquipmentList() {
     axios.post(urlpost, parameterPost, { headers })
     .then(resp => {
       setEquipmentDetails(resp.data.equipmentList);
+      setIsLoader(false);
     })
     .catch(function(error) {
+      setIsLoader(true);
       console.log(error);
     });
   }
@@ -57,6 +61,7 @@ function AllEquipmentList() {
 
 
     useEffect(()=>{
+      window.scrollTo(0, 0);
       getEquipment();
       getMetaSingle();
     },[]);
@@ -134,6 +139,17 @@ function AllEquipmentList() {
     </div>
     <div class="row even">
     {
+isLoader ? <>
+<div class="col-md-12 col-sm-3" style={{textAlign: "center"}}>
+<RotatingLines
+  strokeColor="yellow"
+  strokeWidth="5"
+  animationDuration="0.75"
+  width="96"
+  visible={true}
+/> 
+</div>
+</> :
     equipmentDetails.slice(0, visible).map((getEquipmentData) => {
       const {heading,url,image,id} = getEquipmentData;
       return (

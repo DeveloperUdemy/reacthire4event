@@ -77,7 +77,7 @@ const url = Mainurl + 'api/artist/singleartist';
         </div>
         </div>
         </div>
-        <div class="col-lg-8 text-md-right mt-3 mt-md-0"> 
+        <div class="col-lg-8 text-md-right mt-3 mt-md-0 userMenu"> 
         <Link class="btn btn-secondary btn-md" to="/dashboard"> <FaRegUserCircle style={{fontSize: "20px"}}/> My Profile</Link> 
          { artistCount===true ? 
          <>

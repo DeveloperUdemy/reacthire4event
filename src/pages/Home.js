@@ -3,6 +3,7 @@ import Owlslider from './Owlslider';
 import Ourservices from './Ourservices';
 import Inhouseservices from './Inhouseservices';
 import Ourblogs from './components/Ourblogs';
+import { Parser } from 'html-to-react';
 import { FcCheckmark } from "react-icons/fc";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -163,25 +164,21 @@ const Home = () => {
             </form>
           </div>
         </div>
-        <p style={{ color:"#fff", textalign: "center" }}>Sound rental, Artist, DJ, Band booking, Venue Hire, Wedding Decor</p>
+        <p style={{ color:"#fff", textAlign: "center" }}>Sound rental, Artist, DJ, Band booking, Venue Hire, Wedding Decor</p>
       </div>
     </div>
   </div>
 </section>
- 
-<Owlslider />
 
-<Suspense fallback={<div> Loading… </div>}>
-<Artistscomponent />
-</Suspense>
+<Suspense fallback={<div> Loading… </div>}><Owlslider /></Suspense> 
 
-<Suspense fallback={<div> Loading… </div>}>
-<Equipmentcomponent />
-</Suspense>
+<Suspense fallback={<div> Loading… </div>}><Artistscomponent /></Suspense>
 
-<Ourservices />
+<Suspense fallback={<div> Loading… </div>}><Equipmentcomponent /></Suspense>
 
-<Inhouseservices />
+<Suspense fallback={<div> Loading… </div>}><Ourservices /></Suspense>
+
+<Suspense fallback={<div> Loading… </div>}><Inhouseservices /></Suspense>
 
 <section class="space-pb">
   <div class="container">
@@ -286,7 +283,7 @@ Conference Organizer, biggest Event Management Company in Delhi, Noida, Gurgaon.
   </div>
 </section>
 
- <Ourblogs />
+<Suspense fallback={<div> Loading… </div>}><Ourblogs /></Suspense>
 
 <section class="ts-intro-sponsors space-ptb">
     <div class="container">

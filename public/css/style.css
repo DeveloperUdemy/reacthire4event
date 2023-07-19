@@ -5544,3 +5544,46 @@ label {
     overflow-y: scroll;
     margin-bottom: 26px;
 }
+
+.RemoveUserGallery{
+	position: absolute;
+    background: #ffa800;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    right: 0;
+    top: 0;
+}
+
+.userMenu a.btn{
+	margin-right: 5px; margin-left: 0px !important;
+	margin-bottom: 5px;
+}
+
+.dsts h1 {
+    font-size: 29px;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+.dsts h2 {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+.dsts h3 {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -1px;
+}
+
+.text-white p {
+	color: white;
+}
+.toast-message {
+    background: darkblue;
+    color: #fff;
+    font-size: 20px;
+    width: 34vw;
+    padding: 30px 20px;
+}

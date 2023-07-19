@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 import { Helmet } from 'react-helmet';
 import axios from "axios";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -11,7 +12,7 @@ function AllVenueList() {
   const params = Object.fromEntries([...searchParams]);
   const [categoryName, setCategoryName] = useState(params.category);
   const [locationCity, setLocationCity] = useState(params.location_city);
-
+  const [isLoader, setIsLoader] = useState(true);
 
     const Mainurl = 'https://hire4event.com/apppanel/';
     const [venueDetails, setVenueDetails] = useState([]);
@@ -32,8 +33,10 @@ function AllVenueList() {
       axios.post(urlPost, parameterPost, { headers })
       .then(resp => {
         setVenueDetails(resp.data.venueList);
+        setIsLoader(false);
       })
       .catch(function(error) {
+        setIsLoader(true);
         console.log(error);
       });
     }
@@ -55,6 +58,7 @@ function AllVenueList() {
        });
       }
       useEffect(()=>{
+        window.scrollTo(0, 0);
         getVenue();
         getMetaSingle();
       },[]);
@@ -135,6 +139,17 @@ function AllVenueList() {
     </div>
     <div class="row even">
     {
+    isLoader ? <>
+    <div class="col-md-12 col-sm-3" style={{textAlign: "center"}}>
+    <RotatingLines
+    strokeColor="yellow"
+    strokeWidth="5"
+    animationDuration="0.75"
+    width="96"
+    visible={true}
+    /> 
+    </div>
+    </> :  
     venueDetails.slice(0, visible).map((getVenueData) => {
       const {venudetail_id,type_id,location_id,url,image,heading,title} = getVenueData;
       return (

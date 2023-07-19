@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
 import axios from "axios";
+import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
+import { RotatingLines } from 'react-loader-spinner';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 const Artistscomponent = () => {
@@ -9,6 +10,7 @@ const Artistscomponent = () => {
   
     const Mainurl = 'https://hire4event.com/apppanel/';
     const [artistDetails, setArtistDetails] = useState([]);
+    const [isLoader, setIsLoader] = useState(true);
     function getArtist() {
       const headers = {
         "Content-Type": "application/json"
@@ -16,10 +18,12 @@ const Artistscomponent = () => {
       const url = Mainurl+'api/artist/listartist';
       axios.get(url,{headers})
       .then(resp => {
+        setIsLoader(false);
         setArtistDetails(resp.data.artistList);
         //console.log(resp.data);
       })
       .catch(function(error) {
+        setIsLoader(true);
         console.log(error.resp);
       });
     }
@@ -41,8 +45,24 @@ const Artistscomponent = () => {
     </div>
     <div class="row">
     {
+    isLoader ? <>
+    <div class="col-md-12 col-sm-3" style={{textAlign: "center"}}>
+    <RotatingLines
+      strokeColor="yellow"
+      strokeWidth="5"
+      animationDuration="0.75"
+      width="96"
+      visible={true}
+    /> 
+    </div>
+    </> :  
     artistDetails.slice(0,9).map((getData) => {
-      const {first_name, url, city, category, image, register_id} = getData;
+      const {first_name,last_name, url, city, category, image, register_id} = getData;
+
+      let myIMG = image;
+      let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
+
+
       return (
         <>
       <div class="col-lg-4 col-sm-6 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
@@ -51,8 +71,8 @@ const Artistscomponent = () => {
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={image}
-              alt={first_name}
+              src={Mainurl+'assets/artistimage/'+newIMG}
+              alt={first_name+' '+last_name}
               style={{
                 height: "394px",
                 width: "100%"
@@ -66,7 +86,7 @@ const Artistscomponent = () => {
           <div class="listing-details">
             <div class="listing-details-inner">
               <div class="listing-title">
-                <h6>{first_name}</h6>
+                <h6>{first_name} {last_name}</h6>
               </div>
               <div class="listing-rating-call"> <Link class="listing-rating" to={'/artist/'+url+''}><span>0.0</span> Rating</Link> <Link class="listing-call" to={'artist/'+url+''}> <FcPhone />{/*<i class="fas fa-phone-volume"></i>*/} +91 xxx xxx xxxx</Link> </div>
             </div>

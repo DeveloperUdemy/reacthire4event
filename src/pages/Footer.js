@@ -115,7 +115,6 @@ return (
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/"> Home</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/about/"> About Us</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/why-us/"> Why Us</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/how_it_works/"> How it Works</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/services/"> Services</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#"> Gallery</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/case-study/"> Case study</Link></li>
@@ -157,19 +156,19 @@ return (
                         <h5 class="text-primary mb-2 mb-sm-4">SERVICES</h5>
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="event-organiser.php">Event Organiser</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="sound-system-on-rent">Sound System on Rent</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Event-Production-and-Equipment-Rental/">Event Production & Equipment Rental </Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Brand-Promotion-&-Product-Activation/">Brand Promotion & Product Activation</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Sports-Management/">Sports Management</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Corporate-Events-&-Award-Ceremonies/">Corporate Events & Award Ceremonies</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Trip-Planning-and-Management/">Trip Planning and Management </Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Event-Manpower-&-Team-Management/">Event Manpower & Team Management</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Waste-Management-Services/">Waste Management Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="artists-management/">Artist Management</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="School-activities-Summer-camp-organiser/">School activities and Summer camp organiser</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="event-fabrication-and-venue-branding/">Event Fabrication and Venue Branding</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="award-ceremonies-and-product-launches-organiser-Delhi-NCR/">Award Ceremonies and Product Launches Organiser</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-organiser">Event Organiser</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/sound-system-on-rent">Sound System on Rent</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Event-Production-and-Equipment-Rental/">Event Production & Equipment Rental </Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Brand-Promotion-&-Product-Activation/">Brand Promotion & Product Activation</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Sports-Management/">Sports Management</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Corporate-Events-&-Award-Ceremonies/">Corporate Events & Award Ceremonies</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Trip-Planning-and-Management/">Trip Planning and Management </Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-manpower-and-team-management/">Event Manpower & Team Management</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Waste-Management-Services/">Waste Management Services</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/artists-management/">Artist Management</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/School-activities-Summer-camp-organiser/">School activities and Summer camp organiser</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-fabrication-and-venue-branding/">Event Fabrication and Venue Branding</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/award-ceremonies-and-product-launches-organiser-Delhi-NCR/">Award Ceremonies and Product Launches Organiser</Link></li>
                             </ul>
                         </div>
                     </div>

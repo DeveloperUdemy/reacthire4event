@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios';
+import { Parser } from 'html-to-react';
 import { Helmet } from 'react-helmet';
 import { useFormik } from 'formik';
 import { VolunteerValidation } from './schemas/Volunteervalidation';
@@ -94,8 +95,8 @@ useEffect(() => {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">
-        <h1 class="text-white">Volunteer Registration</h1>
-        <p class="text-white lead">Embrace the thrill of sports and entertainment by registering as a volunteer for electrifying events like MotoGP, IPL, ISL, concerts, music festivals, and brand promotion activities nationwide. Join the action behind the scenes, supporting the seamless execution of high-profile events, from coordinating logistics to engaging with attendees, as a dedicated volunteer. Experience the magic of being part of the pulsating energy and vibrant atmosphere, while contributing your skills and enthusiasm to make unforgettable moments for sports fans, music lovers, and brand enthusiasts across the country.</p>
+      <h1 class="text-white">{metaDetail.heading}</h1>
+        <div class="text-white lead">{Parser().parse(metaDetail.content)}</div> 
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="https://hire4event.com/">Home</a></li>

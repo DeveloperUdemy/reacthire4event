@@ -248,6 +248,12 @@ function getArtistProfile() {
                 
                 </div>
                 
+
+                 
+                  
+
+
+
                 <div class="form-group col-md-4"></div>
                 <div class="form-group col-md-4">
                   <button type="submit" class="form-control btn btn-secondary">Save & Continue</button>

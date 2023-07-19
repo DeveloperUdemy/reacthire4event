@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect, Fragment } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import { UserChangePassword } from '../schemas/Userchangepassword';
 import axios from 'axios';
@@ -57,7 +59,18 @@ useEffect ( () => {
       const url = Mainurl + 'api/user/changepassword';
        axios.post(url, values, { headers })
         .then(resp => {
-          setSuccess(resp.data.message);
+          //setSuccess(resp.data.message);
+          toast.success(resp.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+
           action.resetForm();
         })
         .catch(function (error) {
@@ -80,6 +93,7 @@ useEffect ( () => {
             
             </div>
             <div class="col-lg-8 col-md-8">
+            <ToastContainer />
               <div class="sidebar mb-0">
                 <div class="widget">
                   <div class="widget-title bg-primary">

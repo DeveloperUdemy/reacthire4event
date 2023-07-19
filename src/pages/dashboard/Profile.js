@@ -1,5 +1,7 @@
 
 import React, { useState, useEffect, Fragment } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useFormik } from 'formik';
 import { Editprofilevalidation } from '../schemas/EditprofileValidation';
 import axios from 'axios';
@@ -21,7 +23,9 @@ useEffect ( () => {
  const url = Mainurl + 'api/user/profile';
     axios.post(url, values, { headers })
    .then(resp => {
+
      setUserDetail(resp.data.userProfile);
+
    })
    .catch(function (error) {
      if (error.response) {
@@ -59,7 +63,21 @@ useEffect ( () => {
       const url = Mainurl + 'api/user/update';
        axios.post(url, values, { headers })
         .then(resp => {
-          setSuccess(resp.data.message);
+
+
+          toast.success(resp.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            
+
+          //setSuccess(resp.data.message);
         })
         .catch(function (error) {
           if (error.response) {
@@ -82,7 +100,7 @@ useEffect ( () => {
             </div>
             <div class="col-lg-8 col-md-8">
 
-                 
+            <ToastContainer />                 
 
               <div class="sidebar mb-0">
                 <div class="widget">

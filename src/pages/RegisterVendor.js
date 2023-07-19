@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios';
+import { Parser } from 'html-to-react';
 import { Helmet } from 'react-helmet';
 import { useFormik } from 'formik';
 import { VendorValidation } from './schemas/Vendorvalidation';
@@ -89,8 +90,8 @@ useEffect(() => {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">
-        <h1 class="text-white">Vendor Registration Here</h1>
-        <p class="text-white lead">Like very free full your contents</p>
+        <h1 class="text-white">{metaDetail.heading}</h1>
+        <div class="text-white lead">{Parser().parse(metaDetail.content)}</div>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>

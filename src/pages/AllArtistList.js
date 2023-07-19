@@ -1,8 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 import { Helmet } from 'react-helmet';
 import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
 import axios from "axios";
+
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -13,7 +15,7 @@ function AllArtistList() {
   const params = Object.fromEntries([...searchParams]);
   const [categoryName, setCategoryName] = useState(params.category);
   const [locationCity, setLocationCity] = useState(params.location_city);
-
+  const [isLoader, setIsLoader] = useState(true);
 
 
 
@@ -36,10 +38,13 @@ function AllArtistList() {
    const Getresponse = axios.post(urlPost, parameterPost, {headers})
     .then(resp => {
       setArtistDetails(resp.data.artistList);
+      setIsLoader(false);
       //console.log(resp.data);
     })
     .catch(function(error) {
+      setIsLoader(true);
       console.log(error.resp);
+      
     });
   }
 
@@ -165,8 +170,22 @@ function AllArtistList() {
     </div>
     <div class="row">
     {
+          isLoader ? <>
+          <div class="col-md-12 col-sm-3" style={{textAlign: "center"}}>
+          <RotatingLines
+            strokeColor="yellow"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="96"
+            visible={true}
+          /> 
+          </div>
+          </> :
     artistDetails.slice(0, visible).map((getData) => {
-      const {first_name, url, city, category, image, register_id} = getData;
+      const {first_name,last_name, url, city, category, image, register_id} = getData;
+      let myIMG = image;
+      let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
+
       return (
         <>
       <div class="col-lg-3 col-sm-4 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
@@ -175,8 +194,8 @@ function AllArtistList() {
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={image}
-              alt={first_name}
+              src={Mainurl+'assets/artistimage/'+newIMG}
+              alt={first_name+' '+last_name}
               style={{
                 height: "394px",
                 width: "100%"
@@ -190,7 +209,7 @@ function AllArtistList() {
           <div class="listing-details">
             <div class="listing-details-inner">
               <div class="listing-title">
-                <h6>{first_name}</h6>
+                <h6>{first_name} {last_name}</h6>
               </div>
               <div class="listing-rating-call"> <Link class="listing-rating" to={'/artist/'+url+''}><span>0.0</span> Rating</Link> <Link class="listing-call" to={'artist/'+url+''}> <FcPhone />{/*<i class="fas fa-phone-volume"></i>*/} +91 xxx xxx xxxx</Link> </div>
             </div>

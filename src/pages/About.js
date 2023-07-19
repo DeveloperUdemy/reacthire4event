@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import { Parser } from 'html-to-react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
@@ -67,13 +68,13 @@ function About ()  {
             <div class="row mb-4">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>About Us</h2>
+                  <h1>{metaDetail.heading}</h1>
                   <div class="sub-title text-right"> <span> Interesting info About Us</span></div>
                 </div>
               </div>
               <div class="col-md-12">
                
-               <h1 style={{ textAlign: "center"}}>Comming Soon Content Here!</h1>
+              {Parser().parse(metaDetail.content)} 
                
                </div>
             </div>

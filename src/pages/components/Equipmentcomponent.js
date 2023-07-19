@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import { RotatingLines } from 'react-loader-spinner';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Equipmentcomponent = () => {
 const Mainurl = 'https://hire4event.com/apppanel/';
 const [equipmentDetails, setEquipmentDetails] = useState([]);
+const [isLoader, setIsLoader] = useState(true);
+
 function getEquipment() {
   const headers = {
     "Content-Type": "application/json"
@@ -14,10 +17,12 @@ function getEquipment() {
   const url = Mainurl+'api/equipment/list';
   axios.get(url, { headers })
   .then(resp => {
+    setIsLoader(false);
     setEquipmentDetails(resp.data.equipmentList);
     //console.log(resp.data.equipmentList);
   })
   .catch(function(error) {
+    setIsLoader(true);
     console.log(error);
   });
 }
@@ -40,6 +45,17 @@ function getEquipment() {
     </div>
     <div class="row even">
     {
+    isLoader ? <>
+    <div class="col-md-12 col-sm-3" style={{textAlign: "center"}}>
+    <RotatingLines
+      strokeColor="yellow"
+      strokeWidth="5"
+      animationDuration="0.75"
+      width="96"
+      visible={true}
+    /> 
+    </div>
+    </> :
     equipmentDetails.slice(0,12).map((getEquipmentData) => {
       const {heading,url,image,id} = getEquipmentData;
       return (
@@ -68,10 +84,12 @@ function getEquipment() {
       )
     })
     }
+
+
     </div>
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4" style={{textAlign: "center"}}><Link to="equipment" class="btn btn-primary">View More Equipment</Link></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><Link to="/equipment" class="btn btn-primary">View More Equipment</Link></div>
       <div class="col-md-4"></div>
     </div>
   </div>

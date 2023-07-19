@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Parser } from 'html-to-react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
@@ -64,15 +65,13 @@ function Marketingservice ()  {
             <div class="row mb-4">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>Marketing Services</h2>
+                  <h1>{metaDetail.heading}</h1>
                   <div class="sub-title text-right"> <span> Interesting info Marketing Services</span></div>
                 </div>
               </div>
               
         <div class="col-md-12">
-        <p>Hire4Event.com provides total Marketing solution to our clients. Hire4Event.com can be considered as one of the leading Marketing Services Company or Marketing Company for different cities in India. We provide both The Conventional Marketing such as BTL, TTL, ATL and The Non-Conventional Marketing known as Digital Marketing these days. Both the Marketing Approaches are efficient in different manner. One cannot differentiate between them on the basis of efficiency, but they do provide different results in different situations.</p>
-        <p>Generally Marketing is incomplete without the proper drafting of Positioning and Targetting Strategiesand for this one needs an experenced group of marketters. We have a team of experenced and qualified personnals for the drafting of such sttrategies. As Marketing is not a free of cost process, the output is expected to be the most. Our team of professionals work to make you achieve your target. We have separate team of professionals dedicated towards both the Marketing approaches, Conventional an Non-Coventional as well. One team is assigned with only one client and the dedication level is high. They are experienced enough to arrange potential customers or clients for you and to increase the interest in your existing customers or clients towards you. They have a good hold on all the Marketing activities like BTL, TTL, ATL and Digital Marketing i.e. twitter, Linkedin and other Social Networking Portals.</p>
-        <p>Being an Event Management Company we do not have to rush for vendors as we have all the needed Equipments and other services in our hand. Our charges are very minimal against our offered services. We fetch out the maximum possible outcome from our marketing.</p>
+        {Parser().parse(metaDetail.content)}
         </div>
 
         </div>

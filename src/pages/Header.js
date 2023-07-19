@@ -99,7 +99,7 @@ export default function Header() {
             {currentUser === null && (
             <>
             <Link onClick={loginShow}> <FcManager style={{fontSize: "20px"}}/>My Dashboard</Link> 
-            <Link to="/vendor-registration"> <FcBusinessman style={{fontSize: "20px"}}/> Register as a vendor</Link>
+            <Link to="/vendor-registration"> <FcBusinessman style={{fontSize: "20px"}}/> Vendor Registration</Link>
             <Link to="/volunteer-registration-for-event-and-sports"> <FcBusinessman style={{fontSize: "20px"}}/> Volunteer Registration</Link> 
             </>
             )}

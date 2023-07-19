@@ -6,14 +6,54 @@ import { FaRegUserCircle, FaUpload, FaRegTrashAlt } from "react-icons/fa";
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 function ArtistPhotoVideo() {
+    const Mainurl = 'https://hire4event.com/apppanel/';
     const navigate = useNavigate();
-    const [success, setSuccess] = useState();
-    const [error, setError] = useState([]);
     let userID = (JSON.parse(localStorage.getItem('loginAuth')));
     const fileRef= useRef(null);
 
+    const [artistVideo, setArtistVideo] = useState([]); 
+    function getArtistVideo() {
+      let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+      const headers = {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      };
+     const url = Mainurl + 'api/artist/videos_account/'+userID.userProfile.id;
+        axios.get(url, { headers })
+       .then(resp => {
+        console.log(resp.data.videos);
+        setArtistVideo(resp.data.videos);
+       })
+       .catch(function (error) {
+        
+       });
+      }
+
+      const [artistGallery, setArtistGallery] = useState([]); 
+      function getArtistGallery() {
+        let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+        const headers = {
+          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        };
+       const values = {
+         'register_id': userID.userProfile.id,
+       };
+       const url = Mainurl + 'api/artist/photos_account/'+userID.userProfile.id;
+          axios.get(url, values, { headers })
+         .then(resp => {
+          console.log(resp.data.photos);
+          setArtistGallery(resp.data.photos);
+         })
+         .catch(function (error) {
+          
+         });
+        }
+
     useEffect( () => {
       window.scrollTo(0, 0);
+      getArtistGallery();
+      getArtistVideo();
     },[])
 
         return (
@@ -30,7 +70,7 @@ function ArtistPhotoVideo() {
         <div class="sidebar mb-0">
           <div class="widget">
             <div class="widget-title bg-primary">
-              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Artist Profile Photos</h6>
+              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Artist Profile Photos/Videos</h6>
             </div>
             <div class="widget-content">
     <Formik
@@ -47,14 +87,12 @@ function ArtistPhotoVideo() {
       const url = Mainurl + 'api/Artist/photovideo';
        axios.post(url, values, { headers })
         .then(resp => {
-          setSuccess(resp.data.message);
           navigate('/artist-profile');
         })
         .catch(function (error) {
           if (error.response) {
-            setError(error.response.data.message);
           }
-          console.log(error.response.data.message);
+          //console.log(error.response.data.message);
         });
         //  Stop Form Value To API 
         }, 500)
@@ -75,12 +113,32 @@ function ArtistPhotoVideo() {
                 <span class="btn btn-secondary" onClick={() => {
                   fileRef.current.click();
                  }} style={{float: "right"}}> <FaUpload /> Upload Gallery Images</span>
-
             </div>
+            
+            <div class="col-md-12"><hr/></div>
 
 
 
-
+            <div class="row">
+            <div class="masonry">
+                {
+                artistGallery.map((getPhoto) => {
+                const {id,image} = getPhoto;
+                return (
+                <>
+                <div class="item" style={{position: "relative"}}>
+                <span class="RemoveUserGallery" title="Remove Gallery Image"><FaRegTrashAlt style={{color: "white"}} title="Remove Image"/></span>
+                  <a class="fancybox" href="" data-fancybox-group="gallery">
+                    <img src={'https://hire4event.com/apppanel/assets/artistimage/artistphoto/'+image} />
+                    </a>
+                </div>
+                </>
+                )
+                })
+                }
+            </div>
+            </div>
+            <div class="col-md-12"><hr/></div>
             <FieldArray
              name="videos"
              render={arrayHelpers => (
@@ -110,7 +168,6 @@ function ArtistPhotoVideo() {
                 <span onClick={() => arrayHelpers.remove(index)}><FaRegTrashAlt style={{color: "red"}} title="Remove"/></span>
                 </div>
                 </div>
-                
                    ))
                  ) : (
                     <>
@@ -119,7 +176,25 @@ function ArtistPhotoVideo() {
                </>
              )}
             /> 
-<div class="form-group col-md-5"></div>
+                <div class="row">
+                {
+                artistVideo.map((getVideo) => {
+                const {id,video} = getVideo;
+                return (
+                <>
+                <div class="col-md-4 mb-3">
+                <div style={{position: "relative"}}>
+                <span class="RemoveUserGallery" title="Remove Video"><FaRegTrashAlt style={{color: "white"}} title="Remove Video"/></span>
+                <iframe width="100%" height="150" src={'https://www.youtube.com/embed/'+video} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                </div>
+                </>
+                )
+                })
+                }
+                </div>
+                <div class="col-md-12"><hr/></div>
+                <div class="form-group col-md-5"></div>
                  <div class="form-group col-md-2">
                    <button type="submit" class="form-control btn btn-secondary">Submit</button>
                  </div>

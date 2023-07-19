@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment, } from 'react';
+import { Parser } from 'html-to-react';
 import { useFormik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { PlanTripValidation } from './schemas/Plantripvalidation';
@@ -97,8 +98,8 @@ function Planyourtrip ()  {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">
-        <h1 class="text-white">Plan A Destination Wedding / Event </h1>
-        <p class="text-white">We are an Event Management Company which provides Corporate and Institutional Tour Planning and Packages. We have a list of great locations and activities to energise and refresh the tour participants, which is the most wanted term from an Outdoor tour. The arrangements are great and management is greatest at the most affordable prices.</p>
+        <h1 class="text-white">{metaDetail.heading}</h1>
+        <div class="text-white lead">{Parser().parse(metaDetail.content)}</div>
       </div>
     </div>
   </div>

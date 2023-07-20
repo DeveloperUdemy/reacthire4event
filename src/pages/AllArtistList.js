@@ -4,7 +4,6 @@ import { RotatingLines } from 'react-loader-spinner';
 import { Helmet } from 'react-helmet';
 import { FcApproval, FcSearch, FcPhone } from "react-icons/fc";
 import axios from "axios";
-
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 

@@ -1,6 +1,7 @@
 import React,{useEffect,Fragment, useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Parser } from 'html-to-react';
 import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
 import Equipmentcomponent from './components/Equipmentcomponent';
@@ -66,26 +67,12 @@ function Disclaimer ()  {
             <div class="row mb-4">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>Interesting info Disclaimer</h2>
+                <h1>{metaDetail.heading}</h1>
                   <div class="sub-title text-right"> <span> Interesting info Disclaimer</span></div>
                 </div>
               </div>
               <div class="col-md-12">
-                <p><strong>Payments & Bookings:</strong><br/>
-1. As we are a core Event Production and Management company, the overall Production cost must be paid by the organiser, we do not rely on the sponsors.</p>
-
-<p>2. The total projected amount must be paid in two phases i.e. 50% of the total Amount in advance for the lockingof services as a booking Amount and the remaining 50% One Week (seven days) before the main Event. For bookings made within Three weeks of an event the total event fee will be due on confirmation of the booking.</p>
-
-<p>3. The Company will only accept a booking upon receipt of written confirmation and once this is received a contract will be deemed to have been made. Until the booking deposit is paid and contract signed and returned, the Company shall be free to offer the date in question to other parties.</p>
-
-<p><strong>Sponsorship:</strong><br/>
-4. We do not work for the Sponsorships. The sponsors must be brought by the organiser himself and all the benefits must be discussed.</p>
-
-<p><strong>Cancellations:</strong><br/>
-5. If for any reason the Contracting Party cancels the booking, the booking deposit of 50% of total invoice value will be forfeited. If for any reason the Contracting Party cancels the booking within Five Days prior to the event date, the Contracting Party shall be liable to pay the total price contracted for.</p>
-
-<p><strong>Change in Event Date:</strong><br/>
-6. Once the booking is confirmed and Event Booking Form signed any change of contracted event date instigated by the contracting party up to 5 days prior to the event date, will incur an administration fee of 10% of the total contracted event fee. The contracted event date cannot be changed within Five days of the event date without the full event fee being incurred.</p>
+              {Parser().parse(metaDetail.content)} 
               </div>
             </div>
           </div>

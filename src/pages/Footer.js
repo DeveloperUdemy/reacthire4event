@@ -21,8 +21,27 @@ export default function Footer() {
         console.log(error);
       });
     }
+
+    const [footerKeyword, setFooterKeyword] = useState([]);
+    function getKeywords() {
+        const headers = {
+          "Content-Type": "application/json"
+        };
+        const url = Mainurl+'api/services/keyword';
+        axios.get(url, { headers })
+        .then(res => {
+            setFooterKeyword(res.data.keywordList) 
+            //console.log(res.data.keywordList)
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+
+
       useEffect(()=>{
         getServices();
+        getKeywords();
       },[]);
   
 
@@ -116,7 +135,7 @@ return (
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/about/"> About Us</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/why-us/"> Why Us</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/services/"> Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#"> Gallery</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/gallery"> Gallery</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/case-study/"> Case study</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/our-service"> Our Service</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/marketing_services/"> Marketing Services</Link></li>
@@ -131,24 +150,18 @@ return (
                         <h5 class="text-primary mb-2 mb-sm-4">OCCASIONS</h5>
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="corporate-events">Corporate Events</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="exhibition-seminars">Exhibition & Seminars</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="music-concert">Music Concert</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="sports-events">Sports Events</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="annual-festivals">Annual Festivals</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="wedding-social-events">Wedding & Social Events</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="sound-system-on-rent">Sound system on rent in Delhi ncr</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="sound-system-on-rent">PA system on hire in Delhi, </Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="weatherproof-german-hanger">German hanger on rent in Noida</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="stage-platform">Stage on rent in Gurgaon</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="book-an-artist">Book artist online for corporate event</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="venue-listing">Event venues in Delhi NCR</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="venue-listing">Venues for conference in Gurgaon</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="event-management-company-in-delhi-ncr">Event planner in Noida</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="Corporate-Events-&-Award-Ceremonies">Corporate event company in Delhi Ncr</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="sound-system-on-rent">Book Sound  for conference in Bangalore</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="award-ceremonies-and-product-launches-organiser-Delhi-NCR">Best event Company in Delhi </Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="event-organiser">Top event organiser in Gurgaon</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/corporate-events">Corporate Events</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/exhibition-seminars">Exhibition & Seminars</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/music-concert">Music Concert</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/sports-events">Sports Events</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/annual-festivals">Annual Festivals</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/wedding-social-events">Wedding & Social Events</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/book-an-artist">Book artist online for corporate event</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/venue-listing">Event venues</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-management-company-in-delhi-ncr">Event planner in Noida</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Corporate-Events-&-Award-Ceremonies">Corporate event company in Delhi Ncr</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/award-ceremonies-and-product-launches-organiser-Delhi-NCR">Best event Company in Delhi </Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/equipment">Best Our Equipments for Events </Link></li>
                             </ul>
                         </div>
                     </div>
@@ -165,10 +178,9 @@ return (
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Trip-Planning-and-Management/">Trip Planning and Management </Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-manpower-and-team-management/">Event Manpower & Team Management</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/Waste-Management-Services/">Waste Management Services</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/artists-management/">Artist Management</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/School-activities-Summer-camp-organiser/">School activities and Summer camp organiser</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/School-activities-Summer-camp-organiser/">School activities and Summer Camp Organiser</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/event-fabrication-and-venue-branding/">Event Fabrication and Venue Branding</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/award-ceremonies-and-product-launches-organiser-Delhi-NCR/">Award Ceremonies and Product Launches Organiser</Link></li>
+                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/award-ceremonies-and-product-launches-organiser-Delhi-NCR/">Award Ceremonies and Product Launches</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -176,9 +188,8 @@ return (
                         <h5 class="text-primary mb-2 mb-sm-4">QUICK LINKS</h5>
                         <div class="footer-link">
                             <ul class="list-unstyled mb-0">
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="#" data-toggle="modal" data-target="#loginModal">My Dashboard</Link></li>
+                            <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="https://hire4event.com/blogs/" target="_blank">Trending Blogs</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/contact/"> Contact Us</Link></li>
-                                <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="https://hire4event.com/blogs/" target="_blank">Blogs</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/disclaimer/">Disclaimer</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/term-condition/">Terms & Condition</Link></li>
                                 <li><i class="fa fa-angle-right" aria-hidden="true"></i> <Link to="/privacy-policy/">Privacy Policy</Link></li>
@@ -200,78 +211,32 @@ return (
             <hr style={{marginTop: "20px"}}/>
                 <div class="container pt-4">
                     <div class="row">
+
+
+                {
+                footerKeyword.map((post) => {
+                const {url, keyword} = post;
+                return (
+                <>
                         <div class="col-sm-12 col-md-4 col-lg-4  mb-4 mb-lg-0">
                             <div class="footer-link">
                                 <ul class="list-unstyled mb-0">
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book artist for wedding in Gurgaon, Delhi, Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Artist for wedding in Noida, Gurgaon, Faridabad</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Wedding Dj in Bangalore, Pune, Mumbai</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top wedding decorator in Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Wedding dance choreographer in Delhi, Noida Gurugram</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top band for wedding entertainment in Gurgoan, Bangalore, Mumbai</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Corporate event management company in Delhi NCR</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Sound system on rent for wedding</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Sound rental company in Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Sound system on rent in in Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">PA System on hire in Guragon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Best conference organiser in Delhi, Noida, Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Top event management company in Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Event Planners in Delhi, Gurgaon, Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Event organiser for wedding in Delhi, Gurugram, Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Top wedding entertainment company in Delhi ncr</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Wedding artist booking company in Delhi ncr</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Wedding stage singer, DJ Booking service in Delhi, Noida Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Best artist wedding in Chennai, Pune, Mumbai</a></li>
+                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href={'/page/'+url}> {keyword}</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4  mb-4 mb-lg-0">
-                            <div class="footer-link">
-                                <ul class="list-unstyled mb-0">
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="">Top Wedding planning company in Delhi, Noida, Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Which are best event company in Delhi for corporate event</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Product launch event organiser in Delhi, Noida, Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Exhibition stall design company</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Artist management agency</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> German hanger on hire</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Destination wedding planner in Noida, Gurgaon, Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Event organiser for corporate event and dealer Meet</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Party organiser in Noida, Gurgaon, Delhi, Faridabad</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Event production company Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book Artist for event in Delhi Noida, Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book Singer for event in Lucknow, Patna, Agra</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book DJ for event in Bangalore, Chennai, Hyderabad</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book Dance groupe for event in Pune, Mumbai, Bhopal</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Artist booking agency in Kolkata</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Artist Booking for college fest in Greater Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top artist for corporate event </a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top exhibition management company in Delhi</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4  mb-4 mb-lg-0">
-                            <div class="footer-link">
-                                <ul class="list-unstyled mb-0">
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Wedding event organiser in Jaipur</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top wedding entertainment company in Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Wedding artist booking company in Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Wedding DJ in Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top conference Organizers in Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book artist for event in Bangalore</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Book Artist for event in Pune</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Band for wedding in India</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> List of wedding Fera Singer in India</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Wedding singer/Band in Mumbai</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Wedding DJ in Noida</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best Wedding Dance group in Gurgaon</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> German Hanger on hire</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Top DJ on Rent in Delhi NCR</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Best sound on rent in Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Hire Decorater for Wedding in New Delhi</a></li>
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href=""> Wedding / Corporate event Planner</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                </>
+                )
+                })
+                }
+
+
+
+
+
+
+                        
+
                     </div>
                     <div class="row align-items-center mt-lg-5 ">
                         <div class="col-md-12 text-center mt-2">

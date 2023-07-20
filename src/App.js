@@ -56,6 +56,8 @@ import EventManpowerTeamManagement from "./pages/EventManpowerTeamManagement";
 import WasteManagementServices from "./pages/WasteManagementServices";
 import SchoolactivitiesSummercamporganiser from "./pages/SchoolactivitiesSummercamporganiser";
 import EventFabricationVenueBranding from "./pages/EventFabricationVenueBranding";
+import Gallery from "./pages/Gallery";
+import FooterPage from "./pages/FooterPage";
 function App() {
   return (
       <React.StrictMode>
@@ -98,6 +100,7 @@ function App() {
            <Route path="/Waste-Management-Services/" element={<WasteManagementServices/>} /> 
            <Route path="/School-activities-Summer-camp-organiser/" element={<SchoolactivitiesSummercamporganiser/>} /> 
            <Route path="/event-fabrication-and-venue-branding/" element={<EventFabricationVenueBranding/>} /> 
+           <Route path="/gallery" element={<Gallery/>} /> 
            
 
            {/* Detail Page Start Here  */}
@@ -109,7 +112,7 @@ function App() {
           <Route path="/book-an-artist" element={<AllArtistList />}  />
           <Route path="/equipment" element={<AllEquipmentList />}  />
           <Route path="/venue-listing" element={<AllVenueList />}  />
-
+          <Route path="/page/:page_url" element={<FooterPage/>} />
            {/*  After Login User  */}
            <Route path="/dashboard" element={<Protected Component={Profile}/>} />
            <Route path="/create-artist-profile" element={<Protected Component={Artistprofile}/>} />

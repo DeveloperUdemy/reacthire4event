@@ -3,7 +3,6 @@ import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Ourteam from "./pages/Ourteam";
 import Disclaimerpage from "./pages/Disclaimerpage";
 import Termconditions from "./pages/Termconditions";
 import Privacypolicy from "./pages/Privacypolicy";
@@ -58,6 +57,9 @@ import SchoolactivitiesSummercamporganiser from "./pages/SchoolactivitiesSummerc
 import EventFabricationVenueBranding from "./pages/EventFabricationVenueBranding";
 import Gallery from "./pages/Gallery";
 import FooterPage from "./pages/FooterPage";
+import ArtistbookingInnerpage from "./pages/ArtistbookingInnerpage";
+import ArtistscoutingInnerpage from "./pages/ArtistscoutingInnerpage";
+import ArtistmanagementInnerPage from "./pages/ArtistmanagementInnerPage";
 function App() {
   return (
       <React.StrictMode>
@@ -66,7 +68,6 @@ function App() {
            <Route path="/" element={<MainHeaderFooter/>} >
            <Route index element={<Home/>} />
            <Route path="/about/" element={<About/>} />
-           <Route path="/team/" element={<Ourteam/>} />
            <Route path="/disclaimer/" element={<Disclaimerpage/>} />
            <Route path="/term-condition/" element={<Termconditions/>} />
            <Route path="/privacy-policy/" element={<Privacypolicy/>} />
@@ -101,6 +102,9 @@ function App() {
            <Route path="/School-activities-Summer-camp-organiser/" element={<SchoolactivitiesSummercamporganiser/>} /> 
            <Route path="/event-fabrication-and-venue-branding/" element={<EventFabricationVenueBranding/>} /> 
            <Route path="/gallery" element={<Gallery/>} /> 
+           <Route path="/artist-booking" element={<ArtistbookingInnerpage/>} /> 
+           <Route path="/artist-scouting" element={<ArtistscoutingInnerpage/>} /> 
+           <Route path="/artist-management" element={<ArtistmanagementInnerPage/>} /> 
            
 
            {/* Detail Page Start Here  */}

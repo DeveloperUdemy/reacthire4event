@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Parser } from 'html-to-react';
 import { Helmet } from 'react-helmet';
 import Artistscomponent from './components/Artistscomponent';
 import Equipmentcomponent from './components/Equipmentcomponent';
@@ -66,14 +67,14 @@ function ExhibitionSeminars ()  {
             <div class="row mb-4 dsts">
               <div class="col-12">
                 <div class="section-title">
-                  <h1>Efficient Exhibition Management Services in Delhi, Noida, and Gurgaon</h1>
+                <h1>{metaDetail.heading}</h1>
                   <div class="sub-title text-right"> <span> Interesting info Exhibition & Seminars</span></div>
                 </div>
               </div>
               
               <div class="col-md-12">
 
-               
+              {Parser().parse(metaDetail.content)}
 
               </div>
 

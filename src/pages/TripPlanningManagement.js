@@ -65,7 +65,7 @@ function TripPlanningManagement ()  {
       <div class="col-xl-12 col-lg-12 mt-4 mt-lg-0 listing-detail-page">
         <div class="mt-4">
           <div class="tab-pane">
-            <div class="row mb-4">
+            <div class="row mb-4 dsts">
               <div class="col-12">
                 <div class="section-title">
                   <h1>{metaDetail.heading}</h1>

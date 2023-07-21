@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from "react-icons/fa";
+import { FacebookShareButton, FacebookIcon } from 'react-share';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { Parser } from 'html-to-react';
@@ -190,7 +191,19 @@ function Singleartist() {
               </div>
 
             </div>
-            <a class="share btn btn-default" style={{backgroundColor: "#4267b2", color: "white"}} href={'http://www.facebook.com/sharer.php?u='+window.location.href+''} target="_blank" ><i class="fa fa-facebook" aria-hidden="true"></i> Share</a>
+           <a class="share btn btn-default" style={{backgroundColor: "#4267b2", color: "white"}} 
+           href="#">
+            <FacebookShareButton
+        url={'http://www.facebook.com/sharer.php?u='+window.location.href+''}
+        quote={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'}
+        hashtag={'#'+artistDetail.first_name+artistDetail.last_name}
+      >
+        <i class="fa fa-facebook" aria-hidden="true"></i> Share
+      </FacebookShareButton>
+            
+            </a>
+            
+            
             <div class="listing-detail-box mb-3">
               <div class="detail-title">
                 <h5>More details about {artistDetail.first_name} {artistDetail.last_name}</h5>

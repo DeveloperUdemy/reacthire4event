@@ -77,7 +77,7 @@ function Artistmanagement ()  {
               
     <div class="row align-items-center">
       <div class="col-lg-4">
-        <a href="https://hire4event.com/artist-booking">  
+        <Link to="/artist-booking">  
         <div class="feature-info-02 mb-lg-5 mb-4">
           <div class="feature-icon">
             <span>01</span>
@@ -87,10 +87,10 @@ function Artistmanagement ()  {
             <p>Event Management is one such task that requires not just simple execution, but the courage and far sightedness to take things forward with ease. Hosting a successful event comes handy only</p>
           </div>
         </div>
-        </a>
+        </Link>
       </div>
       <div class="col-lg-4">
-        <a href="https://hire4event.com/artist-scouting"> 
+        <Link to="/artist-scouting"> 
         <div class="feature-info-02 mb-lg-5 mb-4">
           <div class="feature-icon">
             <span>02</span>
@@ -100,10 +100,10 @@ function Artistmanagement ()  {
             <p>Artist Scouting: Prove your worth Talent is an amazing thing. Some are born with it; some develop these skills with sheer hard work and discipline. Every artist wants recognition; they want</p>
           </div>
         </div>
-        </a>
+        </Link>
       </div>
       <div class="col-lg-4">
-        <a href="https://hire4event.com/artist-management">  
+        <Link to="/artist-management">  
         <div class="feature-info-02 mb-lg-5 mb-4">
           <div class="feature-icon">
             <span>03</span>
@@ -113,7 +113,7 @@ function Artistmanagement ()  {
             <p>We are an online platform of artists that helps other artists to come and create a profile and fill details to be promoted over google. Hire4event is an established name in the field of artist management</p>
           </div>
         </div>
-        </a>
+        </Link>
       </div>
     </div>
 

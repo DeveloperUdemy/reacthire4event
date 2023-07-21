@@ -1,4 +1,5 @@
 import React, {Fragment,useEffect, Suspense, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Owlslider from './Owlslider';
 import Ourservices from './Ourservices';
 import Inhouseservices from './Inhouseservices';
@@ -29,9 +30,29 @@ const Home = () => {
       
      });
     }
+
+
+    const [eventcompanyDetail, setEventcompanyDetail] = useState([]);
+    function getMetaSingleEventManagement() {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      };
+     const url = Mainurl + 'api/enquiry/pagemeta/44';
+        axios.get(url, { headers })
+       .then(resp => {
+        setEventcompanyDetail(resp.data.pageMeta);
+       })
+       .catch(function (error) {
+        
+       });
+      }
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
     getMetaSingle();
+    getMetaSingleEventManagement();
   }, []);
   return ( 
     <Fragment>
@@ -191,39 +212,10 @@ const Home = () => {
           <div class="sub-title text-right bg-transparent"> <span> in delhi NCR</span></div>
         </div>
         <div class="event-anagement">
-        <p>"Hire4event one of the best event management companies in Delhi, NCR, Noida, or Gurgaon. Our experienced team specializes in planning and executing flawless events. Contact us today for all your event management and Planning needs in the region."</p>
-<p>We provide a comprehensive range of event management services in the event industry. Here's a summary of the services we mentioned:</p>
- <ul class="list-unstyled mt-4 mb-4 mb-lg-0">
-     <li class="d-flex text-dark align-items-center font-md mt-3"><FcCheckmark class="mr-3 font-xxl text-primary"/><span> <strong>1. Event Management:</strong> Looking for event management services? Hire4Event.com is your ultimate destination for seamless
-event planning, production, and execution. Our experienced team specializes in delivering top-notch
-solutions for corporate events, weddings, concerts, and more. Contact us today for a hassle-free and
-unforgettable event experience!" Hire4event is one of the Top &amp; Best Corporate Event Planner,
-Conference Organizer, biggest Event Management Company in Delhi, Noida, Gurgaon.</span></li>
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>2. Stage Fabrication:</strong> Hire4event is event management company in Delhi, Noida, Gurgaon offer fabrication services, which likely involve creating customized structures, stages, sets, and props for events.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>3. Sound:</strong> Our sound services cover audio equipment, systems, and solutions to ensure optimal sound quality during events. This includes sound engineering, equipment rental, and setup.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>4. Light:</strong> We provide lighting solutions, including designing and setting up lighting arrangements that enhance the visual appeal and atmosphere of events.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>5. Video:</strong> Our video services involve capturing and displaying high-quality video content during events. This includes video production, live streaming, video mapping, and projection.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>6. Experiential Marketing Support:</strong> Hire4event assist experiential marketing agencies in creating unique and engaging experiences for their target audiences. This could involve integrating your various services to enhance the overall event experience.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>7. Event Production and Decor:</strong> Hire4event offer event production and decor services, which likely include designing and executing event themes, decorations, stage setups, and overall event production management.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>8. Artist Booking, Venue Booking, and Entertainment Services:</strong> We help clients book artists, performers, and entertainers for their events. Additionally, we assist in venue selection and offer related entertainment services to enhance event experiences.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>9. Conference, College Fest, and Exhibition Management:</strong> We are specialized in managing conferences, college fests, and exhibitions. This includes planning, coordination, logistics, and execution of these events.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>9. Hospitality Services:</strong> Our hospitality services cater to the specific needs of events, ensuring a smooth and comfortable experience for attendees. This may involve managing accommodation, catering, transportation, and other hospitality-related aspects.</span></li>
-
-          <li class="d-flex text-dark align-items-center font-md mt-3"> <FcCheckmark class="mr-3 font-xxl text-primary"/> <span> <strong>10. Marathon Events, Concerts, and Ticketed Shows:</strong> We organize and provide event services for marathon events, concerts, and ticketed shows. This could involve event planning, production, ticketing, logistics, and overall event management.</span></li>
-</ul>
-<p style={{marginTop: "20px"}}>We have a wide range of expertise and experience in the event industry, catering to various types of events and clients.</p>
-
-</div>
+         {Parser().parse(eventcompanyDetail.content)}
+        </div>
         
-          <a href="/event-management-company-in-delhi-ncr.php" class="btn btn-primary">Know More</a>
+          <Link to="/event-management-company-in-delhi-ncr" class="btn btn-primary">Know More</Link>
       </div>
 
       

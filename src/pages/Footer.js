@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import { Parser } from 'html-to-react';
 import axios from 'axios';
 import Emailsubscriber from './components/Emailsubscriber';
 export default function Footer() {
@@ -38,10 +39,27 @@ export default function Footer() {
         });
       }
 
+      const [personalCorporateDetail, setPersonalCorporateDetail] = useState([]);
+      function getMetaSinglePersonalCorporate() {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        };
+       const url = Mainurl + 'api/enquiry/pagemeta/45';
+          axios.get(url, { headers })
+         .then(resp => {
+          setPersonalCorporateDetail(resp.data.pageMeta);
+         })
+         .catch(function (error) {
+          
+         });
+        }
+
 
       useEffect(()=>{
         getServices();
         getKeywords();
+        getMetaSinglePersonalCorporate();
       },[]);
   
 
@@ -60,32 +78,7 @@ return (
         <div class="col-sm-12 col-md-6 col-lg-6 mb-4 mb-lg-0 pr-5 pt-5 pb-3" style={{borderRight: "solid 1px #ececec;", paddingBottom: "62px !important;"}}>
         <h5 class="text-primary mb-2 mb-sm-4">Hire4Event - Your Personal Corporate Event Organizer</h5>
         <div class="scrollHireAbout">
-         <p>Are you in search of top-notch event organizers, experienced event planners, or a reliable event management company in Delhi, Noida, or Gurgaon? Look no further! Our team of professionals specializes in crafting unforgettable events tailored to your unique requirements. With a proven track record of successful events and a passion for creating exceptional experiences, we are your trusted partners in turning your vision into reality.
-</p>
-<h4>Event Organizers in Delhi, Noida, and Gurgaon:</h4>
-<p>When it comes to event organizing, our company stands out as a leader in Delhi, Noida, and Gurgaon. We understand that every event is different, whether it's a corporate gathering, a wedding celebration, or a grand product launch. Our dedicated team takes the time to comprehend your objectives and ensures that every detail is meticulously planned and executed to perfection.
-</p>
-<h4>Experienced Event Planners:</h4>
-<p>Our experienced event planners possess the creativity, expertise, and industry knowledge to transform your event into an extraordinary affair. We collaborate closely with you, incorporating your ideas and preferences while offering valuable suggestions to enhance your event's overall impact. From conceptualization and theme development to vendor coordination and logistics management, our event planners have you covered at every step of the journey.
-</p>
-<h4>Event Management Company in Delhi, Noida, and Gurgaon:</h4>
-<p>As a leading event management company in Delhi, Noida, and Gurgaon, we take pride in delivering seamless event experiences. Our dedicated team ensures smooth operations, allowing you to enjoy the event stress-free. We meticulously handle venue selection, stage setup, audiovisual requirements, lighting arrangements, catering services, entertainment, and much more. With our attention to detail and commitment to excellence, we strive to exceed your expectations.
-</p>
-<h4>Why Choose Us:</h4>
-
-<p><strong>Expertise and Experience:</strong> With years of experience in the industry, we have a deep understanding of event management and the ability to handle diverse event types and scales.
-</p>
-<p><strong>Personalized Approach:</strong> We believe in personalized event experiences. Our team takes the time to understand your vision and objectives, ensuring that your event reflects your unique style and requirements.
-</p>
-<p><strong>Attention to Detail:</strong> We leave no stone unturned when it comes to event planning and execution. Every aspect, big or small, is meticulously managed to create a seamless and unforgettable experience.
-</p>
-<p><strong>Professional Network:</strong> Over the years, we have developed a strong network of trusted vendors, suppliers, and industry professionals. This allows us to provide you with the best services, ensuring the success of your event.
-</p>
-<p><strong>Cost-Effective Solutions:</strong> We understand the importance of working within your budget. Our team offers cost-effective solutions without compromising on quality, helping you maximize your investment.
-</p>
-<h4>Conclusion:</h4>
-<p>When it comes to organizing exceptional events in Delhi, Noida, and Gurgaon, our event organizers, planners, and management company are your ideal choice. From meticulous planning to flawless execution, we strive to create memorable experiences that leave a lasting impression. Contact us today to discuss your upcoming event and let us bring your vision to life.
-  </p> 
+        {Parser().parse(personalCorporateDetail.content)}
       
     </div>   
       </div>

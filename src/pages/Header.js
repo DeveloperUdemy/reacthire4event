@@ -135,7 +135,6 @@ export default function Header() {
         )}
 
           <li class="nav-item"> <Link class="nav-link" to="/plan-your-trip/"><i class="fa fa-map-marker" aria-hidden="true"></i>plan a destination  wedding/event</Link></li>
-          <li class="nav-item"> <Link class="nav-link" to="/team/"><i class="fa fa-users" aria-hidden="true"></i>team</Link></li>
           <li class="nav-item"> <a class="nav-link" href="https://hire4event.com/blogs/" target="_blank"><i class="fa fa-file" aria-hidden="true"></i>Blog</a></li>
         </ul>
       </div>

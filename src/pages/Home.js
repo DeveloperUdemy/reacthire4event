@@ -290,26 +290,26 @@ const Home = () => {
         <div class="col-lg-12">
           <div class="sponsors-logo text-center"> 
           <div class="row">
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/25.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/26.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/27.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/28.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/31.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/36.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/37.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/25.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/26.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/27.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/28.jpg" /></div>
+              <div class="col-md-2 col-6 "> <img src="https://hire4event.com/apppanel/assets/client/31.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/36.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/37.jpg" /></div>
               
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/38.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/39.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/40.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/41.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/42.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/43.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/38.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/39.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/40.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/41.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/42.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/43.jpg" /></div>
               
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/44.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/45.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/46.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/47.jpg" /></div>
-              <div class="col-md-2"> <img src="https://hire4event.com/images/client/48.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/44.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/45.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/46.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/47.jpg" /></div>
+              <div class="col-md-2 col-6"> <img src="https://hire4event.com/apppanel/assets/client/48.jpg" /></div>
           </div>
         </div>
       </div>

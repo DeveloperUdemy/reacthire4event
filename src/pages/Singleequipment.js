@@ -144,7 +144,7 @@ function Singleequipment() {
 
 
 
- <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/images/bg/event-equip.jpg")', backgroundSize: "cover", backgroundPosition: "center" }}>
+ <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")', backgroundSize: "cover", backgroundPosition: "center" }}>
   <div class="container">
     <div class="row align-content-center">
       <div class="col-lg-9">

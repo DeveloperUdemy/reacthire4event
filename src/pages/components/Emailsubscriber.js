@@ -40,11 +40,11 @@ export default function Emailsubscriber() {
                         
                         <form onSubmit={handleSubmit}>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-8 col-9">
                                     <input type="email" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} class="form-control" placeholder="Email Address...." />
                                     { errors.email && touched.email ? ( <div class="error">{errors.email}</div> ) : null }
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-3">
                                     <button type="submit" class="btn btn-primary">Subscribe</button>
                                 </div>
                             </div>

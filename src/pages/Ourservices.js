@@ -64,8 +64,8 @@ isLoader ? <>
     servicesDetails.slice(0,6).map((post) => {
       const {url, name, title, image, color} = post;
       return (
-      <div class="col-6 mb-4"> <Link to={'/service/'+url+''}>
-        <div style={{backgroundColor: color, float: "left", width: "100%"}}>
+      <div class="col-md-6 col-12 mb-4"> <Link to={'/service/'+url+''}>
+        <div class="serviceClass" style={{backgroundColor: color, float: "left", width: "100%"}}>
           <div class="cont" style={{paddingBottom: "15px"}}>
             <h6>{name}</h6>
             <p class="mb-0">{title.slice(0,400)}</p>

@@ -56,7 +56,7 @@ function getEquipment() {
     /> 
     </div>
     </> :
-    equipmentDetails.slice(0,12).map((getEquipmentData) => {
+    equipmentDetails.slice(0,8).map((getEquipmentData) => {
       const {heading,url,image,id} = getEquipmentData;
       return (
         <>

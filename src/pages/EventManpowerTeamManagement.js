@@ -42,7 +42,7 @@ function EventManpowerTeamManagement ()  {
         <link rel="canonical" href={window.location.href}/>
         </Helmet>
 
-  <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
+  <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")'}}>
   <div class="container">
     <div class="row align-content-center">
       <div class="col-lg-9">

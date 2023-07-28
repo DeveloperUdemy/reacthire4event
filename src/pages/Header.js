@@ -99,7 +99,7 @@ export default function Header() {
             {currentUser === null && (
             <>
             <Link onClick={loginShow}> <FcManager style={{fontSize: "20px"}}/>My Dashboard</Link> 
-            <Link to="/vendor-registration"> <FcBusinessman style={{fontSize: "20px"}}/> Vendor Registration</Link>
+            <Link to="/vendor-registration" class="topHide"> <FcBusinessman style={{fontSize: "20px"}}/> Vendor Registration</Link>
             <Link to="/volunteer-registration-for-event-and-sports"> <FcBusinessman style={{fontSize: "20px"}}/> Volunteer Registration</Link> 
             </>
             )}
@@ -134,7 +134,7 @@ export default function Header() {
         </>
         )}
 
-          <li class="nav-item"> <Link class="nav-link" to="/plan-your-trip/"><i class="fa fa-map-marker" aria-hidden="true"></i>plan a destination  wedding/event</Link></li>
+          <li class="nav-item"> <Link class="nav-link" to="/plan-your-trip/"><i class="fa fa-map-marker" aria-hidden="true"></i>plan a destination event</Link></li>
           <li class="nav-item"> <a class="nav-link" href="https://hire4event.com/blogs/" target="_blank"><i class="fa fa-file" aria-hidden="true"></i>Blog</a></li>
         </ul>
       </div>

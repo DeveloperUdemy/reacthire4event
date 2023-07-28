@@ -56,22 +56,21 @@ const Artistscomponent = () => {
     /> 
     </div>
     </> :  
-    artistDetails.slice(0,9).map((getData) => {
+    artistDetails.slice(0,8).map((getData) => {
       const {first_name,last_name, url, city, category, image, register_id} = getData;
 
       let myIMG = image;
       let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
-
-
+      let newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
       return (
         <>
-      <div class="col-lg-4 col-sm-6 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
+      <div class="col-lg-3 col-sm-6 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
         <div class="listing-item">
           <div class="listing-image bg-overlay-half-bottom"> 
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={Mainurl+'assets/artistimage/'+newIMG}
+              src={Mainurl+'assets/artistimage/'+newIMGShow}
               alt={first_name+' '+last_name}
               style={{
                 height: "394px",

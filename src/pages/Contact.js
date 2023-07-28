@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import { Parser } from 'html-to-react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import { useFormik } from 'formik';
@@ -78,12 +79,12 @@ function Contact ()  {
         </Helmet>
 
 
-<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/team-background-image.jpg")'}}>
+<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")'}}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 text-center">
         <h1 class="text-white">Contact Us</h1>
-        <p class="text-white lead">There are basically six key areas to higher achievement. Some people will tell you there.</p>
+        <p class="text-white lead">{Parser().parse(metaDetail.content)}</p>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><Link to="/">Home</Link></li>
@@ -155,7 +156,7 @@ function Contact ()  {
             </div>
             <div class="ml-3">
               <h6 class="text-white">Address</h6>
-              <p class="text-white">21 SNG Plaza Golf link-1, Greater Noida</p>
+              <p class="text-white">Plot No- 10 D Knowledge Park -3 Greater Noida -201308</p>
             </div>
           </div>
           <div class="d-flex mb-3">
@@ -178,11 +179,11 @@ function Contact ()  {
           </div>
           <div class="d-flex mb-3">
             <div class="contact-address-icon">
-              <i class="flaticon-call text-white fa-3x"></i>
+              <i class="flaticon-house text-white fa-3x"></i>
             </div>
             <div class="ml-3">
-              <h6 class="text-white">Fax</h6>
-              <a class="text-white mb-2" href="tel:(456) 478-2589">(456) 478-2589</a>
+              <h6 class="text-white">Opening</h6>
+              <a class="text-white mb-2" href="#">10 AM to 6 PM. Monday to Saturday</a>
             </div>
           </div>
           <div class="social-icon-02 mt-4 mt-md-5">

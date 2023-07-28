@@ -93,6 +93,12 @@ function Editartist() {
     },
   });
     const fileRef= useRef(null);
+    let newIMGShow = artistDetail.image;
+    if (artistDetail.image) {
+    let myIMG = artistDetail.image;
+    let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
+     newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+    }
     return (
       
     <Fragment>
@@ -123,7 +129,7 @@ function Editartist() {
                 
                 <div class="col-md-3">
                 <div class="text-center"> 
-                {values.user_image ? <Previewimage file={values.user_image} /> : <img src={artistDetail.image} class="avatar img-circle" id="ArtistPic" alt="Artist Profile" style={{width:"100%",height: "200px", marginBottom: "15px"}} /> }
+                {values.user_image ? <Previewimage file={values.user_image} /> : <img src={Mainurl+'assets/artistimage/'+newIMGShow} class="avatar img-circle" id="ArtistPic" alt="Artist Profile" style={{width:"100%",height: "200px", marginBottom: "15px"}} /> }
                 <input type="file" name="user_image" ref={fileRef} hidden onChange={(event) => {
                   setFieldValue("user_image", event.target.files[0]);
                 }} onBlur={handleBlur} class="form-control" />

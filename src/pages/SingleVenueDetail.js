@@ -89,7 +89,7 @@ function SingleVenueDetail() {
         </Helmet>
 
 
-<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: "url(/images/bg/image.jpg)", padding: "150px 0 21px"}}>
+<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")', padding: "150px 0 21px" }}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 text-center">

@@ -86,7 +86,7 @@ useEffect(() => {
         <link rel="canonical" href={window.location.href}/>
         </Helmet>
 
-<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundColor: "rgb(220, 18, 61)"}}>
+<section class="page-title bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")'}}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 text-center">

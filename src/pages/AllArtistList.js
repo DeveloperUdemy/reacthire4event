@@ -17,7 +17,6 @@ function AllArtistList() {
   const [isLoader, setIsLoader] = useState(true);
 
 
-
   const Mainurl = 'https://hire4event.com/apppanel/';
   const [artistDetails, setArtistDetails] = useState([]);
   const [visible, setVisible] = useState(32);
@@ -62,8 +61,6 @@ function AllArtistList() {
       
      });
     }
-
-
     useEffect(()=>{
       window.scrollTo(0, 0);
       getArtist();
@@ -184,6 +181,7 @@ function AllArtistList() {
       const {first_name,last_name, url, city, category, image, register_id} = getData;
       let myIMG = image;
       let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
+      let newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
 
       return (
         <>
@@ -193,7 +191,7 @@ function AllArtistList() {
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={Mainurl+'assets/artistimage/'+newIMG}
+              src={Mainurl+'assets/artistimage/'+newIMGShow}
               alt={first_name+' '+last_name}
               style={{
                 height: "394px",

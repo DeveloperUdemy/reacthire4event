@@ -93,13 +93,21 @@ return (
                         
                         <Emailsubscriber />
 
-                        <div class="contact-address mt-2 footer-link">
+                        <div class="contact-address footer-link mt-5">
                             <h4 style={{fontSize: "17px", fontWeight: "500"}}>Connect us to Get best Deals</h4>
-                            <ul class="list-unstyled mb-4">
-                                <li> <a class="text-dark" href="tel:+91-9811312005"><i class="fa fa-phone" aria-hidden="true"></i>24*7 sales support- +91-9811312005</a> <a class="text-dark ml-3" href="mailto:sales@hire4event.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>sales@hire4event.com </a> </li>
+                            <ul class="list-unstyled mb-4" style={{fontSize: "19px;"}}>
+                                <li> 
+                                    <a class="text-dark" href="tel:+91-9811312005">Sales Support -<i class="fa fa-phone" aria-hidden="true"></i>+91-9811312005</a> 
+                                    <a class="text-dark ml-2" href="mailto:sales@hire4event.com"><i class="fa fa-envelope-o" aria-hidden="true"></i>sales@hire4event.com </a> </li>
+                                <li><a class="text-dark" href="/contact">Opening Time - 10 AM to 6 PM. Monday to Saturday</a></li>
                             </ul>
                         </div>
-                        <ul class="list-unstyled mb-3 social-icon">
+                        <Link to="vendor-registration" class="btn btn-danger mb-1" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Register as a Vendor</Link> 
+                        <Link to="contact/" class="btn btn-primary mb-1" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Submit Requirement</Link> 
+                        <Link to="contact/" class="btn btn-success mb-1" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Contact us</Link> 
+                       
+                       
+                        <ul class="list-unstyled mb-3 mt-3 social-icon">
                             <li><a href="#" style={{fontSize: "14px", fontWeight: "600", color: "#000", fontWeight: "bold"}}>Follow us on:</a></li>
                             <li><a href="https://www.facebook.com/hire4eventofficial" target="_blank" style={{color: "#3b5998"}}><i class="fa fa-facebook-f"></i></a></li>
                             <li><a href="https://twitter.com/hire4eventcom" target="_blank" style={{color: "#26a4f0"}}><i class="fa fa-twitter"></i></a></li>
@@ -107,11 +115,10 @@ return (
                             <li><a href="https://in.pinterest.com/hire4event/" target="_blank" style={{color: "#db473e"}}><i class="fa fa-pinterest"></i></a></li>
                             <li><a href="https://www.instagram.com/hire4event/?hl=en" target="_blank" style={{color: "#9118ab"}}><i class="fa fa-instagram"></i></a></li>
                             <li><a href="https://www.youtube.com/channel/UCO30G7y5-QlJnQv0cVEv7_Q" target="_blank" style={{color: "#f62424"}}><i class="fa fa-youtube"></i></a></li>
-                        
                         </ul>
-                        <Link to="vendor-registration" class="btn btn-danger" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Register as a Vendor</Link> 
-                        <Link to="contact/" class="btn btn-primary" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Submit Requirement</Link> 
-                        <Link to="contact/" class="btn btn-success" style={{fontSize: "14px", padding: "7px 19px", borderRadius: "3px", fontWeight: "600"}}>Contact us</Link> 
+                       
+                       
+                       
                         </div>
 
                 </div>

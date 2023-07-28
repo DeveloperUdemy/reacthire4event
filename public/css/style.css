@@ -4937,13 +4937,13 @@ ul.activity li.activity-item .activity-icon {
 }
 .footer .social-icon li {
 	display: inline-block;
-	margin-right: 12px;
+	margin-right: 25px;
 }
 .footer .social-icon li:last-child {
 	margin-right: 0;
 }
 .footer .social-icon li a {
-	font-size: 18px;
+	font-size: 31px;
 	color: #999999;
 }
 .footer .social-icon li:hover a {
@@ -5586,4 +5586,32 @@ label {
     font-size: 20px;
     width: 34vw;
     padding: 30px 20px;
+}
+@media (max-width: 767px){
+	.pl-5, .px-5 {
+		padding-left: 1rem!important;
+	}
+.topHide {
+    display: none !important;
+}
+.footer .social-icon li a {
+    font-size: 21px;
+    color: #999999;
+}
+.footer-contact-info form .btn {
+    font-size: 12px;
+    padding: 12px 10px !important;
+    border-radius: 3px;
+    font-weight: 700;
+}
+}
+@media (min-width: 767px){
+.serviceClass{
+	height: 130px !important;
+	
+}
+.serviceClass img{
+	height: 130px !important;
+	
+}
 }

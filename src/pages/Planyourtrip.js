@@ -94,7 +94,7 @@ function Planyourtrip ()  {
         </Helmet>
 
 
-<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundColor: "#dc123d"}}>
+<section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{backgroundImage: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")'}}>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 text-center">

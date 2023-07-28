@@ -78,8 +78,15 @@ function Singleartist() {
       },
     });
 
-    
-      
+
+    let newIMGShow = artistDetail.image;
+    if (artistDetail.image) {
+    let myIMG = artistDetail.image;
+    let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
+     newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+    }
+
+
     return (
         <>
       <MDBModal tabIndex='-1' show={enquiryModal} setShow={setEnquiryModal} >
@@ -146,16 +153,19 @@ function Singleartist() {
               <link rel="canonical" href={window.location.href}/>
             </Helmet>
 
-            <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/images/banner2.jpg")', backgroundSize: "cover", backgroundPosition: "0px -146px" }}>
+            <section class="page-title page-title-bottom bg-holder bg-overlay-black-50" style={{ background: 'url("https://hire4event.com/apppanel/assets/primaryimage/event-equip.jpg")', backgroundSize: "cover", backgroundPosition: "0px -146px" }}>
                 <div class="container">
                     <div class="row align-content-center">
                         <div class="col-lg-9">
                             <div class="d-sm-flex d-block align-items-center"> 
+
+
+
                             <LazyLoadImage
-              alt={artistDetail.first_name}
+              alt={artistDetail.first_name+' '+artistDetail.last_name}
               effect="blur"
               class={"img-fluid rounded-circle avatar avatar-xll"}
-              src={artistDetail.image} />
+              src={Mainurl+'assets/artistimage/'+newIMGShow} />
                                 <div class="ml-sm-4 ml-0 mt-3 mt-sm-0">
                                     <h3 class="text-white mb-2"> {artistDetail.first_name} {artistDetail.last_name}</h3>
                                     <div class="d-md-flex d-block">

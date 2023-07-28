@@ -44,7 +44,7 @@ function Inhouseservices () {
     inhouseservicesDetails.slice(0,6).map((post) => {
       const {url, name, title, image} = post;
       return (
-      <div class="col-lg-6 col-sm-6 mb-4">
+      <div class="col-lg-3 col-12 col-sm-6 mb-4">
         <div class="listing-item">
           <div class="listing-image bg-overlay-half-bottom"> 
           <LazyLoadImage

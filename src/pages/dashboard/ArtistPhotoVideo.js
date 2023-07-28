@@ -29,6 +29,30 @@ function ArtistPhotoVideo() {
        });
       }
 
+
+      function removeVideo(id) {
+        let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+        const headers = {
+          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        };
+       const values = {
+         'register_id': userID.userProfile.id,
+         'id': id,
+       };
+       const url = Mainurl + 'api/artist/videos_remove';
+          axios.post(url, values, { headers })
+         .then(resp => {
+          // console.log(resp.data.videos);
+          setArtistVideo(resp.data.videos);
+         })
+         .catch(function (error) {
+          
+         });
+        }
+
+
+
       const [artistGallery, setArtistGallery] = useState([]); 
       function getArtistGallery() {
         let userID = (JSON.parse(localStorage.getItem('loginAuth')));
@@ -42,13 +66,36 @@ function ArtistPhotoVideo() {
        const url = Mainurl + 'api/artist/photos_account/'+userID.userProfile.id;
           axios.get(url, values, { headers })
          .then(resp => {
-          console.log(resp.data.photos);
+          //console.log(resp.data.photos);
           setArtistGallery(resp.data.photos);
          })
          .catch(function (error) {
           
          });
         }
+
+
+        function removeGallery(id) {
+          let userID = (JSON.parse(localStorage.getItem('loginAuth')));
+          const headers = {
+            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data'
+          };
+         const values = {
+           'register_id': userID.userProfile.id,
+           'id': id,
+         };
+         const url = Mainurl + 'api/artist/photos_remove';
+            axios.post(url, values, { headers })
+           .then(resp => {
+            // console.log(resp.data.photos);
+            setArtistGallery(resp.data.photos);
+           })
+           .catch(function (error) {
+            
+           });
+          }
+
 
     useEffect( () => {
       window.scrollTo(0, 0);
@@ -127,7 +174,7 @@ function ArtistPhotoVideo() {
                 return (
                 <>
                 <div class="item" style={{position: "relative"}}>
-                <span class="RemoveUserGallery" title="Remove Gallery Image"><FaRegTrashAlt style={{color: "white"}} title="Remove Image"/></span>
+                <span class="RemoveUserGallery" title="Remove Gallery Image" onClick={() => removeGallery(id)}><FaRegTrashAlt style={{color: "white"}} title="Remove Image"/></span>
                   <a class="fancybox" href="" data-fancybox-group="gallery">
                     <img src={'https://hire4event.com/apppanel/assets/artistimage/artistphoto/'+image} />
                     </a>
@@ -184,7 +231,7 @@ function ArtistPhotoVideo() {
                 <>
                 <div class="col-md-4 mb-3">
                 <div style={{position: "relative"}}>
-                <span class="RemoveUserGallery" title="Remove Video"><FaRegTrashAlt style={{color: "white"}} title="Remove Video"/></span>
+                <span class="RemoveUserGallery" title="Remove Video" onClick={() => removeVideo(id)}><FaRegTrashAlt style={{color: "white"}} title="Remove Video"/></span>
                 <iframe width="100%" height="150" src={'https://www.youtube.com/embed/'+video} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 </div>

@@ -115,7 +115,7 @@ function Editartist() {
         <div class="sidebar mb-0">
           <div class="widget">
             <div class="widget-title bg-primary">
-              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> Edit Artist Profile </h6>
+              <h6 class="text-white mb-0"> <FaRegUserCircle style={{fontSize: "22px"}}/> My Artist Profile </h6>
             </div>
             <div class="widget-content">
 

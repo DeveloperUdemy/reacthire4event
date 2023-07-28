@@ -4,7 +4,8 @@ import Userheader from './Userheader';
 import Usersidebar from './Usersidebar';
 import { FaRegUserCircle, FaUpload, FaRegTrashAlt } from "react-icons/fa";
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 function ArtistPhotoVideo() {
     const Mainurl = 'https://hire4event.com/apppanel/';
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function ArtistPhotoVideo() {
      const url = Mainurl + 'api/artist/videos_account/'+userID.userProfile.id;
         axios.get(url, { headers })
        .then(resp => {
-        console.log(resp.data.videos);
+        //console.log(resp.data.videos);
         setArtistVideo(resp.data.videos);
        })
        .catch(function (error) {
@@ -133,13 +134,29 @@ function ArtistPhotoVideo() {
       };
       const url = Mainurl + 'api/Artist/photovideo';
        axios.post(url, values, { headers })
-        .then(resp => {
-          navigate('/artist-profile');
+        .then(res=> {
+          if(res.data.status===true){
+            swal({
+              title: "Success!",
+              text: res.data.message,
+              icon: "success",
+              button: "Close",
+            });
+            //console.log(resp.data.message);
+            //action.resetForm();
+            navigate('/artist-profile');
+          }
         })
         .catch(function (error) {
           if (error.response) {
+            swal({
+              title: "Failed!",
+              text: error.response.data.message,
+              icon: "warning",
+              button: "Close",
+            });
           }
-          //console.log(error.response.data.message);
+          
         });
         //  Stop Form Value To API 
         }, 500)
@@ -159,31 +176,28 @@ function ArtistPhotoVideo() {
 
                 <span class="btn btn-secondary" onClick={() => {
                   fileRef.current.click();
-                 }} style={{float: "right"}}> <FaUpload /> Upload Gallery Images</span>
+                 }} style={{float: "right"}}> <FaUpload /> Choose Images</span>
             </div>
             
             <div class="col-md-12"><hr/></div>
-
-
-
             <div class="row">
-            <div class="masonry">
                 {
                 artistGallery.map((getPhoto) => {
                 const {id,image} = getPhoto;
                 return (
                 <>
+                <div class="col-md-4 col-3">
                 <div class="item" style={{position: "relative"}}>
                 <span class="RemoveUserGallery" title="Remove Gallery Image" onClick={() => removeGallery(id)}><FaRegTrashAlt style={{color: "white"}} title="Remove Image"/></span>
                   <a class="fancybox" href="" data-fancybox-group="gallery">
                     <img src={'https://hire4event.com/apppanel/assets/artistimage/artistphoto/'+image} />
                     </a>
                 </div>
+                </div>
                 </>
                 )
                 })
                 }
-            </div>
             </div>
             <div class="col-md-12"><hr/></div>
             <FieldArray

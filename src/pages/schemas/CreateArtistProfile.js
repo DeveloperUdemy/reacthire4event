@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as Yup from 'yup';
-const SUPPORTED_FORMAT = ["image/jpg","image/png","image/jpeg"];
+const SUPPORTED_FORMAT = ["image/jpg","image/png","image/jpeg","image/webp"];
 
 export const ArtistFormValidation = Yup.object({
     user_image: Yup
@@ -75,6 +75,16 @@ export const ArtistFormValidation = Yup.object({
     music_genre: Yup.string().required("This field is required"),
     team_members: Yup.string().required("Please enter team member"),
     location: Yup.string().min(2).required("Please enter location"),
-    artist_keyword: Yup.string().min(2).required("Please enter Keywords related to your profile"),
-    description: Yup.string().min(100,'Please enter min 100 charactors').required("Please enter description"),
+    artist_keyword: Yup.string().max(55, 'Max 55 charactors').required("Please enter Keywords related to your profile"),
+    description: Yup.string().min(200,'Please enter min 200 charactors').required("Please enter description"),
+    videos: Yup.string()
+    .url()
+    .min(43,'Please enter corrent youtube url')
+    .max(43,'Please enter corrent youtube url')
+    .matches(/((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,'Enter correct video url!')
+    .required("Please enter youtube video url"),
+    gallerys: Yup
+    .mixed()
+    .nullable()
+    .required("Please select gallery images"),
 });

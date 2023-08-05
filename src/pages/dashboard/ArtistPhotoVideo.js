@@ -237,7 +237,7 @@ function ArtistPhotoVideo() {
                </>
              )}
             /> 
-                <div class="row">
+                <div class="col-md-12">
                 {
                 artistVideo.map((getVideo) => {
                 const {id,video} = getVideo;

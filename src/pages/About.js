@@ -31,7 +31,7 @@ function About ()  {
   return (
     <Fragment>
 
-        <Helmet>
+        <Helmet defaultTitle={metaDetail.meta_title}>
         <title>{metaDetail.meta_title}</title>
         <meta name="description" content={metaDetail.meta_description} />
         <meta name="keywords" content={metaDetail.meta_keyword} />

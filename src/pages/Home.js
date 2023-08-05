@@ -57,16 +57,20 @@ const Home = () => {
   return ( 
     <Fragment>
 
-        <Helmet>
+        <Helmet defaultTitle={metaDetail.meta_title}>
         <title>{metaDetail.meta_title}</title>
+
         <meta name="description" content={metaDetail.meta_description} />
         <meta name="keywords" content={metaDetail.meta_keyword} />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:title" content={metaDetail.meta_title} />
-        <meta property="og:description" content={metaDetail.meta_description}/> 
-        <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
-        <link rel="canonical" href={window.location.href}/>
-        </Helmet>
+
+      {/* OpenGraph tags */}
+      <meta property="og:title" content={metaDetail.meta_title} />
+      <meta property="og:type" content={'website'} />
+      <meta property="og:url" content={window.location.href} />
+      <meta property="og:image" content={Mainurl+'assets/primaryimage/logo.png'} />
+      <meta property="og:description" content={metaDetail.meta_description} />
+      <link rel="canonical" href={window.location.href}/>
+      </Helmet>
 
   <section class="banner bg-holder bg-overlay-black-50" style={{backgroundImage: "url(images/bg/home-banner-hiree4event.png)"}}>
   <div class="container">

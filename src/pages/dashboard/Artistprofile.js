@@ -8,7 +8,7 @@ import Userheader from './Userheader';
 import Usersidebar from './Usersidebar';
 import { FaRegUserCircle, FaUpload } from "react-icons/fa";
 import Previewimage from './Previewimage';
-
+import swal from 'sweetalert';
 
 function Artistprofile() {
 
@@ -61,6 +61,8 @@ function getArtistProfile() {
     artist_keyword: '',
     description: '',
     register_id: userID.userProfile.id,
+    gallerys : [],
+    videos : ''
   }
   const [success, setSuccess] = useState();
   const [error, setError] = useState([]);
@@ -81,12 +83,26 @@ function getArtistProfile() {
       const url = Mainurl + 'api/Artist/addupdate';
        axios.post(url, values, { headers })
         .then(resp => {
-          setSuccess(resp.data.message);
-          navigate('/artist-upload-photo-video');
+          if(resp.data.status===true){
+            swal({
+              title: "Success!",
+              text: resp.data.message,
+              icon: "success",
+              button: "Close",
+            });
+            //console.log(resp.data.message);
+            action.resetForm();
+            navigate('/artist-profile');
+          }
         })
         .catch(function (error) {
           if (error.response) {
-            setError(error.response.data.message);
+            swal({
+              title: "Failed!",
+              text: error.response.data.message,
+              icon: "warning",
+              button: "Close",
+            });
           }
           //console.log(error.response.data.message);
         });
@@ -94,6 +110,8 @@ function getArtistProfile() {
     },
   });
     const fileRef= useRef(null);
+
+    const fileRefGallery= useRef(null);
     return (
       
     <Fragment>
@@ -115,7 +133,7 @@ function getArtistProfile() {
             <div class="widget-content">
               
               <form  onSubmit={handleSubmit} enctype="multipart/form-data">
-                  <div id="error_artistprofile"></div>
+              <div id="error_artistprofile"></div>
               <div class="form-row">
                 <div class="col-md-3">
                 <div class="text-center"> 
@@ -126,8 +144,6 @@ function getArtistProfile() {
                  <div onClick={() => {
                   fileRef.current.click();
                  }} class="form-control btn btn-secondary"><FaUpload style={{ fontSize: "20px" }}/> Upload Photo</div>
-
-
                 {errors.user_image && touched.user_image ? (<div class="error">{errors.user_image}</div>) : null}
                 </div>
                 </div>  
@@ -136,22 +152,22 @@ function getArtistProfile() {
                 <div class="row">      
                 <div class="form-group col-md-6">
                   <label>First name*</label>
-                  <input type="text" required="" class="form-control" name="first_name" onChange={handleChange} onBlur={handleBlur} value={values.first_name} />
+                  <input type="text" required="" placeholder='Enter first name' class="form-control" name="first_name" onChange={handleChange} onBlur={handleBlur} value={values.first_name} />
                   {errors.first_name && touched.first_name ? (<div class="error">{errors.first_name}</div>) : null}
                 </div>
                 <div class="form-group col-md-6">
                   <label>Last name*</label>
-                  <input type="text" required="" class="form-control" name="last_name" onChange={handleChange} onBlur={handleBlur} value={values.last_name} />
+                  <input type="text" required="" placeholder='Enter last name' class="form-control" name="last_name" onChange={handleChange} onBlur={handleBlur} value={values.last_name} />
                   {errors.last_name && touched.last_name ? (<div class="error">{errors.last_name}</div>) : null}
                 </div>
                 <div class="form-group col-md-6">
                   <label>Email Address*</label>
-                  <input type="text" class="form-control" name="email" onChange={handleChange} onBlur={handleBlur} value={values.email} />
+                  <input type="text" class="form-control" placeholder='Enter email address' name="email" onChange={handleChange} onBlur={handleBlur} value={values.email} />
                   {errors.email && touched.email ? (<div class="error">{errors.email}</div>) : null}
                 </div>
                 <div class="form-group col-md-6">
                   <label>Mobile No*</label>
-                  <input type="number" class="form-control" name="mobile" onChange={handleChange} onBlur={handleBlur} value={values.mobile} />
+                  <input type="number" class="form-control" placeholder='Enter mobile number' name="mobile" onChange={handleChange} onBlur={handleBlur} value={values.mobile} />
                   {errors.mobile && touched.mobile ? (<div class="error">{errors.mobile}</div>) : null}
                 </div>
                 
@@ -196,67 +212,78 @@ function getArtistProfile() {
                 
                 <div class="form-group col-md-6">
                   <label>City*</label>
-                  <input type="text" class="form-control" name="city" onChange={handleChange} onBlur={handleBlur} value={values.city} />
+                  <input type="text" class="form-control" placeholder='Eg: Delhi,Noida,Gurugram etc.' name="city" onChange={handleChange} onBlur={handleBlur} value={values.city} />
                   {errors.city && touched.city ? (<div class="error">{errors.city}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label>Performance Duration*</label>
-                  <input type="text" class="form-control" name="performance_duration" onChange={handleChange} onBlur={handleBlur} value={values.performance_duration} />
+                  <input type="text" class="form-control" placeholder='Eg: 2 Houres ' name="performance_duration" onChange={handleChange} onBlur={handleBlur} value={values.performance_duration} />
                   {errors.performance_duration && touched.performance_duration ? (<div class="error">{errors.performance_duration}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label>Open To Travel*</label>
-                  <input type="text" class="form-control" name="open_to_travel" onChange={handleChange} onBlur={handleBlur} value={values.open_to_travel} />
+                  <input type="text" class="form-control" placeholder='Eg: Yes/No' name="open_to_travel" onChange={handleChange} onBlur={handleBlur} value={values.open_to_travel} />
                   {errors.open_to_travel && touched.open_to_travel ? (<div class="error">{errors.open_to_travel}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label>Music/Genre*</label>
-                  <input type="text" class="form-control" name="music_genre" onChange={handleChange} onBlur={handleBlur} value={values.music_genre} />
+                  <input type="text" class="form-control" placeholder='Eg: Bollywood, Hollywood, Punjabi etc.'  name="music_genre" onChange={handleChange} onBlur={handleBlur} value={values.music_genre} />
                   {errors.music_genre && touched.music_genre ? (<div class="error">{errors.music_genre}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-6">
                   <label>Team Members*</label>
-                  <input type="text" class="form-control" name="team_members" onChange={handleChange} onBlur={handleBlur} value={values.team_members} />
+                  <input type="text" class="form-control" placeholder='Eg: 2' name="team_members" onChange={handleChange} onBlur={handleBlur} value={values.team_members} />
                   {errors.team_members && touched.team_members ? (<div class="error">{errors.team_members}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-12">
                   <label>Location*</label>
-                  <input type="text" class="form-control" name="location" onChange={handleChange} onBlur={handleBlur} value={values.location} />
+                  <input type="text" class="form-control" placeholder='Eg: Delhi, Noida, Gurugram etc' name="location" onChange={handleChange} onBlur={handleBlur} value={values.location} />
                   {errors.location && touched.location ? (<div class="error">{errors.location}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-12">
-                  <label>Keywords*</label>
-                  <input type="text" class="form-control" name="artist_keyword" onChange={handleChange} onBlur={handleBlur} value={values.artist_keyword}/>
+                  <label>Keywords*(Max 55 chatactors)</label>
+                  <input type="text" class="form-control" placeholder='Eg: Book YOUR NAME for event, College fest. etc' name="artist_keyword" onChange={handleChange} onBlur={handleBlur} value={values.artist_keyword}/>
                   {errors.artist_keyword && touched.artist_keyword ? (<div class="error">{errors.artist_keyword}</div>) : null}
                 </div>
                 
                 <div class="form-group col-md-12">
-                  <label>Description*</label>
+                  <label>Description*(Min 200 charactors)</label>
 
                   {/* <CKEditor onChange={handleChange} onBlur={handleBlur} value={values.description}/> */}
-
-
-                  <textarea class="form-control" name="description" onChange={handleChange} onBlur={handleBlur}>{values.description}</textarea>
-
+                  <textarea class="form-control" name="description" placeholder='Please enter about your information' onChange={handleChange} onBlur={handleBlur}>{values.description}</textarea>
                   {errors.description && touched.description ? (<div class="error">{errors.description}</div>) : null}
-                
                 </div>
                 
 
-                 
+                <div class="form-group col-md-3">
+                <h5>Artist Gallery</h5>
+                </div>
+
+                <div class="form-group col-md-9">
+                <input type="file" name="gallerys" multiple onChange={(e) => {
+                  setFieldValue("gallerys", e.target.files);
+                }} accept='image/*' class="form-control" />
+                {errors.gallerys && touched.gallerys ? (<div class="error">{errors.gallerys}</div>) : null}
+                </div>
                   
+                <div class="form-group col-md-3">
+                <h5>Artist Video</h5>
+                </div>
 
-
+                <div class="form-group col-md-9">
+                <input type="url" name="videos" placeholder='Eg: https://www.youtube.com/watch?v=2nK6WBcGPOw' class="form-control" onChange={handleChange} onBlur={handleBlur} />
+                {errors.videos && touched.videos ? (<div class="error">{errors.videos}</div>) : null}
+                </div>
 
                 <div class="form-group col-md-4"></div>
                 <div class="form-group col-md-4">
-                  <button type="submit" class="form-control btn btn-secondary">Save & Continue</button>
+                  <button type="submit" class="form-control btn btn-secondary">Submit</button>
                 </div>
                 <div class="form-group col-md-4"></div>
                 </div>

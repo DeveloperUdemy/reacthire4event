@@ -182,7 +182,7 @@ isLoader ? <>
     </div>
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">Load More {'>>'} </button></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">View More {'>>'} </button></div>
       <div class="col-md-4"></div>
     </div>
   </div>

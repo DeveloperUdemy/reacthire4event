@@ -182,6 +182,7 @@ function AllArtistList() {
       let myIMG = image;
       let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
       let newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+      let newIMGShowImage = newIMGShow.replace("https://hire4event.com/artist/testimonial/", "");
 
       return (
         <>
@@ -191,7 +192,7 @@ function AllArtistList() {
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={Mainurl+'assets/artistimage/'+newIMGShow}
+              src={Mainurl+'assets/artistimage/'+newIMGShowImage}
               alt={first_name+' '+last_name}
               style={{
                 height: "394px",
@@ -223,7 +224,7 @@ function AllArtistList() {
 
     <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">Load More {'>>'}</button></div>
+      <div class="col-md-4" style={{textAlign: "center"}}><button onClick={showMore} class="btn btn-primary">View More {'>>'}</button></div>
       <div class="col-md-4"></div>
     </div>
 

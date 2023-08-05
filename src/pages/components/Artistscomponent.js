@@ -62,6 +62,7 @@ const Artistscomponent = () => {
       let myIMG = image;
       let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
       let newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+      let newIMGShowImage = newIMGShow.replace("https://hire4event.com/artist/testimonial/", "");
       return (
         <>
       <div class="col-lg-3 col-sm-6 mb-4" key={register_id}> <Link to={'/artist/'+url+''}>
@@ -70,7 +71,7 @@ const Artistscomponent = () => {
           <LazyLoadImage
               class={"img-fluid"}
               effect="blur"
-              src={Mainurl+'assets/artistimage/'+newIMGShow}
+              src={Mainurl+'assets/artistimage/'+newIMGShowImage}
               alt={first_name+' '+last_name}
               style={{
                 height: "394px",

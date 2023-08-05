@@ -77,6 +77,6 @@ export const EditArtistFormValidation = Yup.object({
     music_genre: Yup.string().required("This field is required"),
     team_members: Yup.string().required("Please enter team member"),
     location: Yup.string().min(2).required("Please enter location"),
-    artist_keyword: Yup.string().min(2).required("Please enter Keywords related to your profile"),
-    description: Yup.string().min(100,'Please enter min 100 charactors').required("Please enter description"),
+    artist_keyword: Yup.string().max(55, 'Max 55 charactors').required("Please enter Keywords related to your profile"),
+    description: Yup.string().min(200,'Please enter min 200 charactors').required("Please enter description"),
 });

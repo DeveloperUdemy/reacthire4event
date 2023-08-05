@@ -79,11 +79,12 @@ function Singleartist() {
     });
 
 
-    let newIMGShow = artistDetail.image;
+    let newIMGShowImage = artistDetail.image;
     if (artistDetail.image) {
     let myIMG = artistDetail.image;
     let newIMG = myIMG.replace("https://www.hire4event.com/artistimage/", "");
-     newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+    let newIMGShow = newIMG.replace("https://hire4event.com/artistimage/", "");
+     newIMGShowImage = newIMGShow.replace("https://hire4event.com/artist/testimonial/", "");
     }
 
 
@@ -141,7 +142,6 @@ function Singleartist() {
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
-
             <Helmet>
               <title>{'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'}</title>
               <meta name="description" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'} />
@@ -149,7 +149,7 @@ function Singleartist() {
               <meta property="og:url" content={window.location.href} />
               <meta property="og:title" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'} />
               <meta property="og:description" content={'Book ' +artistDetail.first_name+' '+artistDetail.last_name+' for wedding, corporate event, College fest. ' +artistDetail.first_name +' '+ artistDetail.last_name+' contact, booking, charges are available on hire4event.'}/> 
-              <meta property="og:image" content={artistDetail.image} />
+              <meta property="og:image" content={Mainurl+'assets/artistimage/'+newIMGShowImage} />
               <link rel="canonical" href={window.location.href}/>
             </Helmet>
 
@@ -165,7 +165,7 @@ function Singleartist() {
               alt={artistDetail.first_name+' '+artistDetail.last_name}
               effect="blur"
               class={"img-fluid rounded-circle avatar avatar-xll"}
-              src={Mainurl+'assets/artistimage/'+newIMGShow} />
+              src={Mainurl+'assets/artistimage/'+newIMGShowImage} />
                                 <div class="ml-sm-4 ml-0 mt-3 mt-sm-0">
                                     <h3 class="text-white mb-2"> {artistDetail.first_name} {artistDetail.last_name}</h3>
                                     <div class="d-md-flex d-block">

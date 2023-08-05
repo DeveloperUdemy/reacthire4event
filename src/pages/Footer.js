@@ -240,7 +240,7 @@ return (
                     </div>
                     <div class="row align-items-center mt-lg-5 ">
                         <div class="col-md-12 text-center mt-2">
-                            <p class="mb-0">©Copyright 2022 <a href="">Global Magic Consulting Pvt Ltd</a> All Rights Reserved</p>
+                            <p class="mb-0">©Copyright 2023-2024 <a href="">Global Magic Consulting Pvt Ltd</a> All Rights Reserved</p>
                         </div>
                     </div>
                 </div>

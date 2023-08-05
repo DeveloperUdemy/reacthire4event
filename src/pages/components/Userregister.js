@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Formik, useFormik } from 'formik'
+import React, { useState } from 'react';
+import { Formik, useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {SignUpUser} from '../schemas/Registrationformvalidation';
 import axios from 'axios';
 
@@ -12,8 +14,7 @@ const initialValues = {
 }
 
 export const Userregister = () => {
-  
-      const [success, setSuccess] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false); 
       const [error, setError] = useState([]);
       const Mainurl = 'https://hire4event.com/apppanel/';
       const {values, errors, touched, handleChange, handleBlur, handleSubmit} = useFormik({
@@ -21,6 +22,7 @@ export const Userregister = () => {
       initialValues : initialValues,
       validationSchema: SignUpUser,
       onSubmit : async (values, action) => {
+        setIsSubmitting(true); 
         setError("");
       const headers = {
             'Content-Type': 'application/json',
@@ -29,24 +31,47 @@ export const Userregister = () => {
           const url = Mainurl+'api/user/registration';
           const  response = await axios.post(url, values, { headers })
           .then(resp => {
-          {/*console.log(resp);*/}
-            setSuccess(resp.data.message);
+
+              toast.success(resp.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+
+            localStorage.setItem('loginAuth',JSON.stringify(resp.data));
             action.resetForm();
+            window.location.replace('/dashboard');
           })
           .catch(function(error) {
             if(error.response)
             {
-              setError(error.response.data.message);
+              setIsSubmitting(false);
+              //setError(error.response.data.message);
+              toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             }
-            console.log(error.response.data.message);
+            //console.log(error.response.data.message);
           });
         // action.resetForm();
       },
     });
   return (
     <>
-        <form onSubmit={handleSubmit} class="form-row mt-4 mb-5 align-items-center">
-              {<div>{success}</div>}    
+        <ToastContainer /> 
+        <form onSubmit={handleSubmit} class="form-row mt-4 mb-5 align-items-center">   
               <div class="form-group col-sm-12">
                 <input type="text" class="form-control" name="name" value={values.name} onChange={handleChange} onBlur={handleBlur} placeholder="Full Name*" />
                  { errors.name && touched.name ? ( <div class="error">{errors.name}</div> ) : null }
@@ -72,7 +97,7 @@ export const Userregister = () => {
               <div class="col-sm-3">
               </div>
               <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                <button type="submit" disabled={isSubmitting} class="btn btn-primary btn-block">Sign Up</button>
               </div>
               <div class="col-sm-3"></div>
             </form>
